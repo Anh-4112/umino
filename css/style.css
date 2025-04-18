@@ -1,5 +1,7 @@
 html {
     font-family: Jost;
+    /* width: 1920px; */
+    /* background-color: #111111; */
 }
 
 /* === Pseudo ================ */
@@ -18,6 +20,12 @@ html {
     --dark-red: #c0392b;
     --green: #26A66A;
     --blue: #516CF4;
+    /* == Slideshow === */
+    --height-slideshow: 55rem;
+    --top-txt-slideshow: 17.6rem;
+    --left-txt-slideshow: 2.1rem;
+    --fs-txt-slideshow: 4rem;
+    --lh-txt-slideshow: 4.5rem;
     /* == Font Family === */
     --bs-font-jost: Jost;
 }
@@ -129,6 +137,14 @@ html {
 }
 
 /* === Hover ================ */
+.cl-hover-white:hover {
+    color: var(--white);
+}
+
+.bg-hover-black:hover {
+    background-color: var(--black);
+}
+
 /*=== Box-Border =============== */
 .box-border {
     box-sizing: border-box;
@@ -179,7 +195,15 @@ html {
 /* === Block ================= */
 /* === Z-Index ================= */
 /* === Width ================= */
+.w-60 {
+    width: 6rem;
+}
+
 /* === Height ================= */
+.h-60 {
+    height: 6rem;
+}
+
 /* === Img ================= */
 .img {
     display: block;
@@ -201,6 +225,13 @@ html {
     white-space: nowrap
 }
 
+.txt-no-select {
+    user-select: none;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+}
+
 .ls-0 {
     letter-spacing: 0%;
 }
@@ -210,8 +241,20 @@ html {
 }
 
 /* === Font Size ================= */
+.fs-txt-slideshow {
+    font-size: var(--fs-txt-slideshow);
+}
+
+.fs-12 {
+    font-size: 1.2rem;
+}
+
 .fs-14 {
     font-size: 1.4rem;
+}
+
+.fs-16 {
+    font-size: 1.6rem;
 }
 
 /* === Font Weight ================= */
@@ -219,9 +262,33 @@ html {
     font-weight: 400;
 }
 
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
 /* === Line Height ================= */
+.lh-txt-slideshow {
+    line-height: var(--lh-txt-slideshow);
+}
+
+.lh {
+    line-height: 100%;
+}
+
 /* === Border ================= */
+.bor-bot {
+    border-bottom: solid transparent;
+}
+
 /* === Border Width ================= */
+.bor-1 {
+    border-width: 0.1rem;
+}
+
 /* === Border Color ================= */
 .bor-black {
     border-color: var(--black);
@@ -276,6 +343,14 @@ html {
 }
 
 /* === Rounded ================= */
+.round-50p {
+    border-radius: 50%;
+}
+
+.round-35 {
+    border-radius: 3.5rem;
+}
+
 /* === Display Grid ================= */
 .d-grid {
     display: grid;
@@ -318,8 +393,16 @@ html {
     gap: 0.5rem;
 }
 
+.g-20 {
+    gap: 2rem;
+}
+
 .g-25 {
     gap: 2.5rem;
+}
+
+.g-26 {
+    gap: 2.6rem;
 }
 
 /* === Justify Content ================= */
@@ -336,29 +419,161 @@ html {
 }
 
 /* === Align Items ================= */
+.ai-center {
+    align-items: center;
+}
+
+/* ==================== */
+.slide {
+    flex: 0 0 100%;
+    width: auto;
+    height: var(--height-slideshow);
+}
+
+.img-slide {
+    object-fit: cover;
+    object-position: 50% center;
+}
+
 /* === Top ================= */
+.top-txt-slideshow {
+    top: var(--top-txt-slideshow);
+}
+
+.top-center {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 .top-0 {
     top: 0;
 }
 
 /* === Left ================= */
+.left-txt-slideshow {
+    left: var(--left-txt-slideshow);
+}
+
+.left-center {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.left-30 {
+    left: 3rem;
+}
+
 /* === Bottom ================= */
+.bot-10 {
+    bottom: 1rem;
+}
+
 /* === Right ================= */
 .right-0 {
     right: 0;
 }
 
+.right-30 {
+    right: 3rem;
+}
+
 /* === Padding ================= */
 /* === Padding X ================= */
+.px-30 {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.px-47 {
+    padding-left: 4.7rem;
+    padding-right: 4.7rem;
+}
+
 /* === Padding Y ================= */
+.py-19 {
+    padding-top: 1.9rem;
+    padding-bottom: 1.9rem;
+}
+
 /* === Padding Top ================= */
+.pt-14 {
+    padding-top: 1.4rem;
+}
+
+.pt-28 {
+    padding-top: 2.8rem;
+}
+
 /* === Padding Left ================= */
+.pl-20 {
+    padding-left: 2rem;
+}
+
 /* === Padding Bottom ================= */
+.pb-11 {
+    padding-bottom: 1.1rem;
+}
+
+.pb-12 {
+    padding-bottom: 1.2rem;
+}
+
+.pb-25 {
+    padding-bottom: 2.5rem;
+}
+
 /* === Padding Right ================= */
+.pr-31 {
+    padding-right: 3.1rem;
+}
 /* === Margin ================= */
 /* === Margin X ================= */
 /* === Margin Y ================= */
 /* === Margin Top ================= */
+.mt-2 {
+    margin-top: 0.2rem;
+}
+
+.mt-14 {
+    margin-top: 1.4rem;
+}
+
+.mt-33 {
+    margin-top: 3.3rem;
+}
+
 /* === Margin Left ================= */
+.ml-4 {
+    margin-left: 0.4rem;
+}
+
+
+.ml-5 {
+    margin-left: 0.5rem;
+}
+
+.ml-6 {
+    margin-left: 0.6rem;
+}
+
+.ml-10 {
+    margin-left: 1rem;
+}
+
+.ml-11 {
+    margin-left: 1.1rem;
+}
+
 /* === Margin Bottom ================= */
+.mb-20vh {
+    margin-bottom: 20vh;
+}
+
 /* === Margin Right ================= */
+.mr-30 {
+    margin-right: 3rem;
+}
+
+.mr-31 {
+    margin-right: 3.1rem;
+}
