@@ -69,7 +69,7 @@ table {
 	border-spacing: 0;
 }
 
-/* Loại bỏ đường gạch dưới */
+/* Loại bỏ đường gạch dưới thẻ a */
 a {
     text-decoration: none;
 	color: #111111;
