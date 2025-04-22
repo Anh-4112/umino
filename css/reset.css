@@ -81,3 +81,9 @@ button {
   border: none;
   font: inherit;
 }
+
+/* Loại bỏ border khi click vào input */
+input:focus {
+    outline: none;
+    border: none;
+}

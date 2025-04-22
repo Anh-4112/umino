@@ -8,6 +8,10 @@
         height: 3rem;
     }
 
+    .g-xs-0 {
+        gap: 0rem;
+    }
+
     .g-xs-15 {
         gap: 1.5rem;
     }
@@ -31,6 +35,7 @@
 /* ===== md ====== */
 @media screen and (min-width: 768px) {
     :root {
+        /* == Slideshow === */
         --height-slideshow: 65rem;
         --top-txt-slideshow: 22.5rem;
         --left-txt-slideshow: 17vw;
@@ -61,23 +66,51 @@
         grid-row: 1/3;
     }
 
+    .d-md-none {
+        display: none;
+    }
+
+    .f-md-33p-g5 {
+        flex: 0 0 calc(calc(100% - 1rem) / 3);
+    }
+
     .f-md-33p-g20 {
         flex: 0 0 calc(calc(100% - 4rem) / 3);
+    }
+    
+    .f-md-50p {
+        flex: 0 0 50%;
     }
 
     .f-md-50p-g20 {
         flex: 0 0 calc(calc(100% - 2rem) / 2);
     }
 
-
     .txt-md-center {
         text-align: center;
+    }
+
+    .bor-md-none {
+        border: none;
+    }
+
+    .pt-md-24 {
+        padding-top: 2.4rem;
+    }
+
+    .pt-md-50 {
+        padding-top: 5rem;
+    }
+
+    .mt-md-0 {
+        margin-top: 0;
     }
 }
 
 /* ===== lg ====== */
 @media screen and (min-width: 992px) {
     :root {
+        /* == Slideshow === */
         --top-txt-slideshow: 25rem;
         --left-txt-slideshow: 22vw;
     }
@@ -96,6 +129,14 @@
 
     .f-lg-1 {
         flex: 1;
+    }
+
+    .f-lg-25p-g5 {
+        flex: 0 0 calc(calc(100% - 1.5rem) / 4);
+    }
+
+    .f-lg-33p {
+        flex: 0 0 calc(100% / 3);
     }
 
     .jc-lg-start {
@@ -118,6 +159,10 @@
         padding-right: 4rem;
     }
 
+    .mt-lg-0 {
+        margin-top: 0;
+    }
+
     .mt-lg-1 {
         margin-top: 0.1rem;
     }
@@ -125,15 +170,29 @@
     .ml-lg-0 {
         margin-left: 0;
     }
+
+    .mr-lg-0 {
+        margin-right: 0;
+    }
 }
 
 /* ===== xl ====== */
 @media screen and (min-width: 1200px) {
     :root {
+        /* == Font Size === */
+        --fs-title: 4.5rem;
+        /* == Slideshow === */
         --height-slideshow: 81rem;
         --fs-txt-slideshow: 8rem;
         --lh-txt-slideshow: 8rem;
-        --fs-title: 4.5rem;
+        /* == Feed Back === */
+        --pt-item-feed-back: 3.8rem;
+        --pb-item-feed-back: 4.2rem;
+        --px-item-feed-back: 4.3rem;
+    }
+
+    .opacity-xl-5 {
+        opacity: 0.5;
     }
 
     .relative-xl {
@@ -156,8 +215,20 @@
         display: flex;
     }
 
+    .f-xl-17p {
+        flex: 0 0 17%;
+    }
+
+    .f-xl-17p-g5 {
+        flex: 0 0 calc(calc(100% - 2.5rem) / 6);
+    }
+
     .f-xl-25p-g30 {
         flex: 0 0 calc(calc(100% - 9rem) / 4);
+    }
+
+    .f-xl-33p {
+        flex: 0 0 33%;
     }
 
     .f-xl-33p-g30 {
@@ -182,6 +253,30 @@
 
     .fs-xl-36 {
         font-size: 3.6rem;
+    }
+
+    .lh-xl-26 {
+        line-height: 2.6rem;
+    }
+
+    .pt-xl-28 {
+        padding-top: 2.8rem;
+    }
+
+    .pt-xl-32 {
+        padding-top: 3.2rem;
+    }
+
+    .pt-xl-33 {
+        padding-top: 3.3rem;
+    }
+
+    .pt-xl-87 {
+        padding-top: 8.7rem;
+    }
+
+    .pl-xl-15 {
+        padding-left: 1.5rem;
     }
 
     .px-xl-30 {
@@ -213,8 +308,16 @@
         margin-top: 2.3rem;
     }
 
+    .mt-xl-24 {
+        margin-top: 2.4rem;
+    }
+
     .mt-xl-33 {
         margin-top: 3.3rem;
+    }
+
+    .mt-xl-36 {
+        margin-top: 3.6rem;
     }
 
     .mt-xl-94 {
@@ -242,14 +345,15 @@
         bottom: 3rem;
     }
 
-    .bot-xl-45 {
-        bottom: 4.5rem;
+    .bot-xl-47 {
+        bottom: 4.7rem;
     }
 }
 
 /* ===== xxl ====== */
 @media screen and (min-width: 1400px) {
     :root {
+        /* == Slideshow === */
         --top-txt-slideshow: 25.2rem;
         --left-txt-slideshow: 23vw;
     }
