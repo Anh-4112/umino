@@ -195,6 +195,10 @@
         opacity: 0.5;
     }
 
+    .opacity-xl-0 {
+        opacity: 0;
+    }
+
     .relative-xl {
         position: relative;
     }
@@ -259,6 +263,15 @@
         line-height: 2.6rem;
     }
 
+    .wrapper-icon {
+        transition: opacity,transform, 0.6s ease-in-out;
+    }
+    
+    .wrapper-item:hover .wrapper-icon {
+        opacity: 1;
+        transform: translateX(-1.5rem);
+    }
+
     .pt-xl-28 {
         padding-top: 2.8rem;
     }
@@ -282,6 +295,10 @@
     .px-xl-30 {
         padding-left: 3rem;
         padding-right: 3rem;
+    }
+
+    .mt-xl-10 {
+        margin-top: 1rem;
     }
 
     .mt-xl-12 {
@@ -337,6 +354,10 @@
         top: 40%;
     }
 
+    .top-xl-15 {
+        top: 1.5rem;
+    }
+
     .left-xl-50 {
         left: 5rem;
     }
@@ -347,6 +368,10 @@
 
     .bot-xl-47 {
         bottom: 4.7rem;
+    }
+
+    .right-xl-0 {
+        right: 0;
     }
 }
 

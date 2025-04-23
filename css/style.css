@@ -148,12 +148,32 @@ html {
     color: var(--white);
 }
 
+.cl-hover-black:hover {
+    color: var(--black);
+}
+
 .cl-hover-gray-dark:hover {
     color: var(--gray-dark);
 }
 
+.cl-hover-orange-red:hover {
+    color: var(--orange-red);
+}
+
 .bg-hover-black:hover {
     background-color: var(--black);
+}
+
+.bor-hover-black:hover {
+    border-color: var(--black);
+}
+
+.txt-hover-underline:hover {
+    text-decoration: underline;
+}
+
+.opacity-hover-1:hover {
+    opacity: 1;
 }
 
 /*=== Box-Border =============== */
@@ -202,9 +222,26 @@ html {
 }
 
 /* === Opacity ================= */
+.opacity-0 {
+    opacity: 0;
+}
+
 /* === Shadow ================= */
+.shadow {
+    box-shadow: 0 0.1rem 1.6rem rgba(0, 0, 0, 0.3);
+}
+
 /* === Block ================= */
 /* === Z-Index ================= */
+.z-1 {
+    z-index: 1;
+}
+
+
+.z-10 {
+    z-index: 10;
+}
+
 /* === Width ================= */
 .w-wrapper {
     width: 145rem;
@@ -213,6 +250,10 @@ html {
 
 .w-fit-content {
     width: fit-content;
+}
+
+.w-max-full {
+    max-width: 100%;
 }
 
 .w-18 {
@@ -247,6 +288,9 @@ html {
     width: 7rem;
 }
 
+.w-77 {
+    width: 7.7rem;
+}
 
 .w-88 {
     width: 8.8rem;
@@ -254,6 +298,10 @@ html {
 
 .w-120 {
     width: 12rem;
+}
+
+.w-70p {
+    width: 170%;
 }
 
 /* === Height ================= */
@@ -297,7 +345,41 @@ html {
     height: 100%;
 }
 
+.img-zoom {
+    transition: transform, 0.6s ease-in-out;
+}
+
+.wrapper-item:hover .img-zoom {
+    transform: scale(1.1);
+}
+
+.img-change {
+    opacity: 0;
+    transition: opacity, 0.6s ease-in-out;
+}
+
+.wrapper-item:hover .img-change {
+    opacity: 1;
+}
+
+.img-hidden {
+    transition: opacity, 0.6s ease-in-out;
+}
+
+.wrapper-item:hover .img-hidden {
+    opacity: 0;
+}
+
 /* === Button ================= */
+.btn-cart {
+    transition: opacity,translate, 0.6s ease-in-out;
+}
+
+.wrapper-item:hover .btn-cart {
+    opacity: 1;
+    transform: translate(-50%, -1.5rem); /* thêm translateX(-50%) để bù cho left-center */
+}
+
 .btn-banner {
     position: relative;
     display: inline-block;
@@ -316,13 +398,50 @@ html {
     left: 0;
 }
 
-.wrapper:hover .btn-banner::before {
+.wrapper-item:hover .btn-banner::before {
     animation: btn-banner-hover 0.8s infinite;
 }
 
 @keyframes btn-banner-hover {
     from {left: -100%;}
     to {left: 100%;}
+}
+
+.btn-tranx {
+    transition: transform 0.3s ease-in-out;
+}
+
+.wrapper-btn:hover .btn-tranx {
+    transform: translateX(10%);
+}
+
+/* === Tooltip ================= */
+.tooltip:hover .tooltip-txt {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-1rem, -50%);
+}
+
+.tooltip-txt {
+    visibility: collapse;
+    opacity: 0;
+    transition: opacity,transform, 0.4s ease-in-out;
+    white-space: nowrap;
+    background-color: var(--black);
+    color: var(--white);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.tooltip-txt::after {
+    content: "";
+    border: solid 0.5rem;
+}
+
+.tooltip-txt-after-left::after {
+    border-color: transparent transparent transparent var(--black);
+    position: absolute;
+    left: 100%;
 }
 
 /* === Text ================= */
@@ -563,12 +682,13 @@ html {
 }
 
 /* === Flex ================= */
-.f-1 {
-    flex: 1;
+.flex-center {
+    justify-content: center;
+    align-items: center;
 }
 
-.fg-1 {
-    flex-grow: 1;
+.f-1 {
+    flex: 1;
 }
 
 .f-wrap {
@@ -628,7 +748,6 @@ html {
     gap: 0.9rem;
 }
 
-
 .g-10 {
     gap: 1rem;
 }
@@ -679,6 +798,35 @@ html {
     object-position: 50% center;
 }
 
+.wrapper:hover .wrapper-prev-next {
+    opacity: 1;
+}
+
+.wrapper-input-newsletter:focus-within {
+    border-color: var(--black);
+}
+
+.dot {
+    cursor: pointer;
+    height: 0.7rem;
+    width: 0.7rem;
+    margin: 0.5rem;
+    background-color: var(--black);
+    opacity: 0.2;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot:hover {
+    background-color: var(--black);
+    opacity: 1;
+}
+
+.dot.active {
+    background-color: var(--black);
+    opacity: 1;
+}
+
 /* === Top ================= */
 .top-txt-slideshow {
     top: var(--top-txt-slideshow);
@@ -695,6 +843,10 @@ html {
 
 .top-10 {
     top: 1rem;
+}
+
+.top-11 {
+    top: 1.1rem;
 }
 
 /* === Left ================= */
@@ -716,8 +868,8 @@ html {
 }
 
 /* === Bottom ================= */
-.bot-10 {
-    bottom: 1rem;
+.bot-0 {
+    bottom: 0;
 }
 
 .bot-20 {
@@ -741,6 +893,10 @@ html {
     right: 3rem;
 }
 
+.right-100p {
+    right: 100%;
+}
+
 /* === Padding ================= */
 /* === Padding X ================= */
 .px-item-feed-back {
@@ -758,6 +914,11 @@ html {
     padding-right: 2rem;
 }
 
+.px-22 {
+    padding-left: 2.2rem;
+    padding-right: 2.2rem;
+}
+
 .px-30 {
     padding-left: 3rem;
     padding-right: 3rem;
@@ -766,6 +927,11 @@ html {
 .px-47 {
     padding-left: 4.7rem;
     padding-right: 4.7rem;
+}
+
+.px-90 {
+    padding-left: 8rem;
+    padding-right: 8rem;
 }
 
 /* === Padding Y ================= */
@@ -779,6 +945,11 @@ html {
     padding-bottom: 1.9rem;
 }
 
+.py-20 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
 /* === Padding Top ================= */
 .pt-item-feed-back {
     padding-top: var(--pt-item-feed-back);
@@ -790,6 +961,10 @@ html {
 
 .pt-14 {
     padding-top: 1.4rem;
+}
+
+.pt-15 {
+    padding-top: 1.5rem;
 }
 
 .pt-16 {
@@ -834,6 +1009,10 @@ html {
     padding-bottom: 2.5rem;
 }
 
+.pb-30 {
+    padding-bottom: 3rem;
+}
+
 /* === Padding Right ================= */
 .pr-10 {
     padding-right: 1rem;
@@ -858,6 +1037,10 @@ html {
 /* === Margin Top ================= */
 .mt-2 {
     margin-top: 0.2rem;
+}
+
+.mt-5 {
+    margin-top: 0.5rem;
 }
 
 .mt-7 {
@@ -960,10 +1143,6 @@ html {
 }
 
 /* === Margin Bottom ================= */
-.mb-20vh {
-    margin-bottom: 20vh;
-}
-
 .mb-30 {
     margin-bottom: 3rem;
 }
