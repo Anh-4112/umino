@@ -234,7 +234,7 @@ html {
 /* === Animation ================= */
 .anim-txt-sshow {
     opacity: 0;
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition: opacity 1.5s ease, transform 1.5s ease;
 }
 
 .anim-txt-sshow.from-top {
@@ -815,7 +815,7 @@ html {
     align-items: center;
 }
 
-/* ==================== */
+/* === Slideshow ================= */
 .wrapper-slideshow {
     width: 100%;
     height: var(--height-slideshow);
@@ -852,12 +852,19 @@ html {
     object-position: 50% center;
 }
 
-.wrapper:hover .wrapper-prev-next {
-    opacity: 1;
+.btn-slideshow-prev,
+.btn-slideshow-next {
+    transition: opacity,transform, 0.2s ease-in-out;
 }
 
-.wrapper-input-newsletter:focus-within {
-    border-color: var(--black);
+.wrapper-slideshow:hover .btn-slideshow-prev {
+    opacity: 1;
+    transform: translate(3rem, -50%);
+}
+
+.wrapper-slideshow:hover .btn-slideshow-next {
+    opacity: 1;
+    transform: translate(-3rem, -50%);
 }
 
 .dot {
@@ -879,6 +886,15 @@ html {
 .dot.active {
     background-color: var(--black);
     opacity: 1;
+}
+
+/* ==================== */
+.wrapper:hover .wrapper-prev-next {
+    opacity: 1;
+}
+
+.wrapper-input-newsletter:focus-within {
+    border-color: var(--black);
 }
 
 /* === Top ================= */

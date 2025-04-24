@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     deltaX = 0;
   });
 
-  // ✅ Chặn click khi kéo slide
+  // Chặn click khi kéo slide
   wrapperSlideshow.addEventListener("click", (e) => {
     if (dragged) {
       e.preventDefault();
