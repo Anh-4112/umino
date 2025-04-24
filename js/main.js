@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
   const wrapperSlideshow = document.querySelector(".wrapper-slideshow");
-  const slideshowInner = wrapperSlideshow.querySelector(".slideshow");
   const slides = Array.from(wrapperSlideshow.querySelectorAll(".slide"));
   const btnPrev = document.querySelector(".btn-slideshow-prev");
   const btnNext = document.querySelector(".btn-slideshow-next");
