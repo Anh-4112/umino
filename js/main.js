@@ -1,148 +1,202 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const slideShow = document.querySelector(".slideshow");
-    const cards = Array.from(slideShow.querySelectorAll(".slide"));
-    const btnPrev = document.querySelector(".btn-slideshow-prev");
-    const btnNext = document.querySelector(".btn-slideshow-next");
-    const dotsContainer = document.querySelector(".slideshow-dots");
-  
-    slideShow.addEventListener("click", (e) => {
-    if (isDraggingSlide) {
+  const wrapperSlideshow = document.querySelector(".wrapper-slideshow");
+  const slideshowInner = wrapperSlideshow.querySelector(".slideshow");
+  const slides = Array.from(wrapperSlideshow.querySelectorAll(".slide"));
+  const btnPrev = document.querySelector(".btn-slideshow-prev");
+  const btnNext = document.querySelector(".btn-slideshow-next");
+  const dotsContainer = document.querySelector(".slideshow-dots");
+
+  let currentIndex = 0;
+  let autoSlideInterval = null;
+
+  let isDragging = false;
+  let startX = 0;
+  let deltaX = 0;
+  let dragged = false;
+  const dragThreshold = 50;
+
+  const showSlide = (index) => {
+    slides.forEach((slide, i) => {
+      slide.classList.remove("active", "to-left", "to-right");
+
+      if (i === index) {
+        slide.classList.add("active");
+      } else if (i < index) {
+        slide.classList.add("to-left");
+      } else {
+        slide.classList.add("to-right");
+      }
+    });
+
+    updateDots();
+  };
+
+  const createDots = () => {
+    if (!dotsContainer) return;
+    dotsContainer.innerHTML = "";
+    slides.forEach((_, i) => {
+      const dot = document.createElement("button");
+      dot.classList.add("dot");
+      if (i === currentIndex) dot.classList.add("active");
+      dot.addEventListener("click", () => {
+        currentIndex = i;
+        showSlide(currentIndex);
+        restartAutoSlide();
+      });
+      dotsContainer.appendChild(dot);
+    });
+  };
+
+  const updateDots = () => {
+    const dots = dotsContainer.querySelectorAll(".dot");
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === currentIndex);
+    });
+  };
+
+  const startAutoSlide = () => {
+    if (autoSlideInterval) return;
+    autoSlideInterval = setInterval(() => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    }, 3000);
+  };
+
+  const stopAutoSlide = () => {
+    clearInterval(autoSlideInterval);
+    autoSlideInterval = null;
+  };
+
+  const restartAutoSlide = () => {
+    stopAutoSlide();
+    startAutoSlide();
+  };
+
+  btnPrev?.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    showSlide(currentIndex);
+    restartAutoSlide();
+  });
+
+  btnNext?.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
+    restartAutoSlide();
+  });
+
+  wrapperSlideshow.addEventListener("mouseenter", stopAutoSlide);
+  wrapperSlideshow.addEventListener("mouseleave", startAutoSlide);
+
+  const getX = (e) => (e.touches ? e.touches[0].clientX : e.clientX);
+
+  wrapperSlideshow.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+    isDragging = true;
+    startX = getX(e);
+    stopAutoSlide();
+  });
+
+  wrapperSlideshow.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    deltaX = getX(e) - startX;
+    if (Math.abs(deltaX) > 5) {
+      dragged = true;
+    }
+  });
+
+  wrapperSlideshow.addEventListener("mouseup", () => {
+    if (!isDragging) return;
+    isDragging = false;
+
+    if (Math.abs(deltaX) > dragThreshold) {
+      currentIndex = deltaX > 0
+        ? (currentIndex - 1 + slides.length) % slides.length
+        : (currentIndex + 1) % slides.length;
+    }
+
+    showSlide(currentIndex);
+    restartAutoSlide();
+    deltaX = 0;
+  });
+
+  wrapperSlideshow.addEventListener("mouseleave", () => {
+    if (isDragging) {
+      isDragging = false;
+      deltaX = 0;
+    }
+  });
+
+  wrapperSlideshow.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    isDragging = true;
+    startX = getX(e);
+    stopAutoSlide();
+  });
+
+  wrapperSlideshow.addEventListener("touchmove", (e) => {
+    if (!isDragging) return;
+    deltaX = getX(e) - startX;
+    if (Math.abs(deltaX) > 5) {
+      dragged = true;
+    }
+  });
+
+  wrapperSlideshow.addEventListener("touchend", () => {
+    if (!isDragging) return;
+    isDragging = false;
+
+    if (Math.abs(deltaX) > dragThreshold) {
+      currentIndex = deltaX > 0
+        ? (currentIndex - 1 + slides.length) % slides.length
+        : (currentIndex + 1) % slides.length;
+    }
+
+    showSlide(currentIndex);
+    restartAutoSlide();
+    deltaX = 0;
+  });
+
+  // ✅ Chặn click khi kéo slide
+  wrapperSlideshow.addEventListener("click", (e) => {
+    if (dragged) {
       e.preventDefault();
       e.stopPropagation();
+      dragged = false;
     }
-    }, true);
-  
-    if (!slideShow || cards.length === 0) return;
-  
-    let currentIndex = 0;
-    let autoSlideInterval = null;
-  
-    let isDragging = false;
-    let startX = 0;
-    let deltaX = 0;
-  
-    let isDraggingSlide = false;
-  
-    const showSlide = (index) => {
-      cards.forEach((card, i) => {
-        card.classList.toggle("active", i === index);
-      });
-      updateDots();
-    };
-  
-    const createDots = () => {
-      if (!dotsContainer) return;
-      dotsContainer.innerHTML = "";
-      cards.forEach((_, i) => {
-        const dot = document.createElement("button");
-        dot.classList.add("dot");
-        if (i === currentIndex) dot.classList.add("active");
-        dot.addEventListener("click", () => {
-          currentIndex = i;
-          showSlide(currentIndex);
-          restartAutoSlide();
-        });
-        dotsContainer.appendChild(dot);
-      });
-    };
-  
-    const updateDots = () => {
-      if (!dotsContainer) return;
-      const dots = dotsContainer.querySelectorAll(".dot");
-      dots.forEach((dot, i) => {
-        dot.classList.toggle("active", i === currentIndex);
-      });
-    };
-  
-    const startAutoSlide = () => {
-      if (autoSlideInterval) return;
-      autoSlideInterval = setInterval(() => {
-        currentIndex = (currentIndex + 1) % cards.length;
-        showSlide(currentIndex);
-      }, 3000);
-    };
-  
-    const stopAutoSlide = () => {
-      clearInterval(autoSlideInterval);
-      autoSlideInterval = null;
-    };
-  
-    const restartAutoSlide = () => {
-      stopAutoSlide();
-      startAutoSlide();
-    };
-  
-    if (btnPrev) {
-      btnPrev.addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-        showSlide(currentIndex);
-        restartAutoSlide();
-      });
-    }
-  
-    if (btnNext) {
-      btnNext.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % cards.length;
-        showSlide(currentIndex);
-        restartAutoSlide();
-      });
-    }
-  
-    const dragStart = (e) => {
-      isDragging = true;
-      startX = e.pageX || e.touches[0].clientX; // Dùng clientX thay vì pageX cho chuột
-      deltaX = 0;
-      stopAutoSlide();
-  
-      // Ngăn hành vi mặc định nếu kéo bắt đầu từ thẻ <a>
-      if (e.target.closest("a")) {
-        e.preventDefault();
-      }
-    };
-  
-    const dragMove = (e) => {
-      if (!isDragging) return;
-      const x = e.pageX || e.touches[0].clientX;
-      deltaX = x - startX;
-  
-      if (Math.abs(deltaX) > 5) {
-        isDraggingSlide = true;
-      }
-    };
-  
-    const dragEnd = () => {
-      if (!isDragging) return;
-      isDragging = false;
-  
-      if (deltaX > 50) {
-        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-        showSlide(currentIndex);
-      } else if (deltaX < -50) {
-        currentIndex = (currentIndex + 1) % cards.length;
-        showSlide(currentIndex);
-      }
-  
-      // Reset sau 300ms
-      setTimeout(() => {
-        isDraggingSlide = false;
-      }, 300);
-  
-      restartAutoSlide();
-    };
-  
-    slideShow.addEventListener("mouseenter", stopAutoSlide);
-    slideShow.addEventListener("mouseleave", startAutoSlide);
-  
-    slideShow.addEventListener("mousedown", dragStart);
-    slideShow.addEventListener("touchstart", dragStart);
-  
-    window.addEventListener("mousemove", dragMove);
-    window.addEventListener("touchmove", dragMove);
-  
-    window.addEventListener("mouseup", dragEnd);
-    window.addEventListener("touchend", dragEnd);
-  
-    createDots();
-    showSlide(currentIndex);
-    startAutoSlide();
+  }, true); // sử dụng capture phase
+
+  createDots();
+  showSlide(currentIndex);
+  startAutoSlide();
+});
+
+// ============================
+document.addEventListener('DOMContentLoaded', () => {
+  const txts = document.querySelectorAll('.anim-txt-sshow');
+
+  const directions = ['from-top', 'from-right', 'from-left'];
+
+  txts.forEach(txt => {
+    // Chọn random 1 hiệu ứng trong 3 hướng
+    const randomDirection = directions[Math.floor(Math.random() * directions.length)];
+    txt.classList.add(randomDirection);
   });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('show');
+        }, index * 150);
+      } else {
+        entry.target.classList.remove('show');
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  txts.forEach(txt => {
+    observer.observe(txt);
+  });
+});
