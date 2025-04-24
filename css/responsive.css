@@ -1,13 +1,12 @@
-/* ===== xs ====== */
+/* ============================ */
+/* ===== Breakpoints XS ====== */
 @media screen and (max-width: 390.98px) {
     :root {
+        /* == Font Size === */
         --fs-title: 3rem;
     }
 
-    .h-xs-30 {
-        height: 3rem;
-    }
-
+    /* === Gap ================= */
     .g-xs-0 {
         gap: 0rem;
     }
@@ -16,23 +15,34 @@
         gap: 1.5rem;
     }
 
+    /* === Height ================= */
+    .h-xs-30 {
+        height: 3rem;
+    }
+
+    /* === Padding X ================= */
     .px-xs-0 {
         padding-left: 0;
         padding-right: 0;
     }
 
+    /* === Bottom ================= */
     .bot-xs-10 {
         bottom: 1rem;
     }
     
 }
 
-/* ===== sm ====== */
-@media screen and (min-width: 576px) {
 
-}
 
-/* ===== md ====== */
+/* ============================ */
+/* ===== Breakpoints SM ====== */
+@media screen and (min-width: 576px) {}
+
+
+
+/* ============================ */
+/* ===== Breakpoints MD ====== */
 @media screen and (min-width: 768px) {
     :root {
         /* == Slideshow === */
@@ -41,6 +51,7 @@
         --left-txt-slideshow: 17vw;
     }
 
+    /* === Display Grid ================= */
     .grid-md-3-2 {
         grid-template-columns: repeat(3, auto);
         grid-template-rows: repeat(2, auto);
@@ -66,10 +77,12 @@
         grid-row: 1/3;
     }
 
+    /* === Display None ================= */
     .d-md-none {
         display: none;
     }
 
+    /* === Flex ================= */
     .f-md-33p-g5 {
         flex: 0 0 calc(calc(100% - 1rem) / 3);
     }
@@ -86,14 +99,17 @@
         flex: 0 0 calc(calc(100% - 2rem) / 2);
     }
 
+    /* === Text ================= */
     .txt-md-center {
         text-align: center;
     }
 
+    /* === Border ================= */
     .bor-md-none {
         border: none;
     }
 
+    /* === Padding Top ================= */
     .pt-md-24 {
         padding-top: 2.4rem;
     }
@@ -102,12 +118,17 @@
         padding-top: 5rem;
     }
 
+    /* === Margin Top ================= */
     .mt-md-0 {
         margin-top: 0;
     }
+
 }
 
-/* ===== lg ====== */
+
+
+/* ============================ */
+/* ===== Breakpoints LG ====== */
 @media screen and (min-width: 992px) {
     :root {
         /* == Slideshow === */
@@ -115,18 +136,22 @@
         --left-txt-slideshow: 22vw;
     }
 
+    /* === Display Block ================= */
     .d-lg-block {
         display: block;
     }
 
+    /* === Display None ================= */
     .d-lg-none {
         display: none;
     }
 
+    /* === Display Flex ================= */
     .d-lg-flex {
         display: flex;
     }
 
+    /* === Flex ================= */
     .f-lg-1 {
         flex: 1;
     }
@@ -139,26 +164,32 @@
         flex: 0 0 calc(100% / 3);
     }
 
+    /* === Justify Content ================= */
     .jc-lg-start {
         justify-content: start;
     }
 
+    /* === Padding Top ================= */
     .pt-lg-26 {
         padding-top: 2.6rem;
     }
 
+    /* === Padding Left ================= */
     .pl-lg-29 {
         padding-left: 2.9rem;
     }
 
+    /* === Padding Bottom ================= */
     .pb-lg-23 {
         padding-bottom: 2.3rem;
     }
 
+    /* === Padding Right ================= */
     .pr-lg-40 {
         padding-right: 4rem;
     }
 
+    /* === Margin Top ================= */
     .mt-lg-0 {
         margin-top: 0;
     }
@@ -167,16 +198,22 @@
         margin-top: 0.1rem;
     }
 
+    /* === Margin Left ================= */
     .ml-lg-0 {
         margin-left: 0;
     }
 
+    /* === Margin Right ================= */
     .mr-lg-0 {
         margin-right: 0;
     }
+
 }
 
-/* ===== xl ====== */
+
+
+/* ============================ */
+/* ===== Breakpoints XL ====== */
 @media screen and (min-width: 1200px) {
     :root {
         /* == Font Size === */
@@ -191,6 +228,7 @@
         --px-item-feed-back: 4.3rem;
     }
 
+    /* === Opacity ================= */
     .opacity-xl-5 {
         opacity: 0.5;
     }
@@ -199,26 +237,32 @@
         opacity: 0;
     }
 
+    /* === Relative ================= */
     .relative-xl {
         position: relative;
     }
 
+    /* === Absolute ================= */
     .absolute-xl {
         position: absolute;
     }
     
+    /* === Display Block ================= */
     .d-xl-block {
         display: block;
     }
 
+    /* === Display None ================= */
     .d-xl-none {
         display: none;
     }
 
+    /* === Display Flex ================= */
     .d-xl-flex {
         display: flex;
     }
 
+    /* === Flex ================= */
     .f-xl-17p {
         flex: 0 0 17%;
     }
@@ -239,30 +283,37 @@
         flex: 0 0 calc(calc(100% - 6rem) / 3);
     }
 
+    /* === Gap ================= */
     .g-xl-30 {
         gap: 3rem;
     }
 
+    /* === Border ================= */
     .bor-xl-none {
         border: none;
     }
 
+    /* === Width ================= */
     .w-xl-160 {
         width: 16rem;
     }
 
+    /* === Height ================= */
     .h-xl-50 {
         height: 5rem;
     }
 
+    /* === Font Size ================= */
     .fs-xl-36 {
         font-size: 3.6rem;
     }
 
+    /* === Line Height ================= */
     .lh-xl-26 {
         line-height: 2.6rem;
     }
 
+    /* === Hover ================= */
     .wrapper-icon {
         transition: opacity,transform, 0.6s ease-in-out;
     }
@@ -272,6 +323,76 @@
         transform: translateX(-1.5rem);
     }
 
+    .btn-trending-prev,
+    .btn-trending-next,
+    .btn-arrivals-prev,
+    .btn-arrivals-next,
+    .btn-fback-prev,
+    .btn-fback-next {
+        transition: opacity, transform, 0.2s ease-in-out;
+    }
+
+    .wrapper:hover .btn-trending-prev,
+    .wrapper:hover .btn-arrivals-prev,
+    .wrapper:hover .btn-trending-next,
+    .wrapper:hover .btn-arrivals-next,
+    .wrapper:hover .btn-fback-prev,
+    .wrapper:hover .btn-fback-next {
+        opacity: 1;
+    }
+    
+    .wrapper:hover .btn-trending-prev,
+    .wrapper:hover .btn-arrivals-prev {
+        transform: translateX(3rem);
+    }
+
+    .wrapper:hover .btn-trending-next,
+    .wrapper:hover .btn-arrivals-next {
+        transform: translateX(-3rem);
+    }
+
+    .wrapper:hover .btn-fback-prev {
+        transform: translate(3rem, -50%);
+    }
+
+    .wrapper:hover .btn-fback-next {
+        transform: translate(-3rem, -50%);
+    }
+
+    /* === Top ================= */
+    .top-xl-center {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .top-xl-40p {
+        top: 40%;
+    }
+
+    .top-xl-15 {
+        top: 1.5rem;
+    }
+
+    /* === Left ================= */
+    .left-xl-50 {
+        left: 5rem;
+    }
+
+    /* === Bottom ================= */
+    .bot-xl-30 {
+        bottom: 3rem;
+    }
+
+    .bot-xl-47 {
+        bottom: 4.7rem;
+    }
+
+    /* === Right ================= */
+    .right-xl-0 {
+        right: 0;
+    }
+
+    /* === Padding Top ================= */
     .pt-xl-28 {
         padding-top: 2.8rem;
     }
@@ -287,16 +408,19 @@
     .pt-xl-87 {
         padding-top: 8.7rem;
     }
-
+    
+    /* === Padding Left ================= */
     .pl-xl-15 {
         padding-left: 1.5rem;
     }
 
+    /* === Padding X ================= */
     .px-xl-30 {
         padding-left: 3rem;
         padding-right: 3rem;
     }
 
+    /* === Margin Top ================= */
     .mt-xl-10 {
         margin-top: 1rem;
     }
@@ -345,37 +469,12 @@
         margin-top: 10.1rem;
     }
 
-    .top-xl-center {
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .top-xl-40p {
-        top: 40%;
-    }
-
-    .top-xl-15 {
-        top: 1.5rem;
-    }
-
-    .left-xl-50 {
-        left: 5rem;
-    }
-
-    .bot-xl-30 {
-        bottom: 3rem;
-    }
-
-    .bot-xl-47 {
-        bottom: 4.7rem;
-    }
-
-    .right-xl-0 {
-        right: 0;
-    }
 }
 
-/* ===== xxl ====== */
+
+
+/* ============================= */
+/* ===== Breakpoints XXL ====== */
 @media screen and (min-width: 1400px) {
     :root {
         /* == Slideshow === */
@@ -383,6 +482,7 @@
         --left-txt-slideshow: 23vw;
     }
 
+    /* === Gap ================= */
     .g-xxl-0 {
         gap: 0;
     }
@@ -391,16 +491,19 @@
         gap: 3rem;
     }
 
+    /* === Padding X ================= */
     .px-xxl-56 {
         padding-left: 5.6rem;
         padding-right: 5.6rem;
     }
 
+    /* === Padding Y ================= */
     .py-xxl-22 {
         padding-top: 2.2rem;
         padding-bottom: 2.2rem;
     }
 
+    /* === Margin Top ================= */
     .mt-xxl-23 {
         margin-top: 2.3rem;
     }
@@ -409,10 +512,12 @@
         margin-top: 5.2rem;
     }
     
+    /* === Margin Left ================= */
     .ml-xxl-10 {
         margin-left: 1rem;
     }
 
+    /* === Margin Right ================= */
     .mr-xxl-30 {
         margin-right: 3rem;
     }
@@ -420,4 +525,5 @@
     .mr-xxl-31 {
         margin-right: 3.1rem;
     }
+    
 }
