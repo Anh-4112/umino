@@ -1,181 +1,198 @@
+// =+=+=+=+=+=+=+=+=+=+=  SLIDESHOW  =+=+=+=+=+=+=+=+=+=+=
 document.addEventListener("DOMContentLoaded", () => {
-  const wrapperSlideshow = document.querySelector(".wrapper-slideshow");
-  const slides = Array.from(wrapperSlideshow.querySelectorAll(".slide"));
-  const btnPrev = document.querySelector(".btn-slideshow-prev");
-  const btnNext = document.querySelector(".btn-slideshow-next");
-  const dotsContainer = document.querySelector(".slideshow-dots");
+  // --- Khởi tạo các biến và phần tử ---
+  const wrapper = document.querySelector(".wrapper-slideshow"); // Thẻ bao toàn bộ slideshow
+  const slides = Array.from(wrapper.querySelectorAll(".slide")); // Danh sách các slide
+  const btnPrev = document.querySelector(".btn-slideshow-prev"); // Nút chuyển slide về trước
+  const btnNext = document.querySelector(".btn-slideshow-next"); // Nút chuyển slide kế tiếp
+  const dotsContainer = document.querySelector(".slideshow-dots"); // Vùng chứa các chấm (dot)
 
-  let currentIndex = 0;
-  let autoSlideInterval = null;
+  let currentIndex = 0; // Slide đang hiển thị
+  let autoSlideInterval = null; // Biến lưu interval chạy tự động
 
+  // Biến hỗ trợ kéo slide bằng tay
   let isDragging = false;
-  let startX = 0;
-  let deltaX = 0;
-  let dragged = false;
-  const dragThreshold = 50;
+  let startX = 0; // Tọa độ X lúc bắt đầu kéo
+  let deltaX = 0; // Khoảng cách kéo ngang
+  let dragged = false; // Biến xác định có phải vừa drag không
+  const dragThreshold = 30; // Ngưỡng để tính là đã kéo xong (đổi slide)
 
-  const showSlide = (index) => {
+  // --- Cập nhật giao diện của slides và dot ---
+  const updateSlides = () => {
     slides.forEach((slide, i) => {
-      slide.classList.remove("active", "to-left", "to-right");
-
-      if (i === index) {
-        slide.classList.add("active");
-      } else if (i < index) {
-        slide.classList.add("to-left");
-      } else {
-        slide.classList.add("to-right");
-      }
+      slide.classList.remove("active", "to-left", "to-right"); // Reset class
+      if (i === currentIndex) slide.classList.add("active"); // Slide hiện tại
+      else if (i < currentIndex) slide.classList.add("to-left"); // Slide nằm trước
+      else slide.classList.add("to-right"); // Slide nằm sau
     });
 
-    updateDots();
+    // Cập nhật dot tương ứng (nếu có)
+    if (dotsContainer) {
+      dotsContainer.querySelectorAll(".dot").forEach((dot, i) =>
+        dot.classList.toggle("active", i === currentIndex)
+      );
+    }
   };
 
-  const createDots = () => {
-    if (!dotsContainer) return;
-    dotsContainer.innerHTML = "";
-    slides.forEach((_, i) => {
-      const dot = document.createElement("button");
-      dot.classList.add("dot");
-      if (i === currentIndex) dot.classList.add("active");
-      dot.addEventListener("click", () => {
-        currentIndex = i;
-        showSlide(currentIndex);
-        restartAutoSlide();
-      });
-      dotsContainer.appendChild(dot);
-    });
+  // Chuyển đến slide có index cụ thể
+  const goToSlide = (index) => {
+    // Đảm bảo index luôn nằm trong khoảng hợp lệ (0 → slides.length - 1)
+    currentIndex = (index + slides.length) % slides.length;
+    updateSlides();
   };
 
-  const updateDots = () => {
-    const dots = dotsContainer.querySelectorAll(".dot");
-    dots.forEach((dot, i) => {
-      dot.classList.toggle("active", i === currentIndex);
-    });
-  };
+  // Các hàm chuyển tiếp và lùi
+  const nextSlide = () => goToSlide(currentIndex + 1);
+  const prevSlide = () => goToSlide(currentIndex - 1);
 
+  // Bắt đầu tự động chuyển slide mỗi 3 giây
   const startAutoSlide = () => {
-    if (autoSlideInterval) return;
-    autoSlideInterval = setInterval(() => {
-      currentIndex = (currentIndex + 1) % slides.length;
-      showSlide(currentIndex);
-    }, 3000);
+    if (!autoSlideInterval) autoSlideInterval = setInterval(nextSlide, 3000);
   };
 
+  // Dừng tự động chuyển slide
   const stopAutoSlide = () => {
     clearInterval(autoSlideInterval);
     autoSlideInterval = null;
   };
 
+  // Khởi động lại auto slide
   const restartAutoSlide = () => {
     stopAutoSlide();
     startAutoSlide();
   };
 
+  // --- Tạo các chấm tròn (dot) dưới slideshow ---
+  const createDots = () => {
+    if (!dotsContainer) return;
+    dotsContainer.innerHTML = ""; // Xóa dot cũ (nếu có)
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement("button");
+      dot.classList.add("dot");
+      if (i === currentIndex) dot.classList.add("active");
+
+      // Gán sự kiện click cho từng dot
+      dot.addEventListener("click", () => {
+        goToSlide(i);
+        restartAutoSlide(); // Click dot cũng reset auto
+      });
+
+      dotsContainer.appendChild(dot);
+    });
+  };
+
+  // --- Sự kiện click cho 2 nút prev/next ---
   btnPrev?.addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-    showSlide(currentIndex);
-    restartAutoSlide();
+    prevSlide();
+    if (wrapper.matches(':hover')) {
+      stopAutoSlide();
+    } else {
+      restartAutoSlide();
+    }
   });
-
+  
   btnNext?.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % slides.length;
-    showSlide(currentIndex);
-    restartAutoSlide();
+    nextSlide();
+    if (wrapper.matches(':hover')) {
+      stopAutoSlide();
+    } else {
+      restartAutoSlide();
+    }
   });
+  
+  // --- Dừng auto slide khi hover vào slideshow ---
+  wrapper.addEventListener("mouseenter", stopAutoSlide);
+  wrapper.addEventListener("mouseleave", startAutoSlide);
 
-  wrapperSlideshow.addEventListener("mouseenter", stopAutoSlide);
-  wrapperSlideshow.addEventListener("mouseleave", startAutoSlide);
-
+  // --- Drag slide bằng chuột hoặc cảm ứng (touch) ---
+  // Hàm lấy tọa độ X (chuột hoặc cảm ứng)
   const getX = (e) => (e.touches ? e.touches[0].clientX : e.clientX);
+  const getY = (e) => (e.touches ? e.touches[0].clientY : e.clientY);
 
-  wrapperSlideshow.addEventListener("mousedown", (e) => {
-    e.preventDefault();
+  // Khi bắt đầu drag
+  const startDrag = (e) => {
     isDragging = true;
+    dragged = false;
     startX = getX(e);
-    stopAutoSlide();
-  });
+    stopAutoSlide(); // Dừng auto khi người dùng đang thao tác
+  };
 
-  wrapperSlideshow.addEventListener("mousemove", (e) => {
+  // Khi đang drag
+  const moveDrag = (e) => {
     if (!isDragging) return;
+
     deltaX = getX(e) - startX;
+
+    // Nếu là cảm ứng, kiểm tra để ngăn scroll dọc khi kéo ngang
+    const deltaY = getY(e) - e.touches?.[0]?.pageY || 0;
+    if (e.touches && Math.abs(deltaX) > Math.abs(deltaY)) {
+      e.preventDefault(); // Ngăn cuộn màn hình
+    }
+
+    // Đánh dấu là đã kéo (dùng để chặn click)
     if (Math.abs(deltaX) > 5) {
       dragged = true;
     }
-  });
+  };
 
-  wrapperSlideshow.addEventListener("mouseup", () => {
+  // Khi kết thúc drag
+  const endDrag = () => {
     if (!isDragging) return;
     isDragging = false;
-
+  
+    // Nếu kéo đủ ngưỡng thì chuyển slide
     if (Math.abs(deltaX) > dragThreshold) {
-      currentIndex = deltaX > 0
-        ? (currentIndex - 1 + slides.length) % slides.length
-        : (currentIndex + 1) % slides.length;
+      deltaX > 0 ? prevSlide() : nextSlide();
+    }  
+    deltaX = 0; // Reset lại
+  
+    // Dừng lại nếu chuột vẫn hover vùng wrapper
+    if (wrapper.matches(':hover')) {
+      stopAutoSlide();
+    } else {
+      startAutoSlide();
     }
+  };
+  
+  // --- Gán sự kiện drag cho chuột ---
+  wrapper.addEventListener("mousedown", (e) => {
+    e.preventDefault(); // Ngăn mặc định (chọn text)
+    startDrag(e);
+  });
 
-    showSlide(currentIndex);
-    restartAutoSlide();
+  wrapper.addEventListener("mousemove", moveDrag);
+  wrapper.addEventListener("mouseup", endDrag);
+  wrapper.addEventListener("mouseleave", () => {
+    isDragging = false;
     deltaX = 0;
   });
 
-  wrapperSlideshow.addEventListener("mouseleave", () => {
-    if (isDragging) {
-      isDragging = false;
-      deltaX = 0;
-    }
-  });
+  // --- Gán sự kiện drag cho cảm ứng ---
+  wrapper.addEventListener("touchstart", startDrag, { passive: false });
+  wrapper.addEventListener("touchmove", moveDrag, { passive: false });
+  wrapper.addEventListener("touchend", endDrag);
 
-  wrapperSlideshow.addEventListener("touchstart", (e) => {
-    // e.preventDefault();
-    isDragging = true;
-    startX = getX(e);
-    stopAutoSlide();
-  });
+  // --- Ngăn click nếu vừa mới drag xong (tránh nhấn nhầm) ---
+  wrapper.addEventListener(
+    "click",
+    (e) => {
+      if (dragged) {
+        e.preventDefault();
+        e.stopPropagation();
+        dragged = false;
+      }
+    },
+    true // capture phase để ưu tiên chặn sớm
+  );
 
-  wrapperSlideshow.addEventListener("touchmove", (e) => {
-    if (!isDragging) return;
-  
-    deltaX = getX(e) - startX;
-  
-    if (Math.abs(deltaX) > Math.abs(e.touches[0].clientY - e.touches[0].pageY)) {
-      e.preventDefault(); // Vuốt ngang thì ngăn cuộn trang
-    }
-  
-    if (Math.abs(deltaX) > 5) {
-      dragged = true;
-    }
-  });
-
-  wrapperSlideshow.addEventListener("touchend", () => {
-    if (!isDragging) return;
-    isDragging = false;
-
-    if (Math.abs(deltaX) > dragThreshold) {
-      currentIndex = deltaX > 0
-        ? (currentIndex - 1 + slides.length) % slides.length
-        : (currentIndex + 1) % slides.length;
-    }
-
-    showSlide(currentIndex);
-    restartAutoSlide();
-    deltaX = 0;
-  });
-
-  // Chặn click khi kéo slide
-  wrapperSlideshow.addEventListener("click", (e) => {
-    if (dragged) {
-      e.preventDefault();
-      e.stopPropagation();
-      dragged = false;
-    }
-  }, true); // sử dụng capture phase
-
-  createDots();
-  showSlide(currentIndex);
-  startAutoSlide();
+  // --- Khởi động khi trang tải ---
+  createDots(); // Tạo dot
+  updateSlides(); // Cập nhật slide ban đầu
+  startAutoSlide(); // Bắt đầu auto slide
 });
 
-// ============================
+// ========== Animation Text ==========
 document.addEventListener('DOMContentLoaded', () => {
   const txts = document.querySelectorAll('.anim-txt-sshow');
 
@@ -192,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (entry.isIntersecting) {
         setTimeout(() => {
           entry.target.classList.add('show');
-        }, index * 150);
+        }, index * 200);
       } else {
         entry.target.classList.remove('show');
       }
