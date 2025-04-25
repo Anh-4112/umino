@@ -1,4 +1,4 @@
-// =+=+=+=+=+=+=+=+=+=+=  SLIDESHOW  =+=+=+=+=+=+=+=+=+=+=
+// =+=+=+=+=+=+=+=+=+=+=  SLIDESHOW  =+=+=+=+=+=+=+=+=+=+= //
 document.addEventListener("DOMContentLoaded", () => {
   // --- Khởi tạo các biến và phần tử ---
   const wrapper = document.querySelector(".wrapper-slideshow"); // Thẻ bao toàn bộ slideshow
@@ -83,23 +83,16 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // --- Sự kiện click cho 2 nút prev/next ---
-  btnPrev?.addEventListener("click", () => {
-    prevSlide();
+  const handleButtonClick = (direction) => {
+    direction === 'prev' ? prevSlide() : nextSlide();
     if (wrapper.matches(':hover')) {
       stopAutoSlide();
     } else {
       restartAutoSlide();
     }
-  });
-  
-  btnNext?.addEventListener("click", () => {
-    nextSlide();
-    if (wrapper.matches(':hover')) {
-      stopAutoSlide();
-    } else {
-      restartAutoSlide();
-    }
-  });
+  };
+  btnPrev?.addEventListener("click", () => handleButtonClick("prev"));
+  btnNext?.addEventListener("click", () => handleButtonClick("next"));  
   
   // --- Dừng auto slide khi hover vào slideshow ---
   wrapper.addEventListener("mouseenter", stopAutoSlide);
@@ -148,9 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
     deltaX = 0; // Reset lại
   
     // Dừng lại nếu chuột vẫn hover vùng wrapper
-    if (wrapper.matches(':hover')) {
-      stopAutoSlide();
-    } else {
+    if (!wrapper.matches(':hover')) {
       startAutoSlide();
     }
   };
@@ -222,3 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(txt);
   });
 });
+
+// =+=+=+=+=+=+=+=+=+=+=  TRENDING THIS WEEK  =+=+=+=+=+=+=+=+=+=+= //
+
