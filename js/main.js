@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   wrapperSlideshow.addEventListener("touchstart", (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     isDragging = true;
     startX = getX(e);
     stopAutoSlide();
@@ -134,7 +134,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   wrapperSlideshow.addEventListener("touchmove", (e) => {
     if (!isDragging) return;
+  
     deltaX = getX(e) - startX;
+  
+    if (Math.abs(deltaX) > Math.abs(e.touches[0].clientY - e.touches[0].pageY)) {
+      e.preventDefault(); // Vuốt ngang thì ngăn cuộn trang
+    }
+  
     if (Math.abs(deltaX) > 5) {
       dragged = true;
     }
