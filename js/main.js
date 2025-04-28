@@ -691,25 +691,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // =========================================================================
 document.addEventListener("DOMContentLoaded", () => {
-  // Chọn tất cả phần tử có class "footer-list" (các menu con trong footer)
-  document.querySelectorAll(".footer-list").forEach(menu => {
-      // Lấy biểu tượng (+/-) từ phần tử liền trước menu
-      let icon = menu.previousElementSibling.querySelector(".footer-icon");
-      // Kiểm tra xem menu có mở sẵn hay không dựa vào biểu tượng (+/-)
-      let isOpen = icon.textContent.trim() === "−";
-
-      if (isOpen) {
-          // Nếu biểu tượng là "-", mở sẵn menu với chiều cao thực tế
-          requestAnimationFrame(() => {
-              menu.style.maxHeight = menu.scrollHeight / 10 + "rem";
-          });
-      } else {
-          // Nếu biểu tượng là "+", giữ menu đóng với maxHeight = 0
-          menu.style.maxHeight = "0rem";
-      }
-      // Lưu trạng thái mở/đóng của menu vào thuộc tính dataset
-      menu.dataset.open = isOpen;
-  });
+  window.addEventListener('resize', () => {
+    // Chọn tất cả phần tử có class "footer-list" (các menu con trong footer)
+    document.querySelectorAll(".footer-list").forEach(menu => {
+        // Lấy biểu tượng (+/-) từ phần tử liền trước menu
+        let icon = menu.previousElementSibling.querySelector(".footer-icon");
+        // Kiểm tra xem menu có mở sẵn hay không dựa vào biểu tượng (+/-)
+        let isOpen = icon.textContent.trim() === "−";
+  
+        // Chỉ tác dụng cho viewport < 768px
+        if (window.innerWidth < 768) {
+          if (isOpen) {
+              // Nếu biểu tượng là "-", mở sẵn menu với chiều cao thực tế
+              requestAnimationFrame(() => {
+                  menu.style.maxHeight = menu.scrollHeight / 10 + "rem";
+              });
+          } else {
+              // Nếu biểu tượng là "+", giữ menu đóng với maxHeight = 0
+              menu.style.maxHeight = "0rem";
+          }
+        } else {
+            // Màn hình desktop: xóa maxHeight inline đi cho sạch
+            menu.style.maxHeight = null;
+        }
+        // Lưu trạng thái mở/đóng của menu vào thuộc tính dataset
+        menu.dataset.open = isOpen;
+    });
+  })
 });
 // Hàm xử lý khi người dùng nhấn vào menu để mở hoặc đóng
 function toggleMenu(id) {

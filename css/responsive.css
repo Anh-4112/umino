@@ -80,21 +80,6 @@
         display: none;
     }
 
-    /* === Display Flex ================= */
-    /* .d-md-flex {
-        display: flex;
-    } */
-
-    /* === Column ================= */
-    /* .column-md {
-        flex-direction: column;
-    } */
-
-    /* === Flex ================= */
-    /* .f-md-1 {
-        flex: 1;
-    } */
-
     .f-md-33p-g5 {
         flex: 0 0 calc(calc(100% - 1rem) / 3);
     }
@@ -133,7 +118,7 @@
 
     /* === Height ================= */
     .h-max-md-none {
-        max-height: none !important;
+        max-height: none;
     }
 
     /* === Padding Top ================= */

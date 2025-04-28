@@ -528,6 +528,10 @@ html {
     line-height: 100%;
 }
 
+.lh-0 {
+    line-height: 0;
+}
+
 .lh-23 {
     line-height: 2.3rem;
 }
