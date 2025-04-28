@@ -80,7 +80,21 @@
         display: none;
     }
 
+    /* === Display Flex ================= */
+    /* .d-md-flex {
+        display: flex;
+    } */
+
+    /* === Column ================= */
+    /* .column-md {
+        flex-direction: column;
+    } */
+
     /* === Flex ================= */
+    /* .f-md-1 {
+        flex: 1;
+    } */
+
     .f-md-33p-g5 {
         flex: 0 0 calc(calc(100% - 1rem) / 3);
     }
@@ -96,15 +110,30 @@
     .f-md-50p-g20 {
         flex: 0 0 calc(calc(100% - 2rem) / 2);
     }
-
+    
     /* === Text ================= */
     .txt-md-center {
         text-align: center;
     }
-
+    
     /* === Border ================= */
     .bor-md-none {
         border: none;
+    }
+
+    /* === Pointer None ================= */
+    .pe-md-none {
+        pointer-events: none; /* Vô hiệu hóa click */
+    }
+
+    /* === Overflow ================= */
+    .overflow-md-v {
+        overflow: visible;
+    }
+
+    /* === Height ================= */
+    .h-max-md-none {
+        max-height: none !important;
     }
 
     /* === Padding Top ================= */

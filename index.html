@@ -829,7 +829,7 @@
                                 </div>
 
                                 <!-- Price -->
-                                <span class="mt-11 fs-14 fw-500">$150.00</span>
+                                <p class="mt-11 fs-14 fw-500">$150.00</p>
 
                                 <!-- Color -->
                                 <div class="mt-10 d-flex g-4">
@@ -939,7 +939,7 @@
                                 </div>
 
                                 <!-- Price -->
-                                <span class="mt-11 fs-14 fw-500">$150.00</span>
+                                <p class="mt-11 fs-14 fw-500">$150.00</p>
 
                                 <!-- Color -->
                                 <div class="mt-10 d-flex g-4">
@@ -2213,18 +2213,13 @@
             <div class="box-border f-100p f-md-50p f-xl-17p">
                 <div class="pt-24 pt-xl-33 pb-21 pl-xl-15 bor-md-none bor-top bor-1 bor-gray-lighter">
                     <!-- Title -->
-                    <div class="d-flex jc-between">
+                    <div class="d-flex jc-between cursor-pointer pe-md-none" onclick="toggleMenu('categories')">
                         <h3 class="fs-14 fw-600">HOT CATEGORIES</h3>
-
-                        <span class="d-md-none">
-                            <svg width="18" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0.744141 7.25C0.544922 7.25 0.369141 7.17969 0.216797 7.03906C0.0761719 6.88672 0.00585938 6.70508 0.00585938 6.49414C0.00585938 6.29492 0.0761719 6.125 0.216797 5.98438C0.369141 5.83203 0.544922 5.75586 0.744141 5.75586H5.24414V1.25586C5.24414 1.04492 5.31445 0.869141 5.45508 0.728516C5.60742 0.576172 5.78906 0.5 6 0.5C6.21094 0.5 6.38672 0.576172 6.52734 0.728516C6.67969 0.869141 6.75586 1.04492 6.75586 1.25586V5.75586H11.2559C11.4551 5.75586 11.625 5.83203 11.7656 5.98438C11.918 6.125 11.9941 6.29492 11.9941 6.49414C11.9941 6.70508 11.918 6.88672 11.7656 7.03906C11.625 7.17969 11.4551 7.25 11.2559 7.25H6.75586V11.75C6.75586 11.9609 6.67969 12.1426 6.52734 12.2949C6.38672 12.4355 6.21094 12.5059 6 12.5059C5.78906 12.5059 5.60742 12.4355 5.45508 12.2949C5.31445 12.1426 5.24414 11.9609 5.24414 11.75V7.25H0.744141Z" fill="currentColor"/>
-                            </svg>                                
-                        </span>
+                        <span class="footer-icon d-md-none fw-400 fs-24">+</span>
                     </div>
 
                     <!-- List -->
-                    <div>
+                    <div id="categories" class="footer-list footer-list-active h-max-md-none overflow-md-v">
                         <ul class="pt-19 pt-xl-32">
                             <li class="wrapper-btn w-fit-content">
                                 <a class="btn-tranx d-inline-block pb-11 cl-gray-dark fs-16 fw-400 cl-hover-black" href="#">Special Offers</a>
@@ -2253,18 +2248,13 @@
             <div class="box-border f-100p f-md-50p f-xl-17p">
                 <div class="pt-24 pt-xl-33 pb-21 pl-xl-15 bor-md-none bor-top bor-1 bor-gray-lighter">
                     <!-- Title -->
-                    <div class="d-flex jc-between">
+                    <div class="d-flex jc-between cursor-pointer pe-md-none" onclick="toggleMenu('customer')">
                         <h3 class="fs-14 fw-600">CUSTOMER SERVICE</h3>
-
-                        <span class="d-md-none">
-                            <svg width="18" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0.744141 7.25C0.544922 7.25 0.369141 7.17969 0.216797 7.03906C0.0761719 6.88672 0.00585938 6.70508 0.00585938 6.49414C0.00585938 6.29492 0.0761719 6.125 0.216797 5.98438C0.369141 5.83203 0.544922 5.75586 0.744141 5.75586H5.24414V1.25586C5.24414 1.04492 5.31445 0.869141 5.45508 0.728516C5.60742 0.576172 5.78906 0.5 6 0.5C6.21094 0.5 6.38672 0.576172 6.52734 0.728516C6.67969 0.869141 6.75586 1.04492 6.75586 1.25586V5.75586H11.2559C11.4551 5.75586 11.625 5.83203 11.7656 5.98438C11.918 6.125 11.9941 6.29492 11.9941 6.49414C11.9941 6.70508 11.918 6.88672 11.7656 7.03906C11.625 7.17969 11.4551 7.25 11.2559 7.25H6.75586V11.75C6.75586 11.9609 6.67969 12.1426 6.52734 12.2949C6.38672 12.4355 6.21094 12.5059 6 12.5059C5.78906 12.5059 5.60742 12.4355 5.45508 12.2949C5.31445 12.1426 5.24414 11.9609 5.24414 11.75V7.25H0.744141Z" fill="currentColor"/>
-                            </svg>                                
-                        </span>
+                        <span class="footer-icon d-md-none fw-400 fs-24">+</span>
                     </div>
                     
                     <!-- List -->
-                    <div>
+                    <div id="customer" class="footer-list footer-list-active h-max-md-none overflow-md-v">
                         <ul class="pt-19 pt-xl-32">
                             <li class="wrapper-btn w-fit-content">
                                 <a class="btn-tranx d-inline-block pb-11 cl-gray-dark fs-16 fw-400 cl-hover-black" href="#">Privacy Policy</a>
@@ -2296,28 +2286,25 @@
             <div class="box-border f-100p f-md-50p f-xl-33p">
                 <div class="pt-24 pt-xl-33 pb-21 pl-xl-15 bor-md-none bor-top bor-1 bor-gray-lighter">
                     <!-- Title -->
-                    <div class="d-flex jc-between">
+                    <div class="d-flex jc-between cursor-pointer pe-md-none" onclick="toggleMenu('newsletter')">
                         <h3 class="fs-14 fw-600">SIGN UP TO NEWSLETTER</h3>
-
-                        <span class="d-md-none">
-                            <svg width="18" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0.744141 7.25C0.544922 7.25 0.369141 7.17969 0.216797 7.03906C0.0761719 6.88672 0.00585938 6.70508 0.00585938 6.49414C0.00585938 6.29492 0.0761719 6.125 0.216797 5.98438C0.369141 5.83203 0.544922 5.75586 0.744141 5.75586H5.24414V1.25586C5.24414 1.04492 5.31445 0.869141 5.45508 0.728516C5.60742 0.576172 5.78906 0.5 6 0.5C6.21094 0.5 6.38672 0.576172 6.52734 0.728516C6.67969 0.869141 6.75586 1.04492 6.75586 1.25586V5.75586H11.2559C11.4551 5.75586 11.625 5.83203 11.7656 5.98438C11.918 6.125 11.9941 6.29492 11.9941 6.49414C11.9941 6.70508 11.918 6.88672 11.7656 7.03906C11.625 7.17969 11.4551 7.25 11.2559 7.25H6.75586V11.75C6.75586 11.9609 6.67969 12.1426 6.52734 12.2949C6.38672 12.4355 6.21094 12.5059 6 12.5059C5.78906 12.5059 5.60742 12.4355 5.45508 12.2949C5.31445 12.1426 5.24414 11.9609 5.24414 11.75V7.25H0.744141Z" fill="currentColor"/>
-                            </svg>                                
-                        </span>
+                        <span class="footer-icon d-md-none fw-400 fs-24">+</span>
                     </div>
 
                     <!-- Content -->
-                    <div class="pt-16 pt-xl-28">
-                        <p class="fs-16 fw-400 lh-24 lh-xl-26 cl-gray-dark">Enter your email address to get $10 off your first order and free shipping. Updates information on Sales and Offers.</p>
-                        
-                        <div class="mt-16 mt-xl-24 d-flex jc-between h-50">
-                            <span class="wrapper-input-newsletter f-58p d-flex jc-center round-35 overflow-h bor bor-1 bor-gray-lighter">
-                                <input class="f-1 mx-19 fs-14 fw-400" type="email" placeholder="Enter your email...">
-                            </span>
-
-                            <span class="f-38p d-flex jc-center round-35 overflow-h">
-                                <button class="f-1 bg-black cl-white fs-12 fw-600 ls-0">SUBSCRIBE</button>
-                            </span>
+                    <div id="newsletter" class="footer-list footer-list-active h-max-md-none overflow-md-v">
+                        <div class="pt-16 pt-xl-28">
+                            <p class="fs-16 fw-400 lh-24 lh-xl-26 cl-gray-dark">Enter your email address to get $10 off your first order and free shipping. Updates information on Sales and Offers.</p>
+                            
+                            <div class="mt-16 mt-xl-24 d-flex jc-between h-50">
+                                <span class="wrapper-input-newsletter f-58p d-flex jc-center round-35 overflow-h bor bor-1 bor-gray-lighter">
+                                    <input class="f-1 mx-19 fs-14 fw-400" type="email" placeholder="Enter your email...">
+                                </span>
+    
+                                <span class="f-38p d-flex jc-center round-35 overflow-h">
+                                    <button class="f-1 bg-black cl-white fs-12 fw-600 ls-0">SUBSCRIBE</button>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2390,7 +2377,7 @@
         </div>
     </footer>
 
-   <!-- Sticky -->
+   <!-- STICKY -->
     <div class="sticky z-2 bot-0 bg-white shadow d-lg-none d-flex jc-between pt-15 px-22 pb-30">
         <div class="box-border w-77 w-max-full">
             <div class="w-fit-content cursor-pointer mx-auto d-flex column ai-center g-1">

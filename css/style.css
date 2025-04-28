@@ -494,11 +494,19 @@ html {
     font-size: 1.6rem;
 }
 
+.fs-24 {
+    font-size: 2.4rem;
+}
+
 .fs-30 {
     font-size: 3rem;
 }
 
 /* === Font Weight ================= */
+.fw-300 {
+    font-weight: 300;
+}
+
 .fw-400 {
     font-weight: 400;
 }
@@ -891,6 +899,18 @@ html {
 /* === Focus ================= */
 .wrapper-input-newsletter:focus-within {
     border-color: var(--black);
+}
+
+/* ===  ================= */
+.footer-list {
+    list-style: none;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease-in-out;
+}
+
+.footer-list .footer-list-active {
+    max-height: auto;
 }
 
 /* === Top ================= */
