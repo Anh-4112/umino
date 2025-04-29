@@ -217,6 +217,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // =+=+=+=+=+=+=+=+=+=+=  TRENDING THIS WEEK  =+=+=+=+=+=+=+=+=+=+= //
+// ========== Btn-Text-Trending ==========
+document.addEventListener("DOMContentLoaded", function () {
+  const buttons = document.querySelectorAll(".btn-text-trending");
+
+  // Đặt active cho nút đầu tiên khi tải trang
+  buttons[0].classList.add("active");
+
+  // Xử lý khi click vào nút
+  buttons.forEach(button => {
+      button.addEventListener("click", function (event) {
+          event.preventDefault(); // Ngăn chặn load lại trang nếu href=""
+
+          // Xóa class active khỏi tất cả các nút
+          buttons.forEach(btn => btn.classList.remove("active"));
+
+          // Thêm class active vào nút được nhấn
+          this.classList.add("active");
+      });
+  });
+});
+
 // ========== Slider ==========
 document.addEventListener("DOMContentLoaded", () => {
   const slider = document.querySelector(".slider-trending");
@@ -262,7 +283,8 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Khi thả chuột
-  const dragStop = () => {
+  const dragStop = (e) => {
+    if (!isDragging) return;
     isDragging = false;
     slider.classList.remove("dragging");
 
@@ -379,7 +401,8 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Khi thả chuột
-  const dragStop = () => {
+  const dragStop = (e) => {
+    if (!isDragging) return;
     isDragging = false;
     slider.classList.remove("dragging");
 
@@ -689,7 +712,7 @@ document.addEventListener("DOMContentLoaded", () => {
   slider.addEventListener("touchend", dragStop);
 });
 
-// =========================================================================
+// =+=+=+=+=+=+=+=+=+=+=  FOOTER LIST  =+=+=+=+=+=+=+=+=+=+= //
 document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener('resize', () => {
     // Chọn tất cả phần tử có class "footer-list" (các menu con trong footer)
@@ -719,6 +742,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   })
 });
+
 // Hàm xử lý khi người dùng nhấn vào menu để mở hoặc đóng
 function toggleMenu(id) {
   // Lấy menu theo ID

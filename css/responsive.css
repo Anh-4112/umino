@@ -6,6 +6,11 @@
         --fs-title: 3rem;
     }
 
+    /* === Display None ================= */
+    .d-xs-none {
+        display: none;
+    }
+
     /* === Gap ================= */
     .g-xs-0 {
         gap: 0rem;
