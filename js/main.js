@@ -357,9 +357,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // =+=+=+=+=+=+=+=+=+=+=  BANNER  =+=+=+=+=+=+=+=+=+=+= //
 document.addEventListener("DOMContentLoaded", () => {
-  const carousel = document.querySelector(".slider-banner");
+  const slider = document.querySelector(".slider-banner");
   
-  let isDragging = false, startX, startScrollLeft;
+  let isDragging = false, startX = 0, startScrollLeft = 0;
   let moved = false; // Kiểm tra có di chuyển chuột hay không
 
   // Ngăn kéo link
@@ -370,33 +370,43 @@ document.addEventListener("DOMContentLoaded", () => {
       a.addEventListener("dragstart", (e) => e.preventDefault()); // Ngăn kéo link
   });
 
+  const getPageX = (e) => {
+    return e.type.includes("touch") ? e.touches[0].pageX : e.pageX;
+  };
+
   // Khi bắt đầu kéo
   const dragStart = (e) => {
       isDragging = true;
       moved = false;
-      startX = e.pageX;
-      startScrollLeft = carousel.scrollLeft;
-      carousel.classList.add("dragging");
+      startX = getPageX(e);
+      startScrollLeft = slider.scrollLeft;
+      slider.classList.add("dragging");
   };
 
   // Khi kéo chuột
   const dragging = (e) => {
       if (!isDragging) return;
       moved = true;
-      carousel.scrollLeft = startScrollLeft - (e.pageX - startX);
+      const currentX = getPageX(e);
+      slider.scrollLeft = startScrollLeft - (currentX - startX);
   };
 
   // Khi thả chuột
   const dragStop = () => {
       isDragging = false;
-      carousel.classList.remove("dragging");
+      slider.classList.remove("dragging");
   };
 
   // Gán sự kiện cho slider
-  carousel.addEventListener("mousedown", dragStart);
-  carousel.addEventListener("mousemove", dragging);
+  slider.addEventListener("mousedown", dragStart);
+  slider.addEventListener("mousemove", dragging);
   document.addEventListener("mouseup", dragStop);
-  carousel.addEventListener("mouseleave", dragStop);
+  slider.addEventListener("mouseleave", dragStop);
+
+  // Gán sự kiện cảm ứng
+  slider.addEventListener("touchstart", dragStart);
+  slider.addEventListener("touchmove", dragging);
+  slider.addEventListener("touchend", dragStop);
 });
 
 
