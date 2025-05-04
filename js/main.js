@@ -354,6 +354,22 @@ document.addEventListener("DOMContentLoaded", () => {
   slider.addEventListener("touchend", dragStop);
 });
 
+// ========== Btn-Change-Color-Trending ==========
+function changeImgTrending(element, imageSrc) {
+  // Tìm phần tử tổ tiên gần nhất của element có class là slide-trending bằng closest
+  let parentDiv = element.closest(".slide-trending");
+  // Kiểm tra nếu tìm được phần tử cha có class slide-trending thì mới tiếp tục
+  if (parentDiv) {
+    // Tìm trong phần tử cha đó phần tử con có class là img-change
+    let imgChange = parentDiv.querySelector(".img-change");
+    // Nếu img-change cần thay đổi tồn tại thì tiến hành thay đổi ảnh 
+    if (imgChange) {
+      // Gán lại thuộc tính src của thẻ <img> thành đường dẫn ảnh mới được truyền vào.
+      imgChange.src = imageSrc;
+    }
+  }
+}
+
 
 // =+=+=+=+=+=+=+=+=+=+=  BANNER  =+=+=+=+=+=+=+=+=+=+= //
 document.addEventListener("DOMContentLoaded", () => {
