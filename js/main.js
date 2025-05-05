@@ -543,6 +543,70 @@ document.addEventListener("DOMContentLoaded", () => {
   slider.addEventListener("touchend", dragStop);
 });
 
+// ========== Btn-Change-Color-Arrivals ==========
+function changeImgArrivals(element, imageSrc) {
+  // Tìm phần tử tổ tiên gần nhất của element có class là slide-arrivals bằng closest
+  let parentDiv = element.closest(".slide-arrivals");
+  // Kiểm tra nếu tìm được phần tử cha có class slide-arrivals thì mới tiếp tục
+  if (parentDiv) {
+    // Tìm trong phần tử cha đó phần tử con có class là img-change
+    let imgChange = parentDiv.querySelector(".img-change");
+    // Nếu img-change cần thay đổi tồn tại thì tiến hành thay đổi ảnh 
+    if (imgChange) {
+      // Gán lại thuộc tính src của thẻ <img> thành đường dẫn ảnh mới được truyền vào.
+      imgChange.src = imageSrc;
+    }
+  }
+}
+
+
+// =+=+=+=+=+=+=+=+=+=+=  TOOLTIPTEXT COLOR  =+=+=+=+=+=+=+=+=+=+= //
+document.addEventListener("DOMContentLoaded", function () {
+  // Lấy phần tử tooltip từ DOM
+  const tooltip = document.getElementById("tooltiptext-color");
+
+  // Chọn tất cả các nút màu có class .btn-color
+  document.querySelectorAll(".btn-color").forEach((btn) => {
+      
+      // Sự kiện khi di chuột vào nút màu
+      btn.addEventListener("mouseenter", function (event) {
+          const rect = event.target.getBoundingClientRect(); // Lấy vị trí và kích thước của nút màu
+          tooltip.textContent = event.target.innerText; // Cập nhật nội dung tooltiptext từ thuộc tính btn-color
+
+          // Tạm thời hiển thị tooltip để đo kích thước chính xác
+          tooltip.style.visibility = "hidden"; // Ẩn tooltip trong lúc đo kích thước
+          tooltip.style.display = "block"; // Hiển thị để có thể đo kích thước
+
+          requestAnimationFrame(() => {
+            const tooltipRect = tooltip.getBoundingClientRect(); // Lấy kích thước thực tế của tooltip
+
+            // Tính toán vị trí để căn giữa tooltip với nút màu
+            const top = (rect.top - tooltipRect.height - 8) / 10; // Cách nút 8px (tương đương 0.8rem vì 1rem = 10px)
+            const left = (rect.left + rect.width / 2 - tooltipRect.width / 2) / 10; // Căn giữa tooltip với nút màu
+            
+            // Tạm tắt transition
+            tooltip.style.transition = "none"; 
+
+            // Cập nhật vị trí tooltip
+            tooltip.style.top = `${top}rem`;
+            tooltip.style.left = `${left}rem`;
+
+            // Hiển thị tooltip với hiệu ứng mượt mà
+            tooltip.style.visibility = "visible";
+            tooltip.style.opacity = "1";
+          });
+      });
+
+      // Sự kiện khi rời chuột khỏi nút màu
+      btn.addEventListener("mouseleave", function () {
+          // Ẩn tooltip khi không cần thiết để tối ưu hiệu suất
+          tooltip.style.visibility = "hidden";
+          tooltip.style.opacity = "0";
+          tooltip.style.display = "none"; // Đảm bảo tooltip không chiếm không gian khi ẩn
+      });
+  });
+});
+
 
 // =+=+=+=+=+=+=+=+=+=+=  CUSTOMER SAY  =+=+=+=+=+=+=+=+=+=+= //
 // ========== Slider ==========

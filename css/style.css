@@ -490,6 +490,10 @@ html {
     font-size: var(--fs-title);
 }
 
+.fs-0 {
+    font-size: 0;
+}
+
 .fs-12 {
     font-size: 1.2rem;
 }
@@ -889,11 +893,25 @@ html {
     color: var(--white);
     border-radius: 0.5rem;
     padding: 1rem;
+    z-index: 1;
 }
 
 .tooltip-txt::after {
     content: "";
     border: solid 0.5rem;
+}
+
+/* Top */
+#tooltiptext-color {
+    position: fixed;
+}
+
+.tooltip-txt-after-top::after {
+    border-color: var(--black) transparent transparent transparent;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* Left */
