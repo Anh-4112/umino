@@ -497,10 +497,6 @@
     }
 
     /* === Gap ================= */
-    .g-xxl-0 {
-        gap: 0;
-    }
-
     .g-xxl-30 {
         gap: 3rem;
     }
@@ -531,13 +527,4 @@
         margin-left: 1rem;
     }
 
-    /* === Margin Right ================= */
-    .mr-xxl-30 {
-        margin-right: 3rem;
-    }
-
-    .mr-xxl-31 {
-        margin-right: 3.1rem;
-    }
-    
 }
