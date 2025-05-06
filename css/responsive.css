@@ -4,6 +4,8 @@
     :root {
         /* == Font Size === */
         --fs-title: 3rem;
+        /* == Navbar === */
+        --pr-navbar: 2.4rem;
     }
 
     /* === Display None ================= */
@@ -29,6 +31,11 @@
     .px-xs-0 {
         padding-left: 0;
         padding-right: 0;
+    }
+
+    /* === Margin Left ================= */
+    .ml-xs-0 {
+        margin-left: 0;
     }
 
     /* === Bottom ================= */
@@ -150,6 +157,11 @@
         /* == Slideshow === */
         --top-txt-slideshow: 25rem;
         --left-txt-slideshow: 22vw;
+        /* == Navbar === */
+        --pt-navbar: 2.6rem;
+        --pl-navbar: 2.9rem;
+        --pb-navbar: 2.3rem;
+        --pr-navbar: 4rem;
     }
 
     /* === Display Block ================= */
@@ -183,26 +195,6 @@
     /* === Justify Content ================= */
     .jc-lg-start {
         justify-content: start;
-    }
-
-    /* === Padding Top ================= */
-    .pt-lg-26 {
-        padding-top: 2.6rem;
-    }
-
-    /* === Padding Left ================= */
-    .pl-lg-29 {
-        padding-left: 2.9rem;
-    }
-
-    /* === Padding Bottom ================= */
-    .pb-lg-23 {
-        padding-bottom: 2.3rem;
-    }
-
-    /* === Padding Right ================= */
-    .pr-lg-40 {
-        padding-right: 4rem;
     }
 
     /* === Margin Top ================= */

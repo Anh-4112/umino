@@ -24,6 +24,11 @@ html {
     --bs-font-jost: Jost;
     /* == Font Size === */
     --fs-title: 3.6rem;
+    /* == Navbar === */
+    --pt-navbar: 2.8rem;
+    --pl-navbar: 2rem;
+    --pb-navbar: 2.5rem;
+    --pr-navbar: 3.1rem;
     /* == Slideshow === */
     --height-slideshow: 55rem;
     --top-txt-slideshow: 17.6rem;
@@ -232,9 +237,9 @@ html {
 }
 
 /* === Shadow ================= */
-/* .shadow {
+.shadow {
     box-shadow: 0 0.1rem 1.6rem rgba(0, 0, 0, 0.3);
-} */
+}
 
 .shadow-1 {
     box-shadow: 0 1rem 1.6rem rgba(0, 0, 0, 0.1);
@@ -347,6 +352,10 @@ html {
 }
 
 /* === Height ================= */
+.h {
+    max-height: 80rem;
+}
+
 .h-19 {
     height: 1.9rem;
 }
@@ -370,7 +379,6 @@ html {
 .h-50 {
     height: 5rem;
 }
-
 
 .h-60 {
     height: 6rem;
@@ -1173,6 +1181,10 @@ html {
     padding-top: var(--pt-item-feed-back);
 }
 
+.pt-navbar {
+    padding-top: var(--pt-navbar);
+}
+
 .pt-12 {
     padding-top: 1.2rem;
 }
@@ -1201,17 +1213,13 @@ html {
     padding-top: 2.5rem;
 }
 
-.pt-28 {
-    padding-top: 2.8rem;
-}
-
 .pt-44 {
     padding-top: 4.4rem;
 }
 
 /* === Padding Left ================= */
-.pl-20 {
-    padding-left: 2rem;
+.pl-navbar {
+    padding-left: var(--pl-navbar);
 }
 
 .pl-30 {
@@ -1221,6 +1229,10 @@ html {
 /* === Padding Bottom ================= */
 .pb-item-feed-back {
     padding-bottom: var(--pb-item-feed-back);
+}
+
+.pb-navbar {
+    padding-bottom: var(--pb-navbar);
 }
 
 .pb-11 {
@@ -1235,21 +1247,17 @@ html {
     padding-bottom: 2.1rem;
 }
 
-.pb-25 {
-    padding-bottom: 2.5rem;
-}
-
 .pb-30 {
     padding-bottom: 3rem;
 }
 
 /* === Padding Right ================= */
-.pr-10 {
-    padding-right: 1rem;
+.pr-navbar {
+    padding-right: var(--pr-navbar);
 }
 
-.pr-31 {
-    padding-right: 3.1rem;
+.pr-10 {
+    padding-right: 1rem;
 }
 
 .pr-55 {
