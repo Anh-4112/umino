@@ -231,9 +231,17 @@ html {
     overflow: visible;
 }
 
+.overflow-y {
+    overflow-y: auto;
+}
+
 /* === Opacity ================= */
 .opacity-0 {
     opacity: 0;
+}
+
+.opacity-6 {
+    opacity: 0.6;
 }
 
 /* === Shadow ================= */
@@ -285,8 +293,14 @@ html {
     z-index: 2;
 }
 
-.z-10 {
-    z-index: 10;
+.z-3 {
+    z-index: 3;
+}
+
+/* z-4 ở overlay-mobile.show */
+
+.z-5 {
+    z-index: 5;
 }
 
 /* === Width ================= */
@@ -303,6 +317,14 @@ html {
     max-width: 100%;
 }
 
+.w-full {
+    width: 100%;
+}
+
+.w-100vw {
+    width: 100vw;
+}
+
 .w-18 {
     width: 1.8rem;
 }
@@ -311,8 +333,16 @@ html {
     width: 1.9rem;
 }
 
+.w-22 {
+    width: 2.2rem;
+}
+
 .w-24 {
     width: 2.4rem;
+}
+
+.w-28 {
+    width: 2.8rem;
 }
 
 .w-35 {
@@ -351,17 +381,29 @@ html {
     width: 27rem;
 }
 
+.w-430 {
+    width: 43rem;
+}
+
 /* === Height ================= */
-.h {
-    max-height: 80rem;
+.h-100vh {
+    height: 100vh;
 }
 
 .h-19 {
     height: 1.9rem;
 }
 
+.h-22 {
+    height: 2.2rem;
+}
+
 .h-24 {
     height: 2.4rem;
+}
+
+.h-28 {
+    height: 2.8rem;
 }
 
 .h-34 {
@@ -425,6 +467,38 @@ html {
 }
 
 /* === Button ================= */
+.btn-lang-mobile:hover {
+    text-decoration: underline;
+}
+
+.btn-lang-mobile:hover > span {
+    border-color: var(--black);
+}
+
+.btn-lang-mobile.active {
+    text-decoration: underline;
+}
+
+.btn-lang-mobile.active > span {
+    border-color: var(--black);
+}
+
+.btn-curr-mobile:hover {
+    text-decoration: underline;
+}
+
+.btn-curr-mobile:hover > span {
+    border-color: var(--black);
+}
+
+.btn-curr-mobile.active {
+    text-decoration: underline;
+}
+
+.btn-curr-mobile.active > span {
+    border-color: var(--black);
+}
+
 .btn-text-trending {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -824,7 +898,9 @@ html {
     gap: 2.6rem;
 }
 
-
+.g-30 {
+    gap: 3rem;
+}
 
 /* === Justify Content ================= */
 .jc-end {
@@ -842,6 +918,26 @@ html {
 /* === Align Items ================= */
 .ai-center {
     align-items: center;
+}
+
+/* === Menu Mobile ================= */
+.wrapper-menu-mobile {
+    transform: translateX(-100%);
+    transition: transform 0.5s ease-in-out;
+}
+
+.wrapper-menu-mobile.open {
+    transform: translateX(0);
+}
+
+.overlay-mobile {
+    transition: opacity 0.5s ease-in-out;
+}
+
+.overlay-mobile.show {
+    opacity: 1;
+    visibility: visible;
+    z-index: 4;
 }
 
 /* === Nav PC ================= */
@@ -1166,6 +1262,11 @@ html {
     padding-bottom: 1.5rem;
 }
 
+.py-17 {
+    padding-top: 1.7rem;
+    padding-bottom: 1.7rem;
+}
+
 .py-19 {
     padding-top: 1.9rem;
     padding-bottom: 1.9rem;
@@ -1205,6 +1306,10 @@ html {
     padding-top: 1.9rem;
 }
 
+.pt-20 {
+    padding-top: 2rem;
+}
+
 .pt-24 {
     padding-top: 2.4rem;
 }
@@ -1241,6 +1346,10 @@ html {
 
 .pb-12 {
     padding-bottom: 1.2rem;
+}
+
+.pb-18 {
+    padding-bottom: 1.8rem;
 }
 
 .pb-21 {
@@ -1387,6 +1496,10 @@ html {
 
 .ml-11 {
     margin-left: 1.1rem;
+}
+
+.ml-30 {
+    margin-left: 3rem;
 }
 
 .ml-81 {

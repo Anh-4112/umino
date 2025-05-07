@@ -1,3 +1,74 @@
+// =+=+=+=+=+=+=+=+=+=+=  MENU MOBILE  =+=+=+=+=+=+=+=+=+=+= //
+document.addEventListener("DOMContentLoaded", function () {
+  const iconMenuMobile = document.getElementById("iconMenuMobile");
+  const wrapperMenuMobile = document.getElementById("wrapperMenuMobile");
+  const closeMenuMobile = document.getElementById("closeMenuMobile");
+  const overlayMobile = document.getElementById("overlayMobile");
+
+  // Mở menu mobile
+  iconMenuMobile.addEventListener("click", () => toggleMobile(true));
+  window.toggleMobile = function (isOpen) {
+      wrapperMenuMobile.classList.toggle("open", isOpen);
+      overlayMobile.classList.toggle("show", isOpen);
+      if (!isOpen) closeAllSubmenus();
+  };
+
+  const closeMobile = () => toggleMobile(false);
+  closeMenuMobile?.addEventListener("click", closeMobile);
+  overlayMobile?.addEventListener("click", closeMobile);
+
+  // Mở submenu
+  document.querySelectorAll(".btn-sub-nav").forEach(btn => {
+      btn.addEventListener("click", function() {
+          const submenu = this.nextElementSibling;
+          if (submenu && submenu.classList.contains("sub-nav-mobile")) {
+              closeAllSubmenus();
+              submenu.classList.add("open");
+          }
+      });
+  });
+
+  // Back submenu
+  document.querySelectorAll(".back-sub-nav").forEach(btn => {
+      btn.addEventListener("click", function() {
+          this.closest(".sub-nav-mobile")?.classList.remove("open");
+      });
+  });
+
+  // Close submenu (X)
+  document.querySelectorAll(".close-sub-nav").forEach(btn => {
+      btn.addEventListener("click", closeMobile);
+  });
+
+  // Đóng tất cả submenus
+  function closeAllSubmenus() {
+      document.querySelectorAll(".sub-nav-mobile.open").forEach(el => {
+          el.classList.remove("open");
+      });
+  }
+});
+
+// ========== Btn Language/Currency ==========
+const langBtns = document.querySelectorAll('.btn-lang-mobile');
+const currBtns = document.querySelectorAll('.btn-curr-mobile');
+// Language
+langBtns.forEach(btn => {
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    langBtns.forEach(b => b.classList.remove('active')); // Xoá active khỏi tất cả
+    btn.classList.add('active'); // Thêm active vào nút được click
+  });
+});
+// Currency
+currBtns.forEach(btn => {
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    currBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+
 // =+=+=+=+=+=+=+=+=+=+=  SLIDESHOW  =+=+=+=+=+=+=+=+=+=+= //
 // ========== Slideshow ==========
 document.addEventListener("DOMContentLoaded", () => {
@@ -877,7 +948,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   })
 });
-
 // Hàm xử lý khi người dùng nhấn vào menu để mở hoặc đóng
 function toggleMenu(id) {
   // Lấy menu theo ID
