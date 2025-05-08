@@ -394,8 +394,16 @@ html {
 }
 
 /* === Height ================= */
+.h-fit-content {
+    height: fit-content;
+}
+
 .h-100vh {
     height: 100vh;
+}
+
+.h-18 {
+    height: 1.8rem;
 }
 
 .h-19 {
@@ -1143,6 +1151,10 @@ html {
     top: 1250%;
 }
 
+.top-n8 {
+    top: -0.8rem;
+}
+
 .top-0 {
     top: 0;
 }
@@ -1195,6 +1207,10 @@ html {
 }
 
 /* === Right ================= */
+.right-n8 {
+    right: -0.8rem;
+}
+
 .right-0 {
     right: 0;
 }
