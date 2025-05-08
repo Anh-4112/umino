@@ -303,6 +303,14 @@ html {
     z-index: 5;
 }
 
+.z-6 {
+    z-index: 6;
+}
+
+.z-7 {
+    z-index: 7;
+}
+
 /* === Width ================= */
 .w-wrapper {
     width: 145rem;
@@ -922,7 +930,7 @@ html {
 
 /* === Menu Mobile ================= */
 .wrapper-menu-mobile {
-    transform: translateX(-100%);
+    transform: translateX(-101%);
     transition: transform 0.5s ease-in-out;
 }
 
@@ -938,6 +946,15 @@ html {
     opacity: 1;
     visibility: visible;
     z-index: 4;
+}
+
+.sub-nav-mobile {
+    transition: transform 0.4s ease-in-out;
+    transform: translateX(-101%);
+}
+
+.sub-nav-mobile.open {
+    transform: translateX(0);
 }
 
 /* === Nav PC ================= */
@@ -1522,6 +1539,10 @@ html {
 
 .mr-16 {
     margin-right: 1.6rem;
+}
+
+.mr-20 {
+    margin-right: 2rem;
 }
 
 .mr-30 {
