@@ -1,53 +1,4 @@
 // =+=+=+=+=+=+=+=+=+=+=  MENU MOBILE  =+=+=+=+=+=+=+=+=+=+= //
-// document.addEventListener("DOMContentLoaded", function () {
-//   const iconMenuMobile = document.getElementById("iconMenuMobile");
-//   const wrapperMenuMobile = document.getElementById("wrapperMenuMobile");
-//   const closeMenuMobile = document.getElementById("closeMenuMobile");
-//   const overlayMobile = document.getElementById("overlayMobile");
-
-//   // Mở menu mobile
-//   iconMenuMobile.addEventListener("click", () => toggleMobile(true));
-//   window.toggleMobile = function (isOpen) {
-//       wrapperMenuMobile.classList.toggle("open", isOpen);
-//       overlayMobile.classList.toggle("show", isOpen);
-//       if (!isOpen) closeAllSubmenus();
-//   };
-
-//   const closeMobile = () => toggleMobile(false);
-//   closeMenuMobile?.addEventListener("click", closeMobile);
-//   overlayMobile?.addEventListener("click", closeMobile);
-
-//   // Mở submenu
-//   document.querySelectorAll(".btn-sub-nav").forEach(btn => {
-//       btn.addEventListener("click", function() {
-//           const submenu = this.nextElementSibling;
-//           if (submenu && submenu.classList.contains("sub-nav-mobile")) {
-//               closeAllSubmenus();
-//               submenu.classList.add("open");
-//           }
-//       });
-//   });
-
-//   // Back submenu
-//   document.querySelectorAll(".back-sub-nav").forEach(btn => {
-//       btn.addEventListener("click", function() {
-//           this.closest(".sub-nav-mobile")?.classList.remove("open");
-//       });
-//   });
-
-//   // Close submenu (X)
-//   document.querySelectorAll(".close-sub-nav").forEach(btn => {
-//       btn.addEventListener("click", closeMobile);
-//   });
-
-//   // Đóng tất cả submenus
-//   function closeAllSubmenus() {
-//       document.querySelectorAll(".sub-nav-mobile.open").forEach(el => {
-//           el.classList.remove("open");
-//       });
-//   }
-// });
-
 document.addEventListener("DOMContentLoaded", function () {
   const iconMenuMobile = document.getElementById("iconMenuMobile");
   const wrapperMenuMobile = document.getElementById("wrapperMenuMobile");
@@ -97,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
 // ========== Btn Language/Currency ==========
 const langBtns = document.querySelectorAll('.btn-lang-mobile');
 const currBtns = document.querySelectorAll('.btn-curr-mobile');
@@ -116,6 +66,180 @@ currBtns.forEach(btn => {
     currBtns.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
   });
+});
+
+
+// =+=+=+=+=+=+=+=+=+=+=  MINI CART  =+=+=+=+=+=+=+=+=+=+= //
+document.addEventListener("DOMContentLoaded", function () {
+  // Lấy các phần tử DOM cần sử dụng
+  const cartIcon = document.querySelectorAll(".cart-icon");
+  const cartBlock = document.getElementById("cartBlock");
+  const closeCart = document.getElementById("closeCart");
+  const overlayCart = document.getElementById("overlayCart");
+  const cartItemsContainer = document.getElementById("cartItemList");
+  const cartItemTemplate = document.getElementById("cartItem");
+  const addToCartButtons = document.querySelectorAll(".add-to-cart");
+  const cartTotal = document.getElementById("cartTotal");
+  const freeShippingThreshold = 120; // Ngưỡng miễn phí vận chuyển
+
+  // Lấy giỏ hàng từ localStorage (nếu có) hoặc khởi tạo mảng trống
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  // Sự kiện mở giỏ hàng
+  cartIcon.forEach(icon => {
+    icon.addEventListener("click", () => toggleCart(true));
+    window.toggleCart = function (isOpen) {
+        cartBlock.classList.toggle("open", isOpen);
+        overlayCart.classList.toggle("show", isOpen);
+    };
+  })
+
+  // Sự kiện đóng giỏ hàng
+  const closeCartWithAnimation = () => toggleCart(false);
+  closeCart.addEventListener("click", closeCartWithAnimation);
+  overlayCart.addEventListener("click", closeCartWithAnimation);
+
+  // Cập nhật tiến trình miễn phí vận chuyển
+  function updateShippingProgress(total) {
+      const progressFill = document.getElementById("progressFill");
+      const progressIcon = document.getElementById("progressIcon");
+      const shippingMessage = document.getElementById("shippingMessage");
+
+      let progress = Math.min((total / freeShippingThreshold) * 100, 100);
+      progressFill.style.width = `${progress}%`;
+      progressIcon.style.left = `${progress}%`;
+
+      shippingMessage.innerHTML = total >= freeShippingThreshold
+          ? `<span class="fs-14 color-green">Congratulations! You've got free shipping!</span>`
+          : `Spend $${(freeShippingThreshold - total).toFixed(2)} more and get <span class="fs-14 fw-600 color-orange-red">FREE SHIPPING!</span>`;
+  }
+
+  // ==== THÊM SẢN PHẨM VÀO GIỎ ====
+  addToCartButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        // Lấy phần tử chứa thông tin sản phẩm đang click
+        const productBlock = button.closest(".wrapper");
+        if (!productBlock) return;
+
+        // Lấy thông tin hình ảnh, tên và giá từ các phần tử con
+        const imageEl = productBlock.querySelector(".img");
+        const nameEl = productBlock.querySelector(".item-name");
+        const priceEl = productBlock.querySelector(".item-price");
+        if (!imageEl || !nameEl || !priceEl) return;
+
+        // Dữ liệu cụ thể
+        const name = nameEl.textContent.trim(); // Tên sản phẩm
+        const price = parseFloat(priceEl.textContent.replace(/[^0-9.]/g, '')); // Giá số
+        const image = imageEl.src; // Link ảnh
+        const id = button.dataset.id || `${name.replace(/\s+/g, "-").toLowerCase()}-${price}-${image.split('/').pop()}`; // Tạo id duy nhất
+
+        // Thêm sản phẩm vào giỏ
+        addToCart(id, name, price, image);
+    });
+  });
+
+  // ==== HÀM THÊM VÀO GIỎ HÀNG ====
+  function addToCart(id, name, price, image) {
+    const existingItem = cart.find(item => item.id === id);
+
+    if (existingItem) {
+        existingItem.quantity += 1; // Nếu đã có sản phẩm thì tăng số lượng
+    } else {
+        cart.push({ id, name, price, image, quantity: 1 }); // Thêm mới sản phẩm
+    }
+
+    saveCart();     // Lưu vào localStorage
+    renderCart();   // Cập nhật giao diện giỏ
+    toggleCart(true); // Mở giỏ hàng
+  }
+
+  // ==== HIỂN THỊ GIỎ HÀNG ====
+  function renderCart() {
+    // Xóa các sản phẩm cũ khỏi DOM (giữ lại template)
+    Array.from(cartItemsContainer.children).forEach(child => {
+        if (child.tagName !== "TEMPLATE") {
+            cartItemsContainer.removeChild(child);
+        }
+    });
+
+    let total = 0;
+
+    // Lặp qua từng sản phẩm trong giỏ và hiển thị chúng
+    cart.forEach((item) => {
+        total += item.price * item.quantity;
+
+        const cartItem = cartItemTemplate.content.cloneNode(true); // Nhân bản template
+
+        // Gán thông tin vào các phần tử trong item
+        cartItem.querySelector(".cart-item-img").src = item.image;
+        cartItem.querySelector(".cart-item-name").textContent = item.name;
+        cartItem.querySelector(".cart-item-price").textContent = `$${(item.price * item.quantity).toFixed(2)}`;
+        cartItem.querySelector(".cart-item-qty").textContent = item.quantity;
+
+        // Các sự kiện tăng/giảm/xoá sản phẩm
+        cartItem.querySelector(".cart-item-increase").addEventListener("click", () => updateQuantity(item.id, 1));
+        cartItem.querySelector(".cart-item-decrease").addEventListener("click", () => updateQuantity(item.id, -1));
+        cartItem.querySelector(".btn-cart-item-remove").addEventListener("click", () => removeFromCart(item.id));
+
+        // Thêm sản phẩm này vào danh sách hiển thị
+        cartItemsContainer.appendChild(cartItem);
+    });
+
+    // Cập nhật tổng tiền
+    if (cartTotal) {
+      cartTotal.textContent = "$" + total.toFixed(2);
+    }
+
+    updateCartCount(); // Cập nhật số lượng sản phẩm ở icon
+  }
+
+  // ==== CẬP NHẬT SỐ LƯỢNG SP TRONG GIỎ ====
+  function updateQuantity(id, change) {
+    const item = cart.find(item => item.id === id);
+    if (!item) return;
+
+    item.quantity += change;
+    if (item.quantity <= 0) {
+        removeFromCart(id); // Nếu số lượng <= 0 thì xoá
+    } else {
+        saveCart();
+        renderCart(); // Cập nhật lại
+    }
+  }
+
+  // ==== XOÁ SP KHỎI GIỎ ====
+  function removeFromCart(id) {
+    cart = cart.filter(item => item.id !== id);
+    saveCart();
+    renderCart();
+  }
+
+  // Lưu giỏ hàng vào localStorage
+  let saveCartTimeout;
+  function saveCart() {
+      clearTimeout(saveCartTimeout);
+      saveCartTimeout = setTimeout(() => {
+          localStorage.setItem("mini-cart", JSON.stringify(cart));
+          updateCartCount();
+      }, 300);
+  }
+
+  // Cập nhật số lượng hiển thị trên icon giỏ hàng
+  function updateCartCount() {
+    // Kiểm tra nếu cart là một mảng, nếu không thì gán giá trị mặc định là []
+    let totalQuantity = Array.isArray(cart) ? cart.reduce((sum, item) => sum + (item.quantity || 0), 0) : 0;
+  
+    // Cập nhật số lượng 
+    const cartCountElements = document.querySelectorAll(".cart-count");
+    cartCountElements.forEach(el => {
+        el.innerText = totalQuantity;
+        el.style.visibility = "visible"; // Luôn hiển thị
+    });
+  }
+  
+  // Hiển thị lại giỏ hàng khi trang tải lại
+  renderCart();
+  updateCartCount();
 });
 
 
