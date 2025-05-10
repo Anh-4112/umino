@@ -131,7 +131,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const name = nameEl.textContent.trim(); // Tên sản phẩm
         const price = parseFloat(priceEl.textContent.replace(/[^0-9.]/g, '')); // Giá số
         const image = imageEl.src; // Link ảnh
-        const id = button.dataset.id || `${name.replace(/\s+/g, "-").toLowerCase()}-${price}-${image.split('/').pop()}`; // Tạo id duy nhất
+        const ImagePart = image.split('/').slice(-2).join('-');
+        const id = button.dataset.id || `${name.replace(/\s+/g, "-").toLowerCase()}-${price}-${ImagePart}`;
 
         // Thêm sản phẩm vào giỏ
         addToCart(id, name, price, image);
