@@ -251,6 +251,7 @@ html {
 
 .overflow-y {
     overflow-y: auto;
+    scrollbar-width: none;
 }
 
 /* === Opacity ================= */
@@ -1466,6 +1467,10 @@ html {
 
 .pb-navbar {
     padding-bottom: var(--pb-navbar);
+}
+
+.pb-5 {
+    padding-bottom: 0.5rem;
 }
 
 .pb-11 {

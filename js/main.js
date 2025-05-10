@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const freeShippingThreshold = 120; // Ngưỡng miễn phí vận chuyển
 
   // Lấy giỏ hàng từ localStorage (nếu có) hoặc khởi tạo mảng trống
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cart = JSON.parse(localStorage.getItem("mini-cart")) || [];
 
   // Sự kiện mở giỏ hàng
   cartIcon.forEach(icon => {
@@ -110,8 +110,8 @@ document.addEventListener("DOMContentLoaded", function () {
       progressIcon.style.left = `${progress}%`;
 
       shippingMessage.innerHTML = total >= freeShippingThreshold
-          ? `<span class="fs-14 color-green">Congratulations! You've got free shipping!</span>`
-          : `Spend $${(freeShippingThreshold - total).toFixed(2)} more and get <span class="fs-14 fw-600 color-orange-red">FREE SHIPPING!</span>`;
+          ? `<p class="fs-14 cl-green">Congratulations! You've got free shipping!</p>`
+          : `Spend $${(freeShippingThreshold - total).toFixed(2)} more and get <span class="fs-14 fw-600 cl-orange-red">FREE SHIPPING!</span>`;
   }
 
   // ==== THÊM SẢN PHẨM VÀO GIỎ ====
@@ -191,6 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     updateCartCount(); // Cập nhật số lượng sản phẩm ở icon
+    updateShippingProgress(total);
   }
 
   // ==== CẬP NHẬT SỐ LƯỢNG SP TRONG GIỎ ====
