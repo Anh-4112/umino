@@ -131,8 +131,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const name = nameEl.textContent.trim(); // Tên sản phẩm
         const price = parseFloat(priceEl.textContent.replace(/[^0-9.]/g, '')); // Giá số
         const image = imageEl.src; // Link ảnh
-        const ImagePart = image.split('/').slice(-2).join('-');
-        const id = button.dataset.id || `${name.replace(/\s+/g, "-").toLowerCase()}-${price}-${ImagePart}`;
+        const ImagePart = image.split('/').slice(-2).join('-'); // Chỉ lấy tên file chứa ảnh, tên ảnh và thay / thành -
+        const id = button.dataset.id || `${name.replace(/\s+/g, "-").toLowerCase()}-${price}-${ImagePart}`; // Tạo id duy nhất
 
         // Thêm sản phẩm vào giỏ
         addToCart(id, name, price, image);
@@ -925,7 +925,7 @@ document.addEventListener("DOMContentLoaded", () => {
     slider.classList.remove("dragging");
 
     if (moved) {
-      const threshold = 100; // khoảng kéo tối thiểu để chuyển slide
+      const threshold = 40; // khoảng kéo tối thiểu để chuyển slide
       const cardWidthWithGap = slideWidth + gap;
       const scrollLeft = slider.scrollLeft;
       const distanceDragged = scrollLeft - startScrollLeft;
@@ -1040,7 +1040,7 @@ document.addEventListener("DOMContentLoaded", () => {
     slider.classList.remove("dragging");
 
     if (moved) {
-        const threshold = 70; // Ngưỡng kéo tối thiểu để chuyển slide
+        const threshold = 40; // Ngưỡng kéo tối thiểu để chuyển slide
         const cardWidthWithGap = slideWidth + gap;
         const scrollLeft = slider.scrollLeft;
         const distanceDragged = scrollLeft - startScrollLeft;
