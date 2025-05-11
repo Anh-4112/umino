@@ -602,20 +602,40 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ========== Btn-Change-Color-Trending ==========
-function changeImgTrending(element, imageSrc) {
-  // Tìm phần tử tổ tiên gần nhất của element có class là slide-trending bằng closest
-  let parentDiv = element.closest(".slide-trending");
-  // Kiểm tra nếu tìm được phần tử cha có class slide-trending thì mới tiếp tục
-  if (parentDiv) {
-    // Tìm trong phần tử cha đó phần tử con có class là img-change
-    let imgChange = parentDiv.querySelector(".img-change");
-    // Nếu img-change cần thay đổi tồn tại thì tiến hành thay đổi ảnh 
-    if (imgChange) {
-      // Gán lại thuộc tính src của thẻ <img> thành đường dẫn ảnh mới được truyền vào.
-      imgChange.src = imageSrc;
-    }
+document.querySelectorAll(".slide-trending").forEach(slideTrending => {
+  const buttons = slideTrending.querySelectorAll(".btn-color");
+
+  buttons.forEach(button => {
+    button.addEventListener("click", function () {
+      const imageChange = this.dataset.imgChange;
+      const imageHover = this.dataset.imgHover;
+      const newPrice = this.dataset.price;
+
+      // Đổi ảnh
+      const imgChange = slideTrending.querySelector(".img-change");
+      if (imgChange) {
+        imgChange.src = imageChange;
+      }
+
+      // Đổi ảnh hover
+      const imgHover = slideTrending.querySelector(".img-hover");
+      if (imgHover) { // && imageHover
+        imgHover.src = imageHover;
+      }
+
+      // Đổi giá
+      const priceElement = slideTrending.querySelector(".item-price");
+      if (priceElement) {
+        priceElement.textContent = newPrice;
+      }
+    });
+  });
+
+  // Gán giá trị mặc định bằng click vào nút đầu tiên
+  if (buttons.length > 0) {
+    buttons[0].click();
   }
-}
+});
 
 
 // =+=+=+=+=+=+=+=+=+=+=  BANNER  =+=+=+=+=+=+=+=+=+=+= //
@@ -677,8 +697,8 @@ document.addEventListener("DOMContentLoaded", () => {
 // ========== Slider ==========
 document.addEventListener("DOMContentLoaded", () => {
   const slider = document.querySelector(".slider-arrivals");
-  const btnArrivals = document.querySelectorAll(".btn-arrivals-prev, .btn-arrivals-next");
-  const slide = slider.querySelector(".slide-arrivals");
+  const btnArrival = document.querySelectorAll(".btn-arrivals-prev, .btn-arrivals-next");
+  const slide = slider.querySelector(".slide-arrival");
   
   let slideWidth = slide ? slide.offsetWidth : 0;
   let gap = parseInt(getComputedStyle(slider).gap) || 0;
@@ -768,7 +788,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Xử lý khi click nút prev/next
-  btnArrivals.forEach(btn => {
+  btnArrival.forEach(btn => {
       btn.addEventListener("click", () => {
           if (btn.classList.contains("btn-arrivals-prev")) {
               scrollToItem("prev");
@@ -790,21 +810,41 @@ document.addEventListener("DOMContentLoaded", () => {
   slider.addEventListener("touchend", dragStop);
 });
 
-// ========== Btn-Change-Color-Arrivals ==========
-function changeImgArrivals(element, imageSrc) {
-  // Tìm phần tử tổ tiên gần nhất của element có class là slide-arrivals bằng closest
-  let parentDiv = element.closest(".slide-arrivals");
-  // Kiểm tra nếu tìm được phần tử cha có class slide-arrivals thì mới tiếp tục
-  if (parentDiv) {
-    // Tìm trong phần tử cha đó phần tử con có class là img-change
-    let imgChange = parentDiv.querySelector(".img-change");
-    // Nếu img-change cần thay đổi tồn tại thì tiến hành thay đổi ảnh 
-    if (imgChange) {
-      // Gán lại thuộc tính src của thẻ <img> thành đường dẫn ảnh mới được truyền vào.
-      imgChange.src = imageSrc;
-    }
+// ========== Btn-Change-Color-Trending ==========
+document.querySelectorAll(".slide-arrival").forEach(slideArrival => {
+  const buttons = slideArrival.querySelectorAll(".btn-color");
+
+  buttons.forEach(button => {
+    button.addEventListener("click", function () {
+      const imageChange = this.dataset.imgChange;
+      const imageHover = this.dataset.imgHover;
+      const newPrice = this.dataset.price;
+
+      // Đổi ảnh
+      const imgChange = slideArrival.querySelector(".img-change");
+      if (imgChange) {
+        imgChange.src = imageChange;
+      }
+
+      // Đổi ảnh hover
+      const imgHover = slideArrival.querySelector(".img-hover");
+      if (imgHover) { // && imageHover
+        imgHover.src = imageHover;
+      }
+
+      // Đổi giá
+      const priceElement = slideArrival.querySelector(".item-price");
+      if (priceElement) {
+        priceElement.textContent = newPrice;
+      }
+    });
+  });
+
+  // Gán giá trị mặc định bằng click vào nút đầu tiên
+  if (buttons.length > 0) {
+    buttons[0].click();
   }
-}
+});
 
 
 // =+=+=+=+=+=+=+=+=+=+=  TOOLTIPTEXT COLOR  =+=+=+=+=+=+=+=+=+=+= //
@@ -1093,6 +1133,7 @@ document.addEventListener("DOMContentLoaded", () => {
   slider.addEventListener("touchmove", dragging);
   slider.addEventListener("touchend", dragStop);
 });
+
 
 // =+=+=+=+=+=+=+=+=+=+=  FOOTER LIST  =+=+=+=+=+=+=+=+=+=+= //
 document.addEventListener("DOMContentLoaded", () => {
