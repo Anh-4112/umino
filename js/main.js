@@ -49,21 +49,21 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // ========== Btn Language/Currency ==========
-const langBtns = document.querySelectorAll('.btn-lang-mobile');
-const currBtns = document.querySelectorAll('.btn-curr-mobile');
+const btnLang = document.querySelectorAll('.btn-lang-mobile');
+const btnCurr = document.querySelectorAll('.btn-curr-mobile');
 // Language
-langBtns.forEach(btn => {
+btnLang.forEach(btn => {
   btn.addEventListener('click', function (e) {
     e.preventDefault();
-    langBtns.forEach(b => b.classList.remove('active')); // Xoá active khỏi tất cả
+    btnLang.forEach(b => b.classList.remove('active')); // Xoá active khỏi tất cả
     btn.classList.add('active'); // Thêm active vào nút được click
   });
 });
 // Currency
-currBtns.forEach(btn => {
+btnCurr.forEach(btn => {
   btn.addEventListener('click', function (e) {
     e.preventDefault();
-    currBtns.forEach(b => b.classList.remove('active'));
+    btnCurr.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
   });
 });
