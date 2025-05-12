@@ -1181,3 +1181,25 @@ function toggleMenu(id) {
   // Cập nhật trạng thái mới vào dataset
   menu.dataset.open = !isOpen;
 }
+
+// =+=+=+=+=+=+=+=+=+=+=  ANIMATION BLOCK  =+=+=+=+=+=+=+=+=+=+= //
+document.addEventListener('DOMContentLoaded', () => {
+    const blocks = document.querySelectorAll('.anim-block');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Delay dựa theo thứ tự xuất hiện
+          setTimeout(() => {
+            entry.target.classList.add('show');
+          }, index * 150); // mỗi block cách nhau 150ms
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    blocks.forEach((block) => {
+      observer.observe(block);
+    });
+});

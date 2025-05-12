@@ -295,6 +295,17 @@ html {
     transform: translate(0, 0);
 }
 
+.anim-block {
+    opacity: 0;
+    transform: translateY(5rem);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.anim-block.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* === Z-Index ================= */
 .z-n1 {
     z-index: -1;
@@ -425,6 +436,10 @@ html {
     height: 100%;
 }
 
+.h-max-800 {
+    max-height: 80rem;
+}
+
 .h-100vh {
     height: 100vh;
 }
@@ -511,6 +526,10 @@ html {
 
 .wrapper-item:hover .img-hidden {
     opacity: 0;
+}
+
+.img-cover {
+    object-fit: cover;
 }
 
 /* === Button ================= */
