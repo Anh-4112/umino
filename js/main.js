@@ -1,9 +1,34 @@
+// =+=+=+=+=+=+=+=+=+=+=  ANIMATION BLOCK  =+=+=+=+=+=+=+=+=+=+= //
+document.addEventListener('DOMContentLoaded', () => {
+    const blocks = document.querySelectorAll('.anim-block');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Delay dựa theo thứ tự xuất hiện
+          setTimeout(() => {
+            entry.target.classList.add('show');
+          }, index * 150); // mỗi block cách nhau 150ms
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    blocks.forEach((block) => {
+      observer.observe(block);
+    });
+});
+
+
 // =+=+=+=+=+=+=+=+=+=+=  MENU MOBILE  =+=+=+=+=+=+=+=+=+=+= //
 document.addEventListener("DOMContentLoaded", function () {
   const iconMenuMobile = document.getElementById("iconMenuMobile");
   const wrapperMenuMobile = document.getElementById("wrapperMenuMobile");
   const closeMenuMobile = document.getElementById("closeMenuMobile");
   const overlayMobile = document.getElementById("overlayMobile");
+  const btnLang = document.querySelectorAll('.btn-lang-mobile');
+  const btnCurr = document.querySelectorAll('.btn-curr-mobile');
 
   iconMenuMobile.addEventListener("click", () => toggleMobile(true));
 
@@ -46,25 +71,23 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".close-sub-nav").forEach(btn => {
     btn.addEventListener("click", closeMobile);
   });
-});
 
-// ========== Btn Language/Currency ==========
-const btnLang = document.querySelectorAll('.btn-lang-mobile');
-const btnCurr = document.querySelectorAll('.btn-curr-mobile');
-// Language
-btnLang.forEach(btn => {
-  btn.addEventListener('click', function (e) {
-    e.preventDefault();
-    btnLang.forEach(b => b.classList.remove('active')); // Xoá active khỏi tất cả
-    btn.classList.add('active'); // Thêm active vào nút được click
+  // Language
+  btnLang.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      btnLang.forEach(b => b.classList.remove('active')); // Xoá active khỏi tất cả
+      btn.classList.add('active'); // Thêm active vào nút được click
+    });
   });
-});
-// Currency
-btnCurr.forEach(btn => {
-  btn.addEventListener('click', function (e) {
-    e.preventDefault();
-    btnCurr.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+
+  // Currency
+  btnCurr.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      btnCurr.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
   });
 });
 
@@ -118,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
   addToCartButtons.forEach(button => {
     button.addEventListener("click", () => {
         // Lấy phần tử chứa thông tin sản phẩm đang click
-        const productBlock = button.closest(".wrapper-item-slide");
+        const productBlock = button.closest(".slide");
         if (!productBlock) return;
 
         // Lấy thông tin hình ảnh, tên và giá từ các phần tử con
@@ -463,7 +486,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// =+=+=+=+=+=+=+=+=+=+=  TRENDING THIS WEEK  =+=+=+=+=+=+=+=+=+=+= //
+// =+=+=+=+=+=+=+=+=+=+=  TRENDING THIS WEEK / ARRIVALS  =+=+=+=+=+=+=+=+=+=+= //
 // ========== Btn-Text-Trending ==========
 document.addEventListener("DOMContentLoaded", function () {
   const buttons = document.querySelectorAll(".btn-text-trending");
@@ -485,124 +508,139 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// ========== Slider ==========
+/* ========== Slider ========== */
 document.addEventListener("DOMContentLoaded", () => {
-  const slider = document.querySelector(".slider-trending");
-  const btnTrending = document.querySelectorAll(".btn-trending-prev, .btn-trending-next");
-  const slide = slider.querySelector(".slide-trending");
-  
-  let slideWidth = slide ? slide.offsetWidth : 0;
-  let gap = parseInt(getComputedStyle(slider).gap) || 0;
+  // Lặp qua tất cả các class slider trong trang
+  document.querySelectorAll(".slider").forEach((slider) => {
+    // Lấy ra 1 phần tử slide bên trong slider để đo kích thước
+    const slide = slider.querySelector(".slide");
+    // Tính chiều rộng của 1 slide bao gồm cả khoảng cách gap giữa các slide
+    let slideWidth = slide ? slide.offsetWidth : 0;
+    let gap = parseInt(getComputedStyle(slider).gap) || 0;
 
-  let isDragging = false, startX, startScrollLeft;
-  let moved = false;
+    // Biến kiểm soát thao tác kéo
+    let isDragging = false;        // Đã bắt đầu kéo chuột hay chưa
+    let startX;                    // Vị trí bắt đầu kéo chuột
+    let startScrollLeft;          // Giá trị scrollLeft khi bắt đầu kéo
+    let moved = false;            // Đã di chuyển xa hay chưa (dùng để ngăn click link khi đang kéo)
 
-  // Cập nhật kích thước khi thay đổi màn hình
-  const updateSizes = () => {
+    // Cập nhật lại slideWidth và gap nếu thay đổi kích thước màn hình
+    const updateSizes = () => {
       slideWidth = slide ? slide.offsetWidth : 0;
       gap = parseInt(getComputedStyle(slider).gap) || 0;
-  };
-  window.addEventListener("resize", updateSizes);
+    };
+    window.addEventListener("resize", updateSizes);
 
-  // Ngăn kéo link
-  document.querySelectorAll(".slider-trending a").forEach(a => {
+    // Ngăn không cho click vào thẻ <a> khi đang kéo slider
+    slider.querySelectorAll("a").forEach(a => {
       a.addEventListener("click", (e) => {
-          if (moved) e.preventDefault();
+        if (moved) e.preventDefault(); // Nếu đã kéo thì ngăn click
       });
-      a.addEventListener("dragstart", (e) => e.preventDefault());
-  });
+      a.addEventListener("dragstart", (e) => e.preventDefault()); // Ngăn kéo hình ảnh đi
+    });
 
-  // Khi bắt đầu kéo
-  const dragStart = (e) => {
+    // Sự kiện khi bắt đầu kéo chuột, cảm ứng
+    const dragStart = (e) => {
       isDragging = true;
       moved = false;
-      startX = e.pageX || e.touches[0].pageX;
-      startScrollLeft = slider.scrollLeft;
-      slider.classList.add("dragging");
-  };
+      startX = e.pageX || e.touches[0].pageX; // Tọa độ ban đầu (chuột, cảm ứng)
+      startScrollLeft = slider.scrollLeft;    // Giá trị scroll ban đầu
+      slider.classList.add("dragging");       // Thêm class kéo (nếu muốn thêm style khi đang kéo)
+    };
 
-  // Khi kéo
-  const dragging = (e) => {
+    // Sự kiện khi đang kéo chuột, cảm ứng
+    const dragging = (e) => {
       if (!isDragging) return;
       moved = true;
       const x = e.pageX || e.touches[0].pageX;
-      slider.scrollLeft = startScrollLeft - (x - startX);
-  };
+      slider.scrollLeft = startScrollLeft - (x - startX); // Tính khoảng scroll dựa theo chênh lệch chuột
+    };
 
-  // Khi thả chuột
-  const dragStop = (e) => {
-    if (!isDragging) return;
-    isDragging = false;
-    slider.classList.remove("dragging");
+    // Sự kiện khi dừng kéo chuột, kết thúc cảm ứng)
+    const dragStop = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      slider.classList.remove("dragging");
 
-    if (moved) {
-        const threshold = 70; // Ngưỡng kéo tối thiểu để chuyển slide
+      if (moved) {
+        const threshold = 50; // Khoảng cách kéo tối thiểu để chuyển slide
         const cardWidthWithGap = slideWidth + gap;
         const scrollLeft = slider.scrollLeft;
         const distanceDragged = scrollLeft - startScrollLeft;
 
-        let closestIndex = Math.round(startScrollLeft / cardWidthWithGap); // Giữ nguyên nếu chưa vượt ngưỡng
+        let closestIndex = Math.round(startScrollLeft / cardWidthWithGap); // Index ban đầu
 
+        // Nếu kéo đủ xa thì chuyển slide
         if (distanceDragged > threshold) {
-            // Kéo sang phải vượt ngưỡng → chuyển slide tiếp theo
-            closestIndex += 1;
+          closestIndex += 1; // kéo sang phải thì qua slide tiếp theo
         } else if (distanceDragged < -threshold) {
-            // Kéo sang trái vượt ngưỡng → lùi về slide trước
-            closestIndex -= 1;
+          closestIndex -= 1; // kéo sang trái thì quay lại slide trước đó
         }
 
         const newScrollPosition = closestIndex * cardWidthWithGap;
 
+        // Cuộn mượt đến vị trí slide mới
         slider.style.scrollBehavior = "smooth";
-        slider.scrollTo({ left: newScrollPosition, behavior: "smooth" });
+        slider.scrollTo({ left: newScrollPosition });
 
+        // Sau 0.4s thì tắt cuộn mượt để kéo bằng tay mượt hơn
         setTimeout(() => {
-            slider.style.scrollBehavior = "auto";
-        }, 500);
-    }
-  };
+          slider.style.scrollBehavior = "auto";
+        }, 400);
+      }
+    };
 
-  // Cuộn chính xác đến item, tính cả gap
-  const scrollToItem = (direction) => {
+    // Hàm xử lý khi bấm nút prev/next
+    const scrollToItem = (direction) => {
       const scrollLeft = slider.scrollLeft;
-      const cardWidthWithGap = slideWidth + gap; // Kích thước mỗi item kèm khoảng cách
+      const cardWidthWithGap = slideWidth + gap;
+
+      // Tính toán vị trí mới tùy theo hướng
       const newScrollPosition = direction === "prev"
-          ? Math.max(0, Math.floor(scrollLeft / cardWidthWithGap) * cardWidthWithGap - cardWidthWithGap)
-          : Math.min(slider.scrollWidth, Math.ceil(scrollLeft / cardWidthWithGap) * cardWidthWithGap + cardWidthWithGap);
+        ? Math.max(0, Math.floor(scrollLeft / cardWidthWithGap) * cardWidthWithGap - cardWidthWithGap)
+        : Math.min(slider.scrollWidth, Math.ceil(scrollLeft / cardWidthWithGap) * cardWidthWithGap + cardWidthWithGap);
 
       slider.style.scrollBehavior = "smooth";
-      slider.scrollTo({ left: newScrollPosition, behavior: "smooth" });
+      slider.scrollTo({ left: newScrollPosition });
 
+      // Sau khi scroll xong thì tắt cuộn mượt
       setTimeout(() => {
-          slider.style.scrollBehavior = "auto";
+        slider.style.scrollBehavior = "auto";
       }, 500);
-  };
+    };
 
-  // Xử lý khi click nút prev/next
-  btnTrending.forEach(btn => {
-      btn.addEventListener("click", () => {
-          if (btn.classList.contains("btn-trending-prev")) {
-              scrollToItem("prev");
-          } else {
-              scrollToItem("next");
-          }
-      });
+    // Tìm wrapper chứa nút prev/next tương ứng với slider hiện tại
+    const wrapper = slider.closest(".wrapper");
+
+    // Lấy đúng nút prev và next trong wrapper đó
+    const prevBtn = wrapper.querySelector(".slider-prev");
+    const nextBtn = wrapper.querySelector(".slider-next");
+
+    // Gán sự kiện click cho nút prev
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => scrollToItem("prev"));
+    }
+
+    // Gán sự kiện click cho nút next
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => scrollToItem("next"));
+    }
+
+    // Gán các sự kiện kéo bằng chuột
+    slider.addEventListener("mousedown", dragStart);
+    slider.addEventListener("mousemove", dragging);
+    document.addEventListener("mouseup", dragStop);
+    slider.addEventListener("mouseleave", dragStop);
+
+    // Gán các sự kiện cảm ứng cho điện thoại
+    slider.addEventListener("touchstart", dragStart);
+    slider.addEventListener("touchmove", dragging);
+    slider.addEventListener("touchend", dragStop);
   });
-
-  // Gán sự kiện kéo chuột
-  slider.addEventListener("mousedown", dragStart);
-  slider.addEventListener("mousemove", dragging);
-  document.addEventListener("mouseup", dragStop);
-  slider.addEventListener("mouseleave", dragStop);
-
-  // Gán sự kiện cảm ứng
-  slider.addEventListener("touchstart", dragStart);
-  slider.addEventListener("touchmove", dragging);
-  slider.addEventListener("touchend", dragStop);
 });
 
-// ========== Btn-Change-Color-Trending ==========
-document.querySelectorAll(".slide-trending").forEach(slideTrending => {
+// ========== Btn-Color ==========
+document.querySelectorAll(".slide").forEach(slideTrending => {
   const buttons = slideTrending.querySelectorAll(".btn-color");
 
   buttons.forEach(button => {
@@ -635,6 +673,53 @@ document.querySelectorAll(".slide-trending").forEach(slideTrending => {
   if (buttons.length > 0) {
     buttons[0].click();
   }
+});
+
+// ========== Tooltip Text Color ==========
+document.addEventListener("DOMContentLoaded", function () {
+  // Lấy phần tử tooltip từ DOM
+  const tooltip = document.getElementById("tooltiptext-color");
+
+  // Chọn tất cả các nút màu có class .btn-color
+  document.querySelectorAll(".btn-color").forEach((btn) => {
+      
+      // Sự kiện khi di chuột vào nút màu
+      btn.addEventListener("mouseenter", function (event) {
+          const rect = event.target.getBoundingClientRect(); // Lấy vị trí và kích thước của nút màu
+          tooltip.textContent = event.target.innerText; // Cập nhật nội dung tooltiptext từ thuộc tính btn-color
+
+          // Tạm thời hiển thị tooltip để đo kích thước chính xác
+          tooltip.style.visibility = "hidden"; // Ẩn tooltip trong lúc đo kích thước
+          tooltip.style.display = "block"; // Hiển thị để có thể đo kích thước
+
+          requestAnimationFrame(() => {
+            const tooltipRect = tooltip.getBoundingClientRect(); // Lấy kích thước thực tế của tooltip
+
+            // Tính toán vị trí để căn giữa tooltip với nút màu
+            const top = (rect.top - tooltipRect.height - 8) / 10; // Cách nút 8px (tương đương 0.8rem vì 1rem = 10px)
+            const left = (rect.left + rect.width / 2 - tooltipRect.width / 2) / 10; // Căn giữa tooltip với nút màu
+            
+            // Tạm tắt transition
+            tooltip.style.transition = "none"; 
+
+            // Cập nhật vị trí tooltip
+            tooltip.style.top = `${top}rem`;
+            tooltip.style.left = `${left}rem`;
+
+            // Hiển thị tooltip với hiệu ứng mượt mà
+            tooltip.style.visibility = "visible";
+            tooltip.style.opacity = "1";
+          });
+      });
+
+      // Sự kiện khi rời chuột khỏi nút màu
+      btn.addEventListener("mouseleave", function () {
+          // Ẩn tooltip khi không cần thiết để tối ưu hiệu suất
+          tooltip.style.visibility = "hidden";
+          tooltip.style.opacity = "0";
+          tooltip.style.display = "none"; // Đảm bảo tooltip không chiếm không gian khi ẩn
+      });
+  });
 });
 
 
@@ -693,215 +778,13 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// =+=+=+=+=+=+=+=+=+=+=  ARRIVALS  =+=+=+=+=+=+=+=+=+=+= //
-// ========== Slider ==========
-document.addEventListener("DOMContentLoaded", () => {
-  const slider = document.querySelector(".slider-arrivals");
-  const btnArrival = document.querySelectorAll(".btn-arrivals-prev, .btn-arrivals-next");
-  const slide = slider.querySelector(".slide-arrival");
-  
-  let slideWidth = slide ? slide.offsetWidth : 0;
-  let gap = parseInt(getComputedStyle(slider).gap) || 0;
-
-  let isDragging = false, startX, startScrollLeft;
-  let moved = false;
-
-  // Cập nhật kích thước khi thay đổi màn hình
-  const updateSizes = () => {
-      slideWidth = slide ? slide.offsetWidth : 0;
-      gap = parseInt(getComputedStyle(slider).gap) || 0;
-  };
-  window.addEventListener("resize", updateSizes);
-
-  // Ngăn kéo link
-  document.querySelectorAll(".slider-arrivals a").forEach(a => {
-      a.addEventListener("click", (e) => {
-          if (moved) e.preventDefault();
-      });
-      a.addEventListener("dragstart", (e) => e.preventDefault());
-  });
-
-  // Khi bắt đầu kéo
-  const dragStart = (e) => {
-      isDragging = true;
-      moved = false;
-      startX = e.pageX || e.touches[0].pageX;
-      startScrollLeft = slider.scrollLeft;
-      slider.classList.add("dragging");
-  };
-
-  // Khi kéo
-  const dragging = (e) => {
-      if (!isDragging) return;
-      moved = true;
-      const x = e.pageX || e.touches[0].pageX;
-      slider.scrollLeft = startScrollLeft - (x - startX);
-  };
-
-  // Khi thả chuột
-  const dragStop = (e) => {
-    if (!isDragging) return;
-    isDragging = false;
-    slider.classList.remove("dragging");
-
-    if (moved) {
-        const threshold = 70; // Ngưỡng kéo tối thiểu để chuyển slide
-        const cardWidthWithGap = slideWidth + gap;
-        const scrollLeft = slider.scrollLeft;
-        const distanceDragged = scrollLeft - startScrollLeft;
-
-        let closestIndex = Math.round(startScrollLeft / cardWidthWithGap); // Giữ nguyên nếu chưa vượt ngưỡng
-
-        if (distanceDragged > threshold) {
-            // Kéo sang phải vượt ngưỡng → chuyển slide tiếp theo
-            closestIndex += 1;
-        } else if (distanceDragged < -threshold) {
-            // Kéo sang trái vượt ngưỡng → lùi về slide trước
-            closestIndex -= 1;
-        }
-
-        const newScrollPosition = closestIndex * cardWidthWithGap;
-
-        slider.style.scrollBehavior = "smooth";
-        slider.scrollTo({ left: newScrollPosition, behavior: "smooth" });
-
-        setTimeout(() => {
-            slider.style.scrollBehavior = "auto";
-        }, 500);
-    }
-  };
-
-  // Cuộn chính xác đến item, tính cả gap
-  const scrollToItem = (direction) => {
-      const scrollLeft = slider.scrollLeft;
-      const cardWidthWithGap = slideWidth + gap; // Kích thước mỗi item kèm khoảng cách
-      const newScrollPosition = direction === "prev"
-          ? Math.max(0, Math.floor(scrollLeft / cardWidthWithGap) * cardWidthWithGap - cardWidthWithGap)
-          : Math.min(slider.scrollWidth, Math.ceil(scrollLeft / cardWidthWithGap) * cardWidthWithGap + cardWidthWithGap);
-
-      slider.style.scrollBehavior = "smooth";
-      slider.scrollTo({ left: newScrollPosition, behavior: "smooth" });
-
-      setTimeout(() => {
-          slider.style.scrollBehavior = "auto";
-      }, 500);
-  };
-
-  // Xử lý khi click nút prev/next
-  btnArrival.forEach(btn => {
-      btn.addEventListener("click", () => {
-          if (btn.classList.contains("btn-arrivals-prev")) {
-              scrollToItem("prev");
-          } else {
-              scrollToItem("next");
-          }
-      });
-  });
-
-  // Gán sự kiện kéo chuột
-  slider.addEventListener("mousedown", dragStart);
-  slider.addEventListener("mousemove", dragging);
-  document.addEventListener("mouseup", dragStop);
-  slider.addEventListener("mouseleave", dragStop);
-
-  // Gán sự kiện cảm ứng
-  slider.addEventListener("touchstart", dragStart);
-  slider.addEventListener("touchmove", dragging);
-  slider.addEventListener("touchend", dragStop);
-});
-
-// ========== Btn-Change-Color-Trending ==========
-document.querySelectorAll(".slide-arrival").forEach(slideArrival => {
-  const buttons = slideArrival.querySelectorAll(".btn-color");
-
-  buttons.forEach(button => {
-    button.addEventListener("click", function () {
-      const imageChange = this.dataset.imgChange;
-      const imageHover = this.dataset.imgHover;
-      const newPrice = this.dataset.price;
-
-      // Đổi ảnh
-      const imgChange = slideArrival.querySelector(".img-change");
-      if (imgChange) {
-        imgChange.src = imageChange;
-      }
-
-      // Đổi ảnh hover
-      const imgHover = slideArrival.querySelector(".img-hover");
-      if (imgHover) { // && imageHover
-        imgHover.src = imageHover;
-      }
-
-      // Đổi giá
-      const priceElement = slideArrival.querySelector(".item-price");
-      if (priceElement) {
-        priceElement.textContent = newPrice;
-      }
-    });
-  });
-
-  // Gán giá trị mặc định bằng click vào nút đầu tiên
-  if (buttons.length > 0) {
-    buttons[0].click();
-  }
-});
-
-
-// =+=+=+=+=+=+=+=+=+=+=  TOOLTIPTEXT COLOR  =+=+=+=+=+=+=+=+=+=+= //
-document.addEventListener("DOMContentLoaded", function () {
-  // Lấy phần tử tooltip từ DOM
-  const tooltip = document.getElementById("tooltiptext-color");
-
-  // Chọn tất cả các nút màu có class .btn-color
-  document.querySelectorAll(".btn-color").forEach((btn) => {
-      
-      // Sự kiện khi di chuột vào nút màu
-      btn.addEventListener("mouseenter", function (event) {
-          const rect = event.target.getBoundingClientRect(); // Lấy vị trí và kích thước của nút màu
-          tooltip.textContent = event.target.innerText; // Cập nhật nội dung tooltiptext từ thuộc tính btn-color
-
-          // Tạm thời hiển thị tooltip để đo kích thước chính xác
-          tooltip.style.visibility = "hidden"; // Ẩn tooltip trong lúc đo kích thước
-          tooltip.style.display = "block"; // Hiển thị để có thể đo kích thước
-
-          requestAnimationFrame(() => {
-            const tooltipRect = tooltip.getBoundingClientRect(); // Lấy kích thước thực tế của tooltip
-
-            // Tính toán vị trí để căn giữa tooltip với nút màu
-            const top = (rect.top - tooltipRect.height - 8) / 10; // Cách nút 8px (tương đương 0.8rem vì 1rem = 10px)
-            const left = (rect.left + rect.width / 2 - tooltipRect.width / 2) / 10; // Căn giữa tooltip với nút màu
-            
-            // Tạm tắt transition
-            tooltip.style.transition = "none"; 
-
-            // Cập nhật vị trí tooltip
-            tooltip.style.top = `${top}rem`;
-            tooltip.style.left = `${left}rem`;
-
-            // Hiển thị tooltip với hiệu ứng mượt mà
-            tooltip.style.visibility = "visible";
-            tooltip.style.opacity = "1";
-          });
-      });
-
-      // Sự kiện khi rời chuột khỏi nút màu
-      btn.addEventListener("mouseleave", function () {
-          // Ẩn tooltip khi không cần thiết để tối ưu hiệu suất
-          tooltip.style.visibility = "hidden";
-          tooltip.style.opacity = "0";
-          tooltip.style.display = "none"; // Đảm bảo tooltip không chiếm không gian khi ẩn
-      });
-  });
-});
-
-
 // =+=+=+=+=+=+=+=+=+=+=  CUSTOMER SAY  =+=+=+=+=+=+=+=+=+=+= //
 // ========== Slider ==========
 document.addEventListener("DOMContentLoaded", () => {
   // Khởi tạo các biến và phần tử
   const slider = document.querySelector(".slider-fback"); // Thẻ bao toàn bộ slide
   const slide = slider.querySelector(".slide-fback"); // Danh sách các slide
-  const btnFback = document.querySelectorAll(".btn-fback-prev, .btn-fback-next"); // Nút prev/next
+  const btnFback = document.querySelectorAll(".fback-prev, .fback-next"); // Nút prev/next
 
   // Tính chiều rộng của slide và khoảng cách (gap) giữa các slide
   let slideWidth = slide ? slide.offsetWidth : 0;
@@ -1007,7 +890,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Lắng nghe sự kiện click nút prev/next
   btnFback.forEach(btn => {
     btn.addEventListener("click", () => {
-      if (btn.classList.contains("btn-fback-prev")) {
+      if (btn.classList.contains("fback-prev")) {
         scrollToItem("prev");
       } else {
         scrollToItem("next");
@@ -1181,25 +1064,3 @@ function toggleMenu(id) {
   // Cập nhật trạng thái mới vào dataset
   menu.dataset.open = !isOpen;
 }
-
-// =+=+=+=+=+=+=+=+=+=+=  ANIMATION BLOCK  =+=+=+=+=+=+=+=+=+=+= //
-document.addEventListener('DOMContentLoaded', () => {
-    const blocks = document.querySelectorAll('.anim-block');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          // Delay dựa theo thứ tự xuất hiện
-          setTimeout(() => {
-            entry.target.classList.add('show');
-          }, index * 150); // mỗi block cách nhau 150ms
-        }
-      });
-    }, {
-      threshold: 0.1
-    });
-
-    blocks.forEach((block) => {
-      observer.observe(block);
-    });
-});

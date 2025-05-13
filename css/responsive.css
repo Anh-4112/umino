@@ -338,39 +338,39 @@
         transform: translateX(-1.5rem);
     }
 
-    .btn-trending-prev,
-    .btn-trending-next,
-    .btn-arrivals-prev,
-    .btn-arrivals-next,
-    .btn-fback-prev,
-    .btn-fback-next {
+    .trending-prev,
+    .trending-next,
+    .arrivals-prev,
+    .arrivals-next,
+    .fback-prev,
+    .fback-next {
         transition: opacity, transform, 0.2s ease-in-out;
     }
 
-    .wrapper:hover .btn-trending-prev,
-    .wrapper:hover .btn-arrivals-prev,
-    .wrapper:hover .btn-trending-next,
-    .wrapper:hover .btn-arrivals-next,
-    .wrapper:hover .btn-fback-prev,
-    .wrapper:hover .btn-fback-next {
+    .wrapper:hover .trending-prev,
+    .wrapper:hover .arrivals-prev,
+    .wrapper:hover .trending-next,
+    .wrapper:hover .arrivals-next,
+    .wrapper:hover .fback-prev,
+    .wrapper:hover .fback-next {
         opacity: 1;
     }
     
-    .wrapper:hover .btn-trending-prev,
-    .wrapper:hover .btn-arrivals-prev {
+    .wrapper:hover .trending-prev,
+    .wrapper:hover .arrivals-prev {
         transform: translateX(3rem);
     }
 
-    .wrapper:hover .btn-trending-next,
-    .wrapper:hover .btn-arrivals-next {
+    .wrapper:hover .trending-next,
+    .wrapper:hover .arrivals-next {
         transform: translateX(-3rem);
     }
 
-    .wrapper:hover .btn-fback-prev {
+    .wrapper:hover .fback-prev {
         transform: translate(3rem, -50%);
     }
 
-    .wrapper:hover .btn-fback-next {
+    .wrapper:hover .fback-next {
         transform: translate(-3rem, -50%);
     }
 
