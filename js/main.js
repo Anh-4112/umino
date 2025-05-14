@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Lấy thông tin hình ảnh, tên và giá từ các phần tử con
         const imageEl = productBlock.querySelector(".img");
         const nameEl = productBlock.querySelector(".item-name");
-        const colorEl = productBlock.querySelector(".btn-color.selected"); // || productBlock.querySelector(".btn-color") Tìm màu sắc đang chọn
+        const colorEl = productBlock.querySelector(".btn-color.selected");
         const priceEl = productBlock.querySelector(".item-price");
         if (!imageEl || !nameEl || !colorEl || !priceEl) return;
 
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const image = imageEl.src; // Link ảnh
         const imagePart = image.split('/').slice(-2).join('-'); // Chỉ lấy tên file chứa ảnh, tên ảnh và thay / thành -
         const name = nameEl.textContent.trim(); // Tên sản phẩm
-        const color = colorEl?.textContent?.trim() || "Default";
+        const color = colorEl?.textContent?.trim(); // Màu sắc
         const price = parseFloat(priceEl.textContent.replace(/[^0-9.]/g, '')); // Giá số
         const id = button.dataset.id || `${name.replace(/\s+/g, "-").toLowerCase()}-${color}-${price}-${imagePart}`; // Tạo id duy nhất
 
