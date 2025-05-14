@@ -508,7 +508,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-/* ========== Slider ========== */
+// ========== Slider ==========
 document.addEventListener("DOMContentLoaded", () => {
   // Lặp qua tất cả các class slider trong trang
   document.querySelectorAll(".slider").forEach((slider) => {
