@@ -147,29 +147,31 @@ document.addEventListener("DOMContentLoaded", function () {
         // Lấy thông tin hình ảnh, tên và giá từ các phần tử con
         const imageEl = productBlock.querySelector(".img");
         const nameEl = productBlock.querySelector(".item-name");
+        const colorEl = productBlock.querySelector(".btn-color.selected"); // || productBlock.querySelector(".btn-color") Tìm màu sắc đang chọn
         const priceEl = productBlock.querySelector(".item-price");
-        if (!imageEl || !nameEl || !priceEl) return;
+        if (!imageEl || !nameEl || !colorEl || !priceEl) return;
 
         // Dữ liệu cụ thể
-        const name = nameEl.textContent.trim(); // Tên sản phẩm
-        const price = parseFloat(priceEl.textContent.replace(/[^0-9.]/g, '')); // Giá số
         const image = imageEl.src; // Link ảnh
-        const ImagePart = image.split('/').slice(-2).join('-'); // Chỉ lấy tên file chứa ảnh, tên ảnh và thay / thành -
-        const id = button.dataset.id || `${name.replace(/\s+/g, "-").toLowerCase()}-${price}-${ImagePart}`; // Tạo id duy nhất
+        const imagePart = image.split('/').slice(-2).join('-'); // Chỉ lấy tên file chứa ảnh, tên ảnh và thay / thành -
+        const name = nameEl.textContent.trim(); // Tên sản phẩm
+        const color = colorEl?.textContent?.trim() || "Default";
+        const price = parseFloat(priceEl.textContent.replace(/[^0-9.]/g, '')); // Giá số
+        const id = button.dataset.id || `${name.replace(/\s+/g, "-").toLowerCase()}-${color}-${price}-${imagePart}`; // Tạo id duy nhất
 
         // Thêm sản phẩm vào giỏ
-        addToCart(id, name, price, image);
+        addToCart(id, name, price, image, color);
     });
   });
 
   // ==== HÀM THÊM VÀO GIỎ HÀNG ====
-  function addToCart(id, name, price, image) {
+  function addToCart(id, name, price, image, color) {
     const existingItem = cart.find(item => item.id === id);
 
     if (existingItem) {
         existingItem.quantity += 1; // Nếu đã có sản phẩm thì tăng số lượng
     } else {
-        cart.push({ id, name, price, image, quantity: 1 }); // Thêm mới sản phẩm
+        cart.push({ id, name, price, image, color, quantity: 1 }); // Thêm mới sản phẩm
     }
 
     saveCart();     // Lưu vào localStorage
@@ -197,9 +199,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Gán thông tin vào các phần tử trong item
         cartItem.querySelector(".cart-item-img").src = item.image;
         cartItem.querySelector(".cart-item-name").textContent = item.name;
+        cartItem.querySelector(".cart-color").textContent = item.color;
         cartItem.querySelector(".cart-item-price").textContent = `$${(item.price * item.quantity).toFixed(2)}`;
         cartItem.querySelector(".cart-item-qty").textContent = item.quantity;
-
         // Các sự kiện tăng/giảm/xoá sản phẩm
         cartItem.querySelector(".cart-item-increase").addEventListener("click", () => updateQuantity(item.id, 1));
         cartItem.querySelector(".cart-item-decrease").addEventListener("click", () => updateQuantity(item.id, -1));
@@ -666,6 +668,10 @@ document.querySelectorAll(".slide").forEach(slideTrending => {
       if (priceElement) {
         priceElement.textContent = newPrice;
       }
+
+      // Gán .selected cho btn đang chọn
+      buttons.forEach(btn => btn.classList.remove("selected"));
+      this.classList.add("selected");
     });
   });
 
