@@ -1064,3 +1064,30 @@ function toggleMenu(id) {
   // Cập nhật trạng thái mới vào dataset
   menu.dataset.open = !isOpen;
 }
+
+// =+=+=+=+=+=+=+=+=+=+=  GO TOP  =+=+=+=+=+=+=+=+=+=+= //
+document.addEventListener("DOMContentLoaded", function () {
+    const goToTopButton = document.querySelector(".go-top");
+
+    function toggleGoToTop() {
+        if (window.scrollY > 150) {
+            goToTopButton.classList.add("show");
+        } else {
+            goToTopButton.classList.remove("show");
+        }
+    }
+
+    // Kiểm tra khi trang load
+    toggleGoToTop();
+
+    // Lắng nghe sự kiện cuộn
+    window.addEventListener("scroll", toggleGoToTop);
+
+    // Cuộn lên đầu khi click
+    goToTopButton.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+});

@@ -300,8 +300,8 @@ html {
 
 .anim-block {
     opacity: 0;
-    transform: translateY(5rem);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(2rem);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .anim-block.show {
@@ -391,6 +391,10 @@ html {
 
 .w-40 {
     width: 4rem;
+}
+
+.w-50 {
+    width: 5rem;
 }
 
 .w-60 {
@@ -1223,6 +1227,16 @@ html {
     max-height: auto;
 }
 
+/* === Go Top ================= */
+.go-top {
+    transform: scale(0);
+    transition: transform 0.3s ease-out;
+}
+
+.go-top.show {
+    transform: scale(1);
+}
+
 /* === Top ================= */
 .top-txt-slideshow {
     top: var(--top-txt-slideshow);
@@ -1304,6 +1318,14 @@ html {
     bottom: 2.5rem;
 }
 
+.bot-88 {
+    bottom: 8.8rem;
+}
+
+.bot-155 {
+    bottom: 15.5rem;
+}
+
 /* === Right ================= */
 .right-n8 {
     right: -0.8rem;
@@ -1315,6 +1337,10 @@ html {
 
 .right-10 {
     right: 1rem;
+}
+
+.right-20 {
+    right: 2rem;
 }
 
 .right-30 {
