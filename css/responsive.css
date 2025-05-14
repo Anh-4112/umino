@@ -425,6 +425,12 @@
         padding-right: 3rem;
     }
 
+    /* === Padding Y ================= */
+    .py-xl-50 {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+
     /* === Margin Top ================= */
     .mt-xl-10 {
         margin-top: 1rem;

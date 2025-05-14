@@ -99,11 +99,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const cartBlock = document.getElementById("cartBlock");
   const closeCart = document.getElementById("closeCart");
   const overlayCart = document.getElementById("overlayCart");
-  const cartItemsContainer = document.getElementById("cartItemList");
-  const cartItemTemplate = document.getElementById("cartItem");
-  const addToCartButtons = document.querySelectorAll(".add-to-cart");
+  const listCartItem = document.getElementById("listCartItem");
+  const cartItemTemplate = document.getElementById("cartItem"); 
+  const addItem = document.querySelectorAll(".add-to-cart");
   const cartTotal = document.getElementById("cartTotal");
-  const freeShippingThreshold = 120; // Ngưỡng miễn phí vận chuyển
+  const freeShip = 120; // Ngưỡng miễn phí vận chuyển
 
   // Lấy giỏ hàng từ localStorage (nếu có) hoặc khởi tạo mảng trống
   let cart = JSON.parse(localStorage.getItem("mini-cart")) || [];
@@ -128,17 +128,17 @@ document.addEventListener("DOMContentLoaded", function () {
       const progressIcon = document.getElementById("progressIcon");
       const shippingMessage = document.getElementById("shippingMessage");
 
-      let progress = Math.min((total / freeShippingThreshold) * 100, 100);
+      let progress = Math.min((total / freeShip) * 100, 100);
       progressFill.style.width = `${progress}%`;
       progressIcon.style.left = `${progress}%`;
 
-      shippingMessage.innerHTML = total >= freeShippingThreshold
+      shippingMessage.innerHTML = total >= freeShip
           ? `<p class="fs-14 cl-green">Congratulations! You've got free shipping!</p>`
-          : `Spend $${(freeShippingThreshold - total).toFixed(2)} more and get <span class="fs-14 fw-600 cl-orange-red">FREE SHIPPING!</span>`;
+          : `Spend $${(freeShip - total).toFixed(2)} more and get <span class="fs-14 fw-600 cl-orange-red">FREE SHIPPING!</span>`;
   }
 
   // ==== THÊM SẢN PHẨM VÀO GIỎ ====
-  addToCartButtons.forEach(button => {
+  addItem.forEach(button => {
     button.addEventListener("click", () => {
         // Lấy phần tử chứa thông tin sản phẩm đang click
         const productBlock = button.closest(".slide");
@@ -182,9 +182,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // ==== HIỂN THỊ GIỎ HÀNG ====
   function renderCart() {
     // Xóa các sản phẩm cũ khỏi DOM (giữ lại template)
-    Array.from(cartItemsContainer.children).forEach(child => {
+    Array.from(listCartItem.children).forEach(child => {
         if (child.tagName !== "TEMPLATE") {
-            cartItemsContainer.removeChild(child);
+            listCartItem.removeChild(child);
         }
     });
 
@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
         cartItem.querySelector(".btn-cart-item-remove").addEventListener("click", () => removeFromCart(item.id));
 
         // Thêm sản phẩm này vào danh sách hiển thị
-        cartItemsContainer.appendChild(cartItem);
+        listCartItem.appendChild(cartItem);
     });
 
     // Cập nhật tổng tiền
@@ -1026,50 +1026,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // =+=+=+=+=+=+=+=+=+=+=  FOOTER LIST  =+=+=+=+=+=+=+=+=+=+= //
 document.addEventListener("DOMContentLoaded", () => {
-  window.addEventListener('resize', () => {
-    // Chọn tất cả phần tử có class "footer-list" (các menu con trong footer)
-    document.querySelectorAll(".footer-list").forEach(menu => {
-        // Lấy biểu tượng (+/-) từ phần tử liền trước menu
-        let icon = menu.previousElementSibling.querySelector(".footer-icon");
-        // Kiểm tra xem menu có mở sẵn hay không dựa vào biểu tượng (+/-)
-        let isOpen = icon.textContent.trim() === "−";
-  
-        // Chỉ tác dụng cho viewport < 768px
-        if (window.innerWidth < 768) {
-          if (isOpen) {
-              // Nếu biểu tượng là "-", mở sẵn menu với chiều cao thực tế
-              requestAnimationFrame(() => {
-                  menu.style.maxHeight = menu.scrollHeight / 10 + "rem";
-              });
-          } else {
-              // Nếu biểu tượng là "+", giữ menu đóng với maxHeight = 0
-              menu.style.maxHeight = "0rem";
-          }
-        } else {
-            // Màn hình desktop: xóa maxHeight inline đi cho sạch
-            menu.style.maxHeight = null;
-        }
-        // Lưu trạng thái mở/đóng của menu vào thuộc tính dataset
-        menu.dataset.open = isOpen;
+  // Gán sự kiện click cho .footer-title
+  document.querySelectorAll(".footer-title").forEach(title => {
+    title.addEventListener("click", () => {
+      // Lấy .footer-list liền sau .footer-title
+      const menu = title.nextElementSibling;
+      toggleMenu(menu, title);
     });
-  })
-});
-// Hàm xử lý khi người dùng nhấn vào menu để mở hoặc đóng
-function toggleMenu(id) {
-  // Lấy menu theo ID
-  let menu = document.getElementById(id);
-  // Lấy biểu tượng (+/-) từ phần tử liền trước menu
-  let icon = menu.previousElementSibling.querySelector(".footer-icon");
-  // Kiểm tra trạng thái hiện tại của menu
-  let isOpen = menu.dataset.open === "true";
+  });
 
-  // Nếu menu đang mở, thu gọn lại, nếu đang đóng, mở rộng ra
-  menu.style.maxHeight = isOpen ? "0rem" : menu.scrollHeight / 10 + "rem";
-  // Cập nhật biểu tượng tương ứng
-  icon.textContent = isOpen ? "+" : "−";
-  // Cập nhật trạng thái mới vào dataset
-  menu.dataset.open = !isOpen;
-}
+  window.addEventListener('resize', () => {
+    document.querySelectorAll(".footer-list").forEach(menu => {
+      const icon = menu.previousElementSibling.querySelector(".footer-icon");
+      const isOpen = icon.textContent.trim() === "−";
+      if (window.innerWidth < 768) {
+        if (isOpen) {
+          requestAnimationFrame(() => {
+            menu.style.maxHeight = menu.scrollHeight / 10 + "rem";
+          });
+        } else {
+          menu.style.maxHeight = "0rem";
+        }
+      } else {
+        menu.style.maxHeight = null;
+      }
+      menu.dataset.open = isOpen;
+    });
+  });
+
+  // Hàm mở/đóng menu
+  function toggleMenu(menu, titleElement) {
+    const icon = titleElement.querySelector(".footer-icon");
+    const isOpen = menu.dataset.open === "true";
+
+    menu.style.maxHeight = isOpen ? "0rem" : menu.scrollHeight / 10 + "rem";
+    icon.textContent = isOpen ? "+" : "−";
+    menu.dataset.open = !isOpen;
+  }
+});
+
 
 // =+=+=+=+=+=+=+=+=+=+=  GO TOP  =+=+=+=+=+=+=+=+=+=+= //
 document.addEventListener("DOMContentLoaded", function () {
