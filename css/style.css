@@ -276,6 +276,17 @@ html {
 }
 
 /* === Animation ================= */
+.anim-block {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.anim-block.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .anim-txt-sshow {
     opacity: 0;
     transition: opacity 1.5s ease, transform 1.5s ease;
@@ -296,17 +307,6 @@ html {
 .anim-txt-sshow.show {
     opacity: 1;
     transform: translate(0, 0);
-}
-
-.anim-block {
-    opacity: 0;
-    transform: translateY(2rem);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-.anim-block.show {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 /* === Z-Index ================= */
