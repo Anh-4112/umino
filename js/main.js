@@ -337,8 +337,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Khởi tạo các biến và phần tử
   const wrapper = document.querySelector(".wrapper-slideshow"); // Thẻ bao toàn bộ slideshow
   const slides = Array.from(wrapper.querySelectorAll(".slide")); // Danh sách các slide
-  const btnPrev = document.querySelector(".btn-slideshow-prev"); // Nút chuyển slide về trước
-  const btnNext = document.querySelector(".btn-slideshow-next"); // Nút chuyển slide kế tiếp
+  const btnPrev = document.querySelector(".slideshow-prev"); // Nút chuyển slide về trước
+  const btnNext = document.querySelector(".slideshow-next"); // Nút chuyển slide kế tiếp
   const dotsContainer = document.querySelector(".slideshow-dots"); // Vùng chứa các chấm (dot)
 
   let currentIndex = 0; // Slide đang hiển thị
@@ -370,7 +370,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Chuyển đến slide có index cụ thể
   const goToSlide = (index) => {
-    // Đảm bảo index luôn nằm trong khoảng hợp lệ (0 → slides.length - 1)
+    // Đảm bảo index luôn nằm trong khoảng hợp lệ (0 => slides.length - 1)
     currentIndex = (index + slides.length) % slides.length;
     updateSlides();
   };
@@ -396,11 +396,8 @@ document.addEventListener("DOMContentLoaded", () => {
     startAutoSlide();
   };
 
-  // Tạo các chấm tròn (dot) dưới slideshow 
+  // Tạo dot slideshow 
   const createDots = () => {
-    if (!dotsContainer) return;
-    dotsContainer.innerHTML = ""; // Xóa dot cũ (nếu có)
-
     slides.forEach((_, i) => {
       const dot = document.createElement("button");
       dot.classList.add("dot");
