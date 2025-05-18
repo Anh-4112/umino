@@ -276,13 +276,13 @@ html {
 }
 
 /* === Animation ================= */
-.anim-block {
+.anim-reveal {
     opacity: 0;
     transform: translateY(2rem);
     transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-.anim-block.show {
+.anim-reveal.show {
     opacity: 1;
     transform: translateY(0);
 }
@@ -571,11 +571,11 @@ html {
     border-color: var(--black);
 }
 
-.btn-text-trending {
+.btn-txt-trending {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.btn-text-trending.active {
+.btn-txt-trending.active {
     background-color: var(--white-smoke);
 }
 
