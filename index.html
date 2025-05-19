@@ -12,13 +12,14 @@
     <!-- Responsive -->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- JS -->
-    <script src="js/main.js" defer></script>
     <script src="js/anim-displays-bot-up.js" defer></script>
     <script src="js/anim-displays-random.js" defer></script>
     <script src="js/countdown.js" defer></script>
     <script src="js/menu-mobile.js" defer></script>
     <script src="js/mini-cart.js" defer></script>
     <script src="js/slideshow.js" defer></script>
+    <script src="js/slider-snap.js" defer></script>
+    <script src="js/slider-scroll.js" defer></script>
     <script src="js/variant-switcher.js" defer></script>
     <script src="js/hover-tooltip.js" defer></script>
     <script src="js/tabs-toggle.js" defer></script>
@@ -2525,7 +2526,7 @@
                 <!-- Wrapper Btn Prev/Next -->
                 <div class="d-flex jc-center g-10">
                     <!-- Btn Perv -->
-                    <div class="fback-prev cursor-pointer z-1 absolute-xl opacity-xl-0 top-xl-center left-0">
+                    <div class="fback-prev slider-prev cursor-pointer z-1 absolute-xl opacity-xl-0 top-xl-center left-0">
                         <span class="opacity-xl-5 opacity-hover-1 bg-white bg-hover-black cl-hover-white w-40 h-40 round-50p bor-xl-none bor bor-1 bor-gray-light d-flex flex-center">
                             <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5.46875 8.86328L1.9375 5.33203L5.46875 1.80078C5.60417 1.67578 5.67188 1.52474 5.67188 1.34766C5.67188 1.16016 5.60417 0.998698 5.46875 0.863281C5.34375 0.738281 5.1875 0.675781 5 0.675781C4.8125 0.675781 4.65625 0.738281 4.53125 0.863281L0.53125 4.86328C0.395833 4.9987 0.328125 5.16016 0.328125 5.34766C0.328125 5.52474 0.395833 5.67578 0.53125 5.80078L4.53125 9.80078C4.65625 9.9362 4.8125 10.0039 5 10.0039C5.1875 10.0039 5.34375 9.9362 5.46875 9.80078C5.60417 9.67578 5.67188 9.52474 5.67188 9.34766C5.67188 9.16016 5.60417 8.9987 5.46875 8.86328Z" fill="currentColor"/>
@@ -2534,7 +2535,7 @@
                     </div>
     
                     <!-- Btn Next -->
-                    <div class="fback-next cursor-pointer z-1 absolute-xl opacity-xl-0 top-xl-center right-0">
+                    <div class="fback-next slider-next cursor-pointer z-1 absolute-xl opacity-xl-0 top-xl-center right-0">
                         <span class="opacity-xl-5 opacity-hover-1 bg-white bg-hover-black cl-hover-white w-40 h-40 round-50p bor-xl-none bor bor-1 bor-gray-light d-flex flex-center">
                             <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.46875 9.80078L5.46875 5.80078C5.60417 5.67578 5.67188 5.52474 5.67188 5.34766C5.67188 5.16016 5.60417 4.9987 5.46875 4.86328L1.46875 0.863281C1.34375 0.738281 1.1875 0.675781 1 0.675781C0.8125 0.675781 0.65625 0.738281 0.53125 0.863281C0.395833 0.998698 0.328125 1.16016 0.328125 1.34766C0.328125 1.52474 0.395833 1.67578 0.53125 1.80078L4.0625 5.33203L0.53125 8.86328C0.395833 8.9987 0.328125 9.16016 0.328125 9.34766C0.328125 9.52474 0.395833 9.67578 0.53125 9.80078C0.65625 9.9362 0.8125 10.0039 1 10.0039C1.1875 10.0039 1.34375 9.9362 1.46875 9.80078Z" fill="currentColor"/>
@@ -2544,9 +2545,9 @@
                 </div>
 
                 <!-- Slider -->
-                <div class="slider-fback mt-20 d-flex g-20 g-xl-30 overflow-h">
+                <div class="slider-fback slider mt-20 d-flex g-20 g-xl-30 overflow-h">
                     <!-- 1 -->
-                    <div class="slide-fback f-fback box-border anim-reveal">
+                    <div class="slide-fback slide f-fback box-border anim-reveal">
                         <div class="bor bor-1 bor-gray-lighter round-10 d-flex column ai-center txt-center pt-item-feed-back px-item-feed-back pb-item-feed-back">
                             <div class="d-flex flex-center bor bor-1 bor-gray-lighter w-70 h-70 round-50p">
                                 <img class="w-60 h-60 round-50p" src="assets/img/main/people/1.jpg" alt="">
@@ -2579,7 +2580,7 @@
                     </div>
 
                     <!-- 2 -->
-                    <div class="slide-fback f-fback box-border anim-reveal">
+                    <div class="slide-fback slide f-fback box-border anim-reveal">
                         <div class="bor bor-1 bor-gray-lighter round-10 d-flex column ai-center txt-center pt-item-feed-back px-item-feed-back pb-item-feed-back">
                             <div class="d-flex flex-center bor bor-1 bor-gray-lighter w-70 h-70 round-50p">
                                 <img class="w-60 h-60 round-50p" src="assets/img/main/people/2.jpg" alt="">
@@ -2612,7 +2613,7 @@
                     </div>
 
                     <!-- 3 -->
-                    <div class="slide-fback f-fback box-border anim-reveal">
+                    <div class="slide-fback slide f-fback box-border anim-reveal">
                         <div class="bor bor-1 bor-gray-lighter round-10 d-flex column ai-center txt-center pt-item-feed-back px-item-feed-back pb-item-feed-back">
                             <div class="d-flex flex-center bor bor-1 bor-gray-lighter w-70 h-70 round-50p">
                                 <img class="w-60 h-60 round-50p" src="assets/img/main/people/3.jpg" alt="">
@@ -2645,7 +2646,7 @@
                     </div>
 
                     <!-- 4 -->
-                    <div class="slide-fback f-fback box-border anim-reveal">
+                    <div class="slide-fback slide f-fback box-border anim-reveal">
                         <div class="bor bor-1 bor-gray-lighter round-10 d-flex column ai-center txt-center pt-item-feed-back px-item-feed-back pb-item-feed-back">
                             <div class="d-flex flex-center bor bor-1 bor-gray-lighter w-70 h-70 round-50p">
                                 <img class="w-60 h-60 round-50p" src="assets/img/main/people/1.jpg" alt="">
@@ -2678,7 +2679,7 @@
                     </div>
 
                     <!-- 5 -->
-                    <div class="slide-fback f-fback box-border anim-reveal">
+                    <div class="slide-fback slide f-fback box-border anim-reveal">
                         <div class="bor bor-1 bor-gray-lighter round-10 d-flex column ai-center txt-center pt-item-feed-back px-item-feed-back pb-item-feed-back">
                             <div class="d-flex flex-center bor bor-1 bor-gray-lighter w-70 h-70 round-50p">
                                 <img class="w-60 h-60 round-50p" src="assets/img/main/people/2.jpg" alt="">
@@ -2711,7 +2712,7 @@
                     </div>
 
                     <!-- 6 -->
-                    <div class="slide-fback f-fback box-border anim-reveal">
+                    <div class="slide-fback slide f-fback box-border anim-reveal">
                         <div class="bor bor-1 bor-gray-lighter round-10 d-flex column ai-center txt-center pt-item-feed-back px-item-feed-back pb-item-feed-back">
                             <div class="d-flex flex-center bor bor-1 bor-gray-lighter w-70 h-70 round-50p">
                                 <img class="w-60 h-60 round-50p" src="assets/img/main/people/3.jpg" alt="">
@@ -2755,9 +2756,9 @@
             </div>
 
             <!-- Slider -->
-            <div class="slider-ig mt-24 mt-xl-33 d-flex g-5 overflow-h txt-no-select">
+            <div class="slider-ig slider mt-24 mt-xl-33 d-flex g-5 overflow-h txt-no-select">
                 <!-- 1 -->
-                <div class="slide-ig f-ig box-border wrapper-item round-10 overflow-h relative anim-reveal">
+                <div class="slide-ig slide f-ig box-border wrapper-item round-10 overflow-h relative anim-reveal">
                     <!-- Img -->
                     <a class="d-block w-full h-full" href="#">
                         <img class="img img-zoom" src="assets/img/main/ig/ig-1.jpg" alt="">
@@ -2769,7 +2770,7 @@
                 </div>
 
                 <!-- 2 -->
-                <div class="slide-ig f-ig box-border wrapper-item round-10 overflow-h relative anim-reveal">
+                <div class="slide-ig slide f-ig box-border wrapper-item round-10 overflow-h relative anim-reveal">
                     <!-- Img -->
                     <a class="d-block w-full h-full" href="#">
                         <img class="img img-zoom" src="assets/img/main/ig/ig-2.jpg" alt="">
@@ -2781,7 +2782,7 @@
                 </div>
 
                 <!-- 3 -->
-                <div class="slide-ig f-ig box-border wrapper-item round-10 overflow-h relative anim-reveal">
+                <div class="slide-ig slide f-ig box-border wrapper-item round-10 overflow-h relative anim-reveal">
                     <!-- Img -->
                     <a class="d-block w-full h-full" href="#">
                         <img class="img img-zoom" src="assets/img/main/ig/ig-3.jpg" alt="">
@@ -2793,7 +2794,7 @@
                 </div>
 
                 <!-- 4 -->
-                <div class="slide-ig f-ig box-border wrapper-item round-10 overflow-h relative anim-reveal">
+                <div class="slide-ig slide f-ig box-border wrapper-item round-10 overflow-h relative anim-reveal">
                     <!-- Img -->
                     <a class="d-block w-full h-full" href="#">
                         <img class="img img-zoom" src="assets/img/main/ig/ig-4.jpg" alt="">
@@ -2805,7 +2806,7 @@
                 </div>
 
                 <!-- 5 -->
-                <div class="slide-ig f-ig box-border wrapper-item round-10 overflow-h relative anim-reveal">
+                <div class="slide-ig slide f-ig box-border wrapper-item round-10 overflow-h relative anim-reveal">
                     <!-- Img -->
                     <a class="d-block w-full h-full" href="#">
                         <img class="img img-zoom" src="assets/img/main/ig/ig-5.jpg" alt="">
@@ -2817,7 +2818,7 @@
                 </div>
 
                 <!-- 6 -->
-                <div class="slide-ig f-ig box-border wrapper-item round-10 overflow-h relative anim-reveal">
+                <div class="slide-ig slide f-ig box-border wrapper-item round-10 overflow-h relative anim-reveal">
                     <!-- Img -->
                     <a class="d-block w-full h-full" href="#">
                         <img class="img img-zoom" src="assets/img/main/ig/ig-6.jpg" alt="">
