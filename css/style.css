@@ -1137,8 +1137,8 @@ html {
 
 .dot {
     cursor: pointer;
-    height: 1rem;
-    width: 1rem;
+    height: 1.3rem;
+    width: 1.3rem;
     background-color: var(--black);
     opacity: 0.2;
     border-radius: 50%;
