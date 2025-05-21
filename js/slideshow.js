@@ -63,7 +63,7 @@ const restartAutoSlide = () => {
 // Tạo dot slideshow 
 const createDots = () => {
   slides.forEach((_, i) => {
-    const dot = document.createElement("button");
+    const dot = document.createElement("span");
     dot.classList.add("dot");
     if (i === currentIndex) dot.classList.add("active");
 
