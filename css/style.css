@@ -434,10 +434,6 @@ html {
 }
 
 /* === Height ================= */
-.h-fit-content {
-    height: fit-content;
-}
-
 .h-full {
     height: 100%;
 }
@@ -1706,18 +1702,6 @@ html {
     margin-right: 1.3rem;
 }
 
-.mr-16 {
-    margin-right: 1.6rem;
-}
-
 .mr-20 {
     margin-right: 2rem;
-}
-
-.mr-30 {
-    margin-right: 3rem;
-}
-
-.mr-31 {
-    margin-right: 3.1rem;
 }

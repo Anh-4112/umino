@@ -64,5 +64,3 @@ btnCurr.forEach(btn => {
     btn.classList.add('active');
   });
 });
-// document.addEventListener("DOMContentLoaded", function () {
-// });
