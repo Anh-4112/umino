@@ -855,8 +855,8 @@
                             <!-- Item -->
                             <template id="cartItem">
                                 <div class="d-flex py-10 bor-bot bor-1 bor-gray-light">
-                                    <div class="box-border f-20p round-10 overflow-h">
-                                        <img class="cart-item-img img" src="" alt="">
+                                    <div class="box-border f-20p round-10 overflow-h" style="aspect-ratio: 84 / 113;">
+                                        <img class="cart-item-img img img-cover" src="" alt="">
                                     </div>
         
                                     <div class="box-border f-75p">
@@ -865,13 +865,13 @@
                                             <span class="cart-color fs-14 fw-400 cl-gray-medium"></span>
                                             <span class="cart-item-price fs-14 fw-500"></span>
                                             <span class="d-inline-block d-flex ai-center g-5 w-fit-content bg-white-smoke bor bor-1 bor-gray-light">
-                                                <button class="cart-item-decrease cursor-pointer px-5">
+                                                <button class="cart-item-decrease cursor-pointer px-5" aria-label="Cart Item Decrease">
                                                     <svg width="12" height="16" viewBox="0 0 10 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M9.5 0.5L9.5 1.5L0.5 1.5L0.5 0.5L9.5 0.5Z" fill="#111111"/>
                                                     </svg>
                                                 </button>
                                                 <span class="cart-item-qty lh-0 fs-14 fw-400"></span>
-                                                <button class="cart-item-increase cursor-pointer px-5">
+                                                <button class="cart-item-increase cursor-pointer px-5" aria-label="Cart Item Increase">
                                                     <svg width="12" height="20" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M4.5 9.5H5.5L5.5 5.5H9.5V4.5H5.5L5.5 0.5H4.5L4.5 4.5H0.5V5.5H4.5L4.5 9.5Z" fill="#111111"/>
                                                     </svg>
@@ -881,13 +881,13 @@
                                     </div>
                                     
                                     <div class="box-border f-5p d-flex g-6 column ai-center">
-                                        <button class="btn-cart-item-remove cursor-pointer">
+                                        <button class="btn-cart-item-remove cursor-pointer" aria-label="Btn Cart Item Remove">
                                             <svg width="15" height="15" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M9.5 4.25H2.5V11.8379C2.5 11.9108 2.51367 11.9837 2.54102 12.0566C2.57747 12.1296 2.62305 12.1934 2.67773 12.248C2.72331 12.3027 2.78255 12.3438 2.85547 12.3711C2.92839 12.3984 3.00586 12.4121 3.08789 12.4121H8.91211C8.99414 12.4121 9.07161 12.3984 9.14453 12.3711C9.21745 12.3438 9.27669 12.3027 9.32227 12.248C9.37695 12.1934 9.41797 12.1296 9.44531 12.0566C9.48177 11.9837 9.5 11.9108 9.5 11.8379V4.25ZM8.91211 3.08789H11.25C11.4141 3.08789 11.5508 3.14714 11.6602 3.26562C11.7786 3.375 11.8379 3.50716 11.8379 3.66211C11.8379 3.82617 11.7786 3.96745 11.6602 4.08594C11.5508 4.19531 11.4141 4.25 11.25 4.25H10.6621V11.8379C10.6621 12.0749 10.6165 12.3027 10.5254 12.5215C10.4342 12.7311 10.3112 12.9134 10.1562 13.0684C10.0013 13.2324 9.81445 13.36 9.5957 13.4512C9.38607 13.5423 9.1582 13.5879 8.91211 13.5879H3.08789C2.8418 13.5879 2.61393 13.5378 2.4043 13.4375C2.19466 13.3464 2.00781 13.2233 1.84375 13.0684C1.6888 12.9134 1.56576 12.7311 1.47461 12.5215C1.38346 12.3027 1.33789 12.0749 1.33789 11.8379V4.25H0.75C0.585938 4.25 0.444661 4.19531 0.326172 4.08594C0.216797 3.96745 0.162109 3.82617 0.162109 3.66211C0.162109 3.50716 0.216797 3.375 0.326172 3.26562C0.444661 3.14714 0.585938 3.08789 0.75 3.08789H3.08789V2.5C3.08789 2.26302 3.13346 2.03971 3.22461 1.83008C3.31576 1.61133 3.4388 1.42448 3.59375 1.26953C3.7487 1.10547 3.93099 0.977865 4.14062 0.886719C4.35938 0.795573 4.5918 0.75 4.83789 0.75H7.16211C7.4082 0.75 7.63607 0.795573 7.8457 0.886719C8.05534 0.977865 8.24219 1.10547 8.40625 1.26953C8.5612 1.42448 8.68424 1.61133 8.77539 1.83008C8.86654 2.03971 8.91211 2.26302 8.91211 2.5V3.08789ZM4.25 3.08789H7.75V2.5C7.75 2.41797 7.73177 2.34505 7.69531 2.28125C7.66797 2.20833 7.62695 2.14453 7.57227 2.08984C7.52669 2.03516 7.46745 1.99414 7.39453 1.9668C7.32161 1.93034 7.24414 1.91211 7.16211 1.91211H4.83789C4.75586 1.91211 4.67839 1.93034 4.60547 1.9668C4.53255 1.99414 4.47331 2.03516 4.42773 2.08984C4.37305 2.14453 4.32747 2.20833 4.29102 2.28125C4.26367 2.34505 4.25 2.41797 4.25 2.5V3.08789ZM4.25 6.58789C4.25 6.42383 4.30469 6.28711 4.41406 6.17773C4.53255 6.05924 4.67383 6 4.83789 6C4.99284 6 5.125 6.05924 5.23438 6.17773C5.35286 6.28711 5.41211 6.42383 5.41211 6.58789V10.0879C5.41211 10.2428 5.35286 10.3796 5.23438 10.498C5.125 10.6074 4.99284 10.6621 4.83789 10.6621C4.67383 10.6621 4.53255 10.6074 4.41406 10.498C4.30469 10.3796 4.25 10.2428 4.25 10.0879V6.58789ZM6.58789 6.58789C6.58789 6.42383 6.64258 6.28711 6.75195 6.17773C6.87044 6.05924 7.00716 6 7.16211 6C7.32617 6 7.46289 6.05924 7.57227 6.17773C7.69076 6.28711 7.75 6.42383 7.75 6.58789V10.0879C7.75 10.2428 7.69076 10.3796 7.57227 10.498C7.46289 10.6074 7.32617 10.6621 7.16211 10.6621C7.00716 10.6621 6.87044 10.6074 6.75195 10.498C6.64258 10.3796 6.58789 10.2428 6.58789 10.0879V6.58789Z" fill="#999999"/>
                                             </svg>
                                         </button>
 
-                                        <button class="cursor-pointer">
+                                        <button class="cursor-pointer" aria-label="Btn Note">
                                             <svg width="15" height="15" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M7.73512 2.10021L2.94595 7.16937C2.76512 7.36187 2.59012 7.74104 2.55512 8.00354L2.33928 9.89354C2.26345 10.576 2.75345 11.0427 3.43012 10.926L5.30845 10.6052C5.57095 10.5585 5.93845 10.366 6.11928 10.1677L10.9085 5.09854C11.7368 4.22354 12.1101 3.22604 10.8209 2.00687C9.53762 0.799375 8.56345 1.22521 7.73512 2.10021Z" stroke="#999999" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                                 <path d="M6.93604 2.9458C7.18687 4.5558 8.49354 5.78663 10.1152 5.94997" stroke="#999999" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -934,7 +934,13 @@
 
                             <!-- Tick -->
                             <div class="d-flex ai-center g-10">
-                                <input class="cursor-pointer" type="checkbox" aria-label="Agree to terms">
+                                <input 
+                                    class="cursor-pointer" 
+                                    type="checkbox"
+                                    id="agree"
+                                    name="agree_terms"
+                                    aria-label="Agree to terms"
+                                >
                                 <p class="fs-16 fw-400 cl-gray-dark">
                                     I agree with the
                                     <a class="txt-underline" href="#">terms and conditions</a>
@@ -3246,7 +3252,14 @@
                                 
                                 <div class="mt-16 mt-xl-24 d-flex jc-between h-50">
                                     <span class="f-58p d-flex jc-center round-35 overflow-h bor bor-1 bor-gray-lighter bor-focus-black">
-                                        <input class="f-1 mx-19 fs-14 fw-400" type="email" placeholder="Enter your email...">
+                                        <input 
+                                            class="f-1 mx-19 fs-14 fw-400" 
+                                            type="email" 
+                                            id="agree"
+                                            name="agree_terms"
+                                            placeholder="Enter your email..."
+                                            autocomplete="email"
+                                        >
                                     </span>
         
                                     <span class="f-38p d-flex jc-center">
