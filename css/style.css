@@ -276,13 +276,18 @@ html {
 }
 
 /* === Animation ================= */
-.anim-reveal {
+.anim-observer {
+    opacity: 1;
+    transform: none;
+}
+
+.have-js .anim-observer {
     opacity: 0;
     transform: translateY(2rem);
     transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-.anim-reveal.show {
+.have-js .anim-observer.show {
     opacity: 1;
     transform: translateY(0);
 }
