@@ -45,6 +45,6 @@ document.addEventListener("mouseup", dragStop);
 sliderScroll.addEventListener("mouseleave", dragStop);
 
 // Gán sự kiện cảm ứng
-sliderScroll.addEventListener("touchstart", dragStart);
-sliderScroll.addEventListener("touchmove", dragging);
+sliderScroll.addEventListener("touchstart", dragStart,{ passive: true });
+sliderScroll.addEventListener("touchmove", dragging,{ passive: true });
 sliderScroll.addEventListener("touchend", dragStop);

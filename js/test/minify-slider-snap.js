@@ -56,7 +56,7 @@ if(f){
     e.addEventListener("mousemove",c),
     document.addEventListener("mouseup",v),
     e.addEventListener("mouseleave",v),
-    e.addEventListener("touchstart",i),
-    e.addEventListener("touchmove",c),
+    e.addEventListener("touchstart",i,{ passive: true }),
+    e.addEventListener("touchmove",c,{ passive: true }),
     e.addEventListener("touchend",v)
 });
