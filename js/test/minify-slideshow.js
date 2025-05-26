@@ -1,0 +1,91 @@
+const wrapper=document.querySelector(".wrapper-slideshow"),
+slides=Array.from(wrapper.querySelectorAll(".slide")),
+btnPrev=document.querySelector(".slideshow-prev"),
+btnNext=document.querySelector(".slideshow-next"),
+dotsContainer=document.querySelector(".slideshow-dots");
+let currentIndex=0,
+autoSlideInterval=null,
+isDragging=!1,
+startX=0,
+deltaX=0,
+dragged=!1;
+const dragThreshold=30,
+updateSlides=()=>{
+    slides.forEach((e,t)=>{
+        e.classList.remove("active","to-left","to-right"),
+        t===currentIndex?e.classList.add("active"):t<currentIndex?e.classList.add("to-left"):e.classList.add("to-right")
+    }),
+dotsContainer&&dotsContainer.querySelectorAll(".dot").forEach((e,t)=>e.classList.toggle("active",
+    t===currentIndex))
+},
+goToSlide=e=>{
+    currentIndex=(e+slides.length)%slides.length,updateSlides()
+},
+nextSlide=()=>goToSlide(currentIndex+1),
+prevSlide=()=>goToSlide(currentIndex-1),
+startAutoSlide=()=>{
+    autoSlideInterval||(autoSlideInterval=setInterval(nextSlide,3e3))
+},
+stopAutoSlide=()=>{
+    clearInterval(autoSlideInterval),autoSlideInterval=null
+},
+restartAutoSlide=()=>{
+    stopAutoSlide(),
+    startAutoSlide()
+},
+createDots=()=>{
+    slides.forEach((e,t)=>{
+        let r=document.createElement("span");
+        r.classList.add("dot"),
+        t===currentIndex&&r.classList.add("active"),
+        r.addEventListener("click",()=>{goToSlide(t),
+            restartAutoSlide()
+        }),
+        dotsContainer.appendChild(r)
+    })
+},
+handleButtonClick=e=>{
+    "prev"===e?prevSlide():nextSlide(),
+    wrapper.matches(":hover")?stopAutoSlide():restartAutoSlide()
+};
+btnPrev?.addEventListener("click",()=>handleButtonClick("prev")),
+btnNext?.addEventListener("click",()=>handleButtonClick("next")),
+wrapper.addEventListener("mouseenter",stopAutoSlide),
+wrapper.addEventListener("mouseleave",startAutoSlide);
+const getX=e=>e.touches?e.touches[0].clientX:e.clientX,
+getY=e=>e.touches?e.touches[0].clientY:e.clientY,
+startDrag=e=>{
+    isDragging=!0,dragged=!1,startX=getX(e),
+    stopAutoSlide()
+},
+moveDrag=e=>{
+    if(!isDragging)return;
+    deltaX=getX(e)-startX;
+    let t=getY(e)-e.touches?.[0]?.pageY||0;
+    e.touches&&Math.abs(deltaX)>Math.abs(t)&&e.preventDefault(),Math.abs(deltaX)>5&&(dragged=!0)
+},
+endDrag=()=>{
+    isDragging&&(isDragging=!1,Math.abs(deltaX)>30&&(deltaX>0?prevSlide():nextSlide()),
+    deltaX=0,wrapper.matches(":hover")||startAutoSlide())
+};
+wrapper.addEventListener("mousedown",e=>{
+    e.preventDefault(),startDrag(e)
+}),
+wrapper.addEventListener("mousemove",moveDrag),
+wrapper.addEventListener("mouseup",endDrag),
+wrapper.addEventListener("mouseleave",()=>{
+    isDragging=!1,deltaX=0
+}),
+wrapper.addEventListener("touchstart",startDrag,{
+    passive:!1
+}),
+wrapper.addEventListener("touchmove",moveDrag,{
+    passive:!1
+}),
+wrapper.addEventListener("touchend",endDrag),
+wrapper.addEventListener("click",e=>{
+    dragged&&(e.preventDefault(),e.stopPropagation(),dragged=!1)
+},!0),
+createDots(),
+updateSlides(),
+startAutoSlide();
