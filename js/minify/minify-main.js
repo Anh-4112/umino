@@ -1,3 +1,37 @@
+// =============== SLIDER SCROLL ===============
+const sliderScroll=document.querySelectorAll(".slider-banner");
+if(sliderScroll.length>0){
+    let e=async()=>{
+        let r=await import("./minify-slider-scroll.js");
+        r.initSliderScroll(),
+        sliderScroll.forEach(r=>{
+            r.removeEventListener("mouseenter",e),
+            r.removeEventListener("click",e)
+        })
+    };
+    sliderScroll.forEach(r=>{
+        r.addEventListener("mouseenter",e,{once:!0}),
+        r.addEventListener("click",e,{once:!0})
+    })
+}
+
+// =============== SLIDER SNAP ===============
+const sliders=document.querySelectorAll(".slider");
+if(sliders.length>0){
+    let e=async()=>{
+        let r=await import("./minify-slider-snap.js");
+        r.initSliderSnap(),
+        sliders.forEach(r=>{
+            r.removeEventListener("mouseenter",e),
+            r.removeEventListener("click",e)
+        })
+    };
+    sliders.forEach(r=>{
+        r.addEventListener("mouseenter",e,{once:!0}),
+        r.addEventListener("click",e,{once:!0})
+    })
+}
+
 // =============== TAB TOGGLE ===============
 const tabToggle=document.querySelectorAll(".btn-txt-trending");
 if(tabToggle.length>0){

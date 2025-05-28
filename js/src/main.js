@@ -1,3 +1,49 @@
+// =============== SLIDER SCROLL ===============
+// Lấy tất cả các phần tử trong DOM có .slider-banner
+const sliderScroll = document.querySelectorAll(".slider-banner");
+// Chỉ thực hiện code nếu có ít nhất một .slider-banner tồn tại
+if (sliderScroll.length > 0) {
+    // Định nghĩa hàm loadSliderScroll là một hàm bất đồng bộ
+    const loadSliderScroll = async () => {
+        const module = await import('./src/slider-scroll.js'); // Tương tác lần đầu thì mới tải file slider-scroll.js
+        module.initSliderScroll(); // Module tải xong, gọi initSliderScroll() bên trong module đó
+        // Gỡ click, mouseenter khỏi các slider - tránh gọi lại loadSliderScroll nhiều lần
+        sliderScroll.forEach(slideScroll => {
+        slideScroll.removeEventListener("mouseenter", loadSliderScroll);
+        slideScroll.removeEventListener("click", loadSliderScroll);
+        });
+    };
+    // Gán click, mouseenter lần đầu cho các slider
+    sliderScroll.forEach(slideScroll => {
+        // Đảm bảo mỗi slideSnap chỉ gọi loadSliderScroll 1 lần duy nhất
+        slideScroll.addEventListener("mouseenter", loadSliderScroll, { once: true });
+        slideScroll.addEventListener("click", loadSliderScroll, { once: true });
+    });
+}
+
+// =============== SLIDER SNAP ===============
+// Lấy tất cả các phần tử trong DOM có .slider.
+const sliderSnap = document.querySelectorAll(".slider");
+// Chỉ thực hiện code nếu có ít nhất một .slider tồn tại
+if (sliderSnap.length > 0) {
+    // Định nghĩa hàm loadSliderSnap là một hàm bất đồng bộ
+    const loadSliderSnap = async () => {
+        const module = await import('./slider-snap.js'); // Tương tác lần đầu thì mới tải file slider-snap.js
+        module.initSliderSnap(); // Module tải xong, gọi initSliderSnap() bên trong module đó
+        // Gỡ click, mouseenter khỏi các slider - tránh gọi lại loadSliderSnap nhiều lần
+        sliderSnap.forEach(slideSnap => {
+        slideSnap.removeEventListener("mouseenter", loadSliderSnap);
+        slideSnap.removeEventListener("click", loadSliderSnap);
+        });
+    };
+    // Gán click, mouseenter lần đầu cho các slider
+    sliderSnap.forEach(slideSnap => {
+        // Đảm bảo mỗi slideSnap chỉ gọi loadSliderSnap 1 lần duy nhất
+        slideSnap.addEventListener("mouseenter", loadSliderSnap, { once: true });
+        slideSnap.addEventListener("click", loadSliderSnap, { once: true });
+    });
+}
+
 // =============== TAB TOGGLE ===============
 // Lấy tất cả phần tử .btn-txt-trending có trong DOM
 const tabToggle = document.querySelectorAll(".btn-txt-trending");
