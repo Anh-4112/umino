@@ -1,3 +1,26 @@
+// =============== MINI CART ===============
+// Lấy tất cả các phần tử trong DOM có .cart-icon
+const miniCart = document.querySelectorAll(".cart-icon");
+// Chỉ thực hiện code nếu có ít nhất một .cart-icon tồn tại
+if (miniCart.length > 0) {
+    // Định nghĩa hàm loadMiniCart là một hàm bất đồng bộ
+    const loadMiniCart = async () => {
+        miniCart.forEach(cart => {
+            cart.removeEventListener("mouseenter", loadMiniCart);
+            cart.removeEventListener("click", loadMiniCart);
+        });
+        const module = await import('./src/mini-cart.js'); // Tương tác lần đầu thì mới tải file mini-cart.js
+        module.initMiniCart(); // Module tải xong, gọi initMiniCart() bên trong module đó
+        // Gỡ click, mouseenter khỏi các cart-icon - tránh gọi lại loadMiniCart nhiều lần
+    };
+    // Gán click, mouseenter lần đầu cho các cart-icon
+    miniCart.forEach(cart => {
+        // Đảm bảo mỗi cart-icon chỉ gọi loadMiniCart 1 lần duy nhất
+        cart.addEventListener("mouseenter", loadMiniCart, { once: true });
+        cart.addEventListener("click", loadMiniCart, { once: true });
+    });
+}
+
 // =============== SLIDER SCROLL ===============
 // Lấy tất cả các phần tử trong DOM có .slider-banner
 const sliderScroll = document.querySelectorAll(".slider-banner");

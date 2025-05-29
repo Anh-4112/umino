@@ -1,3 +1,20 @@
+// =============== MINI CART ===============
+const miniCart=document.querySelectorAll(".cart-icon");
+if(miniCart.length>0){
+    let e=async()=>{
+        miniCart.forEach(t=>{
+            t.removeEventListener("mouseenter",e),
+            t.removeEventListener("click",e)
+        });
+        let t=await import("./minify-mini-cart.js");
+        t.initMiniCart()
+    };
+    miniCart.forEach(t=>{
+        t.addEventListener("mouseenter",e,{once:!0}),
+        t.addEventListener("click",e,{once:!0})
+    })
+}
+
 // =============== SLIDER SCROLL ===============
 const sliderScroll=document.querySelectorAll(".slider-banner");
 if(sliderScroll.length>0){

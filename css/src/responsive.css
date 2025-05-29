@@ -66,7 +66,7 @@
     }
 
     /* === Display Grid ================= */
-    .grid-md-3-2 {
+    .grid-md-layout {
         grid-template-columns: repeat(3, auto);
         grid-template-rows: repeat(2, auto);
     }
