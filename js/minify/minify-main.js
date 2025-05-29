@@ -66,3 +66,20 @@ if(hoverTooltip.length>0){
         t.addEventListener("mouseenter",e,{once:!0})
     })
 }
+
+// =============== ACCORDION MENU ===============
+const accordionMenu=document.querySelectorAll(".footer-title");
+if(accordionMenu.length>0){
+    let e=async()=>{
+        accordionMenu.forEach(n=>{
+            n.removeEventListener("mouseenter",e),
+            n.removeEventListener("click",e)
+        });
+        let n=await import("./minify-accordion-menu.js");
+        n.initAccordionMenu()
+    };
+    accordionMenu.forEach(n=>{
+        n.addEventListener("mouseenter",e,{once:!0}),
+        n.addEventListener("click",e,{once:!0})
+    })
+}

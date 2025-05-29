@@ -1,5 +1,4 @@
 const goTo = document.querySelector(".go-top");
-
 function toggleGoTop() {
     if (window.scrollY > 150) {
         goTo.classList.add("show");
@@ -9,7 +8,6 @@ function toggleGoTop() {
 }
 
 toggleGoTop(); // Kiểm tra khi trang load
-
 window.addEventListener("scroll", toggleGoTop); // Lắng nghe sự kiện cuộn
 // Cuộn lên đầu khi click
 goTo.addEventListener("click", function () {
