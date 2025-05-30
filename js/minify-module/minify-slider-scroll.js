@@ -1,9 +1,9 @@
 export function initSliderScroll(){
     let e=document.querySelector(".slider-banner"),
-    t=!1,
-    n=0,
-    r=0,
-    s=!1;
+        t=!1,
+        n=0,
+        r=0,
+        s=!1;
     document.querySelectorAll(".slider-banner a").forEach(e=>{
         e.addEventListener("click",e=>{
             s&&e.preventDefault()

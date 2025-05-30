@@ -1,5 +1,25 @@
+// =============== MENU MOBILE ===============
+// Lấy #iconMenuMobile trong DOM
+const menuMobile = document.getElementById("iconMenuMobile");
+// Kiểm tra phần tử này có tồn tại không
+if (menuMobile) {
+    // Định nghĩa hàm loadMenuMobile là một hàm bất đồng bộ
+    const loadMenuMobile = async () => {
+        // Gỡ bỏ sự kiện để tránh gọi lại loadMenuMobile nhiều lần
+        menuMobile.removeEventListener("mouseenter", loadMenuMobile);
+        menuMobile.removeEventListener("click", loadMenuMobile);
+        // Tương tác lần đầu thì mới tải file menu-mobile.js
+        const module = await import('./menu-mobile.js'); 
+        // Gọi hàm khởi tạo menu từ module đã import
+        module.initMenuMobile(); 
+    };
+    // Gán "mouseenter" và "click" vào biểu tượng menu và đảm bảo mỗi sự kiện chỉ xử lý một lần
+    menuMobile.addEventListener("mouseenter", loadMenuMobile, { once: true });
+    menuMobile.addEventListener("click", loadMenuMobile, { once: true });
+}
+
 // =============== MINI CART ===============
-// Lấy tất cả các phần tử trong DOM có .cart-icon
+// Lấy tất cả .cart-icon trong DOM 
 const miniCart = document.querySelectorAll(".cart-icon");
 // Chỉ thực hiện code nếu có ít nhất một .cart-icon tồn tại
 if (miniCart.length > 0) {
@@ -22,7 +42,7 @@ if (miniCart.length > 0) {
 }
 
 // =============== SLIDER SCROLL ===============
-// Lấy tất cả các phần tử trong DOM có .slider-banner
+// Lấy tất cả .slider-banner trong DOM 
 const sliderScroll = document.querySelectorAll(".slider-banner");
 // Chỉ thực hiện code nếu có ít nhất một .slider-banner tồn tại
 if (sliderScroll.length > 0) {
@@ -45,7 +65,7 @@ if (sliderScroll.length > 0) {
 }
 
 // =============== SLIDER SNAP ===============
-// Lấy tất cả các phần tử trong DOM có .slider.
+// Lấy tất cả .slider trong DOM
 const sliderSnap = document.querySelectorAll(".slider");
 // Chỉ thực hiện code nếu có ít nhất một .slider tồn tại
 if (sliderSnap.length > 0) {
@@ -68,7 +88,7 @@ if (sliderSnap.length > 0) {
 }
 
 // =============== TAB TOGGLE ===============
-// Lấy tất cả phần tử .btn-txt-trending có trong DOM
+// Lấy tất cả .btn-txt-trending trong DOM
 const tabToggle = document.querySelectorAll(".btn-txt-trending");
 // Kiểm tra nếu có ít nhất 1 phần tử với class trên mới thực hiện phần code bên trong
 if (tabToggle.length > 0) {
@@ -91,7 +111,7 @@ if (tabToggle.length > 0) {
 }
 
 // =============== HOVER TOOLTIP ===============
-// Lấy tất cả phần tử .tooltip-bot thuộc .slide có trong DOM
+// Lấy tất cả .tooltip-bot thuộc .slide trong DOM
 const hoverTooltip = document.querySelectorAll(".slide .tooltip-bot");
 // Kiểm tra nếu có ít nhất 1 phần tử với class trên mới thực hiện phần code bên trong
 if (hoverTooltip.length > 0) {
@@ -116,7 +136,7 @@ if (hoverTooltip.length > 0) {
 }
 
 // =============== ACCORDION MENU ===============
-// Lấy tất cả các phần tử trong DOM có .footer-title
+// Lấy tất cả .footer-title trong DOM
 const accordionMenu = document.querySelectorAll(".footer-title");
 // Chỉ thực hiện code nếu có ít nhất một .footer-title tồn tại
 if (accordionMenu.length > 0) {

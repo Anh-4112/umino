@@ -1,13 +1,13 @@
 export function initMiniCart(){
     let e=document.querySelectorAll(".cart-icon"),
-    t=document.getElementById("cartBlock"),
-    r=document.getElementById("closeCart"),
-    n=document.getElementById("overlayCart"),
-    i=document.getElementById("listCartItem"),
-    c=document.getElementById("cartItem"),
-    l=document.querySelectorAll(".add-to-cart"),
-    o=document.getElementById("cartTotal"),
-    a=JSON.parse(localStorage.getItem("mini-cart"))||[];
+        t=document.getElementById("cartBlock"),
+        r=document.getElementById("closeCart"),
+        n=document.getElementById("overlayCart"),
+        i=document.getElementById("listCartItem"),
+        c=document.getElementById("cartItem"),
+        l=document.querySelectorAll(".add-to-cart"),
+        o=document.getElementById("cartTotal"),
+        a=JSON.parse(localStorage.getItem("mini-cart"))||[];
     e.forEach(e=>{
         e.addEventListener("click",()=>toggleCart(!0)),
         window.toggleCart=function(e){

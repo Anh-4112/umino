@@ -1,3 +1,16 @@
+// =============== MENU MOBILE ===============
+const menuMobile=document.getElementById("iconMenuMobile");
+if(menuMobile){
+    let e=async()=>{
+        menuMobile.removeEventListener("mouseenter",e),
+        menuMobile.removeEventListener("click",e);
+        let n=await import("./minify-menu-mobile.js");
+        n.initMenuMobile()
+    };
+    menuMobile.addEventListener("mouseenter",e,{once:!0}),
+    menuMobile.addEventListener("click",e,{once:!0})
+}
+
 // =============== MINI CART ===============
 const miniCart=document.querySelectorAll(".cart-icon");
 if(miniCart.length>0){

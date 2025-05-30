@@ -3,10 +3,10 @@ export function initSliderSnap(){
         let t=e.querySelector(".slide");
         if(!t)return;
         let r=t?t.offsetWidth:0,
-        l=parseInt(getComputedStyle(e).gap)||10,o=!1,s,a,d=!1,n=()=>{
-            r=t?t.offsetWidth:0,
-            l=parseInt(getComputedStyle(e).gap)||0
-        };
+            l=parseInt(getComputedStyle(e).gap)||10,o=!1,s,a,d=!1,n=()=>{
+                r=t?t.offsetWidth:0,
+                l=parseInt(getComputedStyle(e).gap)||0
+            };
         window.addEventListener("resize",n),e.querySelectorAll("a").forEach(e=>{
             e.addEventListener("click",e=>{
                 d&&e.preventDefault()
