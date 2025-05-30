@@ -6,8 +6,12 @@
     <meta name="description" content="Fashion Website">
     <!-- Reset -->
     <link rel="stylesheet" href="css/minify/minify-reset.css">
-    <!-- Embel fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- Tải trước Google Fonts CSS -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <!-- Fallback nếu JavaScript bị tắt -->
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap">
+    </noscript>
     <!-- Styles -->
     <link rel="stylesheet" href="css/minify/minify-style.css">
     <!-- Responsive -->
