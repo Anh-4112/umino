@@ -1,3 +1,19 @@
+:root {
+  /* giá trị đầu vào */
+  --f-min: 20;  /* px ở 430px viewport */
+  --f-max: 36;  /* px ở 1920px viewport */
+  --v-min: 430;
+  --v-max: 1920;
+  --rem-base: 10; /* 1rem = 10px */
+  /* tính hệ số b và a */
+  --b: calc((var(--f-max) - var(--f-min)) * 100 / (var(--v-max) - var(--v-min)));
+  --a: calc((var(--f-min) - (var(--b) * (var(--v-min) / 100))) / var(--rem-base));
+}
+
+.font-size {
+  font-size: calc((var(--a) * 1rem) + (var(--b) * 1vw));
+}
+
 html {
     font-family: Jost;
     /* width: 1920px; */
