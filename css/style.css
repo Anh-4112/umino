@@ -1642,11 +1642,6 @@ html {
     margin-top: 3.4rem;
 }
 
-
-.mt-54 {
-    margin-top: 5.4rem;
-}
-
 .mt-58 {
     margin-top: 5.8rem;
 }
@@ -1695,6 +1690,10 @@ html {
 /* === Margin Bottom ================= */
 .mb-30 {
     margin-bottom: 3rem;
+}
+
+.mb-section {
+    margin-bottom: 8rem;
 }
 
 /* === Margin Right ================= */

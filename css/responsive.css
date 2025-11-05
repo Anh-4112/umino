@@ -402,8 +402,8 @@
         padding-top: 2.8rem;
     }
 
-    .pt-xl-32 {
-        padding-top: 3.2rem;
+    .pt-xl-31 {
+        padding-top: 3.1rem;
     }
 
     .pt-xl-33 {
@@ -423,12 +423,6 @@
     .px-xl-30 {
         padding-left: 3rem;
         padding-right: 3rem;
-    }
-
-    /* === Padding Y ================= */
-    .py-xl-50 {
-        padding-top: 5rem;
-        padding-bottom: 5rem;
     }
 
     /* === Margin Top ================= */
@@ -464,16 +458,16 @@
         margin-top: 2.4rem;
     }
 
+    .mt-xl-32 {
+        margin-top: 3.2rem;
+    }
+
     .mt-xl-33 {
         margin-top: 3.3rem;
     }
 
-    .mt-xl-36 {
-        margin-top: 3.6rem;
-    }
-
-    .mt-xl-94 {
-        margin-top: 9.4rem;
+    .mt-xl-37 {
+        margin-top: 3.7rem;
     }
 
     .mt-xl-101 {
